@@ -1,0 +1,58 @@
+h1 {
+    color: blue;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    height: 80vh;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th,
+td {
+    border: 1px solid black;
+}
+
+td {
+    font-weight: 600;
+    font-size: 30px;
+}
+
+sub {
+    font-size: 15px;
+}
+
+tr:first-child th {
+    background-color: orange;
+    color: white;
+    border: 2px solid white;
+}
+
+th:first-child,
+td:first-child {
+    color: red;
+}
+
+tr:nth-child(odd) th:last-child {
+    background-color: blue;
+    color: white;
+}
+
+tr:nth-child(odd) th:first-child {
+    background-color: red;
+    color: white;
+}
+
+tr:nth-of-type(2) th {
+    border: none !important;
+}
+
+td:last-child {
+    color: blue;
+}
+
+td sub {
+    color: black;
+}

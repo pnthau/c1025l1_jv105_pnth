@@ -1,0 +1,44 @@
+body {
+    text-align: center;
+    padding: 10px 40px;
+}
+
+h1 {
+    color: blue;
+}
+
+.wrap-class {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    color: blue;
+}
+
+.class-time {
+    text-align: right;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+}
+
+th,
+td {
+    padding: 5px;
+}
+
+tr:nth-of-type(2) {
+    background-color: orange;
+}
+
+tr:first-child th:not(th:first-child) {
+    background-color: yellow;
+}

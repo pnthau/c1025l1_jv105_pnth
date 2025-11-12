@@ -1,0 +1,21 @@
+table {
+    width: 70%;
+    height: 100vh;
+    border-collapse: collapse;
+    text-align: center;
+    margin: 0 auto;
+}
+
+td {
+    border: 2px solid black;
+}
+
+
+table tr:not(:first-child):nth-child(even) td:nth-child(odd) {
+    background-color: black;
+}
+
+
+table tr:not(:first-child):nth-child(odd) td:nth-child(even) {
+    background-color: black;
+}

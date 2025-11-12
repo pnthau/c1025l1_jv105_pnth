@@ -1,0 +1,71 @@
+html {
+    box-sizing: border-box;
+}
+
+* {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+
+.m-tb {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+form {
+    padding-left: 10px;
+}
+
+hr {
+    margin-left: -10px;
+}
+
+form label {
+    font-weight: 600;
+}
+
+#age-range,
+#income-level {
+    margin-top: 5px;
+    width: 50vw;
+}
+
+.wrap-item {
+    padding-top: 10px;
+    padding-bottom: 20px;
+    margin-left: -10px;
+    padding-left: 10px;
+}
+
+.wrap-item:focus-within {
+    background-color: rgba(255, 255, 0, 0.5);
+}
+
+p input[type="radio"],
+p input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.indent {
+    margin-left: 20px;
+}
+
+#dollars::-webkit-inner-spin-button,
+#cents::-webkit-inner-spin-button {
+    display: none;
+}
+
+#dollars {
+    width: 100px;
+}
+
+#cents {
+    width: 20px;
+}

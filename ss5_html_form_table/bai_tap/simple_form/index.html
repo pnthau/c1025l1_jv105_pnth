@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="fvf">
+        <form id="fv" action="#" method="post">
+            <h2>Sở thích của bạn</h2>
+            <label for="yourname">Họ và tên</label>
+            <input type="text" name="yourname" id="yourname" size="30"><br>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email"><br>
+            <label for="">Sở thích</label>
+            <span class="checkbox-group">
+                <span> <input type="checkbox" name="" id=""> Thể thao </span>
+                <span><input type="checkbox" name="" id=""> Lước web</span>
+                <span><input type="checkbox" name="" id=""> Du lịch</span>
+                <span> <input type="checkbox" name="" id=""> Âm nhạc</span>
+                <span><input type="checkbox" name="" id=""> Chơi game</span>
+                <span><input type="checkbox" name="" id=""> Đọc sách</span>
+                <span><input type="checkbox" name="" id=""> Điện ảnh</span>
+            </span>
+            <div class="button-group">
+                <input type="submit" value="Gưởi thông tin">
+                <input type="reset" value="Nhập lại">
+            </div>
+        </form>
+    </div>
+
+
+    <form action="" method="" id="sr">
+        <h2>ĐĂNG KÝ HỌC VIÊN</h2>
+        <label for="name">Họ và tên</label>
+        <input type="text" name="name" id="name">
+        <br>
+        <label for="dob">Ngày Sinh</label>
+        <input type="text" name="dob" id="dob" size="10">
+        <br>
+        <label for="gender">Giới tính</label>
+        <input type="radio" name="gender" id="male" value="male"> Nam
+        <input type="radio" name="gender" id="female" value="female"> Nữ
+        <br>
+        <label for="address">Địa chỉ</label>
+        <textarea name="address" id="address"></textarea>
+        <br>
+        <label for="class">Lớp</label>
+        <select name="class" id="class">
+            <option value="">-Chọn lớp-</option>
+        </select>
+        <br>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email">
+        <br>
+        <label for="phone">Điện thoại</label>
+        <input type="tel" name="phone" id="phone">
+        <br>
+        <div class="button-group">
+            <input type="submit" value="Đăng ký">
+            <input type="reset" value="Nhập lại">
+        </div>
+    </form>
+</body>
+
+</html>
