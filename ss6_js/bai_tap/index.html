@@ -9,9 +9,20 @@
 
 <body>
     <script>
-        let mathGrade = +prompt("Enter math grade :");
-        let physicGrade = +prompt("Enter physic grade : ");
-        let chemistryGrade = +prompt("Enter chemistry grade : ");
+        let mathGrade = 0;
+        let physicGrade = 0;
+        let chemistryGrade = 0;
+        do {
+            mathGrade = +prompt("Enter math grade :");
+        } while (isNaN(mathGrade))
+
+        do {
+            physicGrade = +prompt("Enter physic grade : ");
+        } while (isNaN(physicGrade))
+
+        do {
+            chemistryGrade = +prompt("Enter chemistry grade : ");
+        } while (isNaN(chemistryGrade))
 
         let averageGrade = (mathGrade + physicGrade + chemistryGrade) / 3;
         alert("The average grade : " + averageGrade.toFixed(2));
