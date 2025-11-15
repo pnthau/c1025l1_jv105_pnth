@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <table id="calculator">
+            <tr>
+                <th colspan="4"><input type="text" disabled value="0" id="display-screen"></th>
+            </tr>
+            <tr>
+                <td><button type="button" id="" class="btn-operator">(</button></td>
+                <td><button type="button" id="" class="btn-operator">)</button></td>
+                <td><button type="button" id="" class="btn-operator">%</button></td>
+                <td><button type="button" class="btn-operator" id="ac">AC</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" class="btn-number" id="seven">7</button></td>
+                <td><button type="button" class="btn-number" id="eight">8</button> </td>
+                <td><button type="button" class="btn-number" id="nine">9</button> </td>
+                <td><button type="button" id="divide" class="btn-operator">/</button> </td>
+            </tr>
+            <tr>
+                <td><button type="button " class="btn-number" id="four">4</button> </td>
+                <td><button type="button " class="btn-number" id="five">5</button> </td>
+                <td><button type="button " class="btn-number" id="six">6</button> </td>
+                <td><button type="button" id="multiple" class="btn-operator">*</button> </td>
+            </tr>
+            <tr>
+                <td><button type="button " class="btn-number" id="one">1</button></td>
+                <td><button type="button " class="btn-number" id="two">2</button> </td>
+                <td><button type="button " class="btn-number" id="three">3</button> </td>
+                <td><button type="button" id="minus" class="btn-operator">-</button> </td>
+            </tr>
+            <tr>
+                <td><button type="button " class="btn-number" id="">0</button> </td>
+                <td><button type="button" id="" class="btn-number">.</button> </td>
+                <td><button type="button" id="equal" class="btn-operator">=</button> </td>
+                <td><button type="button" id="plus" class="btn-operator">+</button> </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        // Xu ly bieu thuc
+        function tokenize(expr) {
+            return expr.match(/\d+(\.\d+)?|\+|\-|\*|\/|\(|\)|\./g);
+        }
+        function toRPN(tokens) {
+            let stack = [];
+            let output = [];
+            let predecence = {
+                "+": 1, "-": 1,
+                "*": 2, "/": 2
+            }
+            tokens.forEach(token => {
+                if (!isNaN(token)) {
+                    output.push(token);
+                }
+                else if (token === "(") {
+                    stack.push(token);
+                }
+                else if (token === ")") {
+                    while (stack.length != 0 && stack[stack.length - 1] !== "(") {
+                        output.push(stack[stack.length - 1]);
+                        stack.pop();
+                    }
+                    stack.pop();
+                }
+                else {
+                    while (stack.length != 0 && predecence[stack[stack.length - 1]] >= predecence[token]) {
+                        output.push(stack[stack.length - 1]);
+                        stack.pop();
+                    }
+                    stack.push(token);
+                }
+            });
+            while (stack.length != 0) {
+                output.push(stack[stack.length - 1]);
+                stack.pop();
+            }
+            return output;
+        }
+        function evalRPN(rpnTokens) {
+            let stack = [];
+            rpnTokens.forEach((token) => {
+                if (!isNaN(token)) {
+                    stack.push(token);
+                } else {
+                    let b = +stack[stack.length - 1];
+                    stack.pop();
+                    let a = stack.length !== 0 ? +stack[stack.length - 1] : 0;
+                    stack.pop();
+                    switch (token) {
+                        case '+':
+                            stack.push(a + b);
+                            break;
+                        case '-':
+                            stack.push(a - b);
+                            break;
+                        case '*':
+                            stack.push(a * b);
+                            break;
+                        case '/':
+                            stack.push(a / b);
+                            break;
+                    }
+                }
+            });
+            let output = stack[0];
+            return output;
+        }
+        // Xu ly su kien button clicked
+        function clickEqual(expression) {
+            let tokens = tokenize(expression);
+            let rpnTokens = toRPN(tokens);
+            let result = evalRPN(rpnTokens);
+            display.value = result;
+            preCalculator = display.value;
+            currentCalculator = "";
+
+        }
+        function clickAllClear() {
+            display.value = "0";
+            preCalculator = "";
+            currentCalculator = "";
+        }
+        function clickNumberButton(event) {
+            currentCalculator += event.target.innerText;
+            display.value = preCalculator + currentCalculator;
+        }
+        function clickOperatorButton(event) {
+            preCalculator = display.value;
+            display.value = preCalculator + event.target.innerText;
+            currentCalculator = "";
+            preCalculator = display.value;
+        }
+        let numberButtons = document.getElementsByClassName("btn-number");
+        let operatorButtons = document.getElementsByClassName("btn-operator");
+        let display = document.getElementById("display-screen");
+        let currentCalculator = "";
+        let preCalculator = "";
+        //Numbers clicked
+        Array.from(numberButtons).forEach((numberButton) => {
+            numberButton.addEventListener('click', function (event) {
+                clickNumberButton(event);
+            })
+        })
+        //Operators clicked
+        Array.from(operatorButtons).forEach((operatorButton) => {
+            operatorButton.addEventListener('click', function (event) {
+                switch (event.target.id) {
+                    case "equal":
+                        clickEqual(display.value);
+                        break;
+                    case "ac":
+                        clickAllClear();
+                        break;
+                    default:
+                        clickOperatorButton(event);
+                        break;
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

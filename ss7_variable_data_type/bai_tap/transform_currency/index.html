@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="wraper">
+        <div class="col">
+            <p>Amount</p>
+            <input type="number" min="0" id="amount">
+        </div>
+        <div class="col">
+            <p>From Currency</p>
+            <select id="from-currency">
+                <option value="vnd" selected>VND</option>
+                <option value="usd">USD</option>
+                <option value="jpy">JPY</option>
+                <option value="rub">RUB</option>
+            </select>
+        </div>
+        <div class="col">
+            <p>To Currency</p>
+            <select id="to-currency">
+                <option value="vnd" selected>VND</option>
+                <option value="usd">USD</option>
+                <option value="jpy">JPY</option>
+                <option value="rub">RUB</option>
+            </select>
+        </div>
+        <div class="col">
+            <p></p>
+            <button type="button" id="convert">Convert</button>
+        </div>
+    </div>
+    <p id="title">Result : <span id="result"></span></p>
+    <script>
+        // vndERs stands for vnd exchange rates
+        let vndERs = {
+            'vnd': 1,
+            'usd': 25000,
+            'jpy': 170.4,
+            'rub': 326.5
+        }
+        let amountInput = document.getElementById('amount');
+        let fromCurrencySelector = document.getElementById('from-currency');
+        let toCurrencySelector = document.getElementById('to-currency');
+        let btnConvert = document.getElementById('convert');
+        let resultDisplay = document.getElementById('result');
+
+        function transformCurrency(amount, fromCurrency, toCurrency) {
+            let fromCurrencyValue = vndERs[fromCurrency];
+            let toCurrencyValue = vndERs[toCurrency];
+
+            let result = amount * fromCurrencyValue / toCurrencyValue;
+
+            resultDisplay.innerText = result + ' ' + toCurrency.toUpperCase();
+        }
+
+        btnConvert.addEventListener('click', () => {
+            let amount = amountInput.value;
+            let fromCurrency = fromCurrencySelector.value;
+            let toCurrency = toCurrencySelector.value;
+            transformCurrency(amount, fromCurrency, toCurrency);
+        });
+    </script>
+</body>
+
+</html>

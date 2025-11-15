@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let physicGrade = 0;
+        let chemistryGrade = 0;
+        let biologyGrade = 0;
+
+        do {
+            physicGrade = +prompt("Enter physic grade : ");
+        } while (isNaN(physicGrade));
+        do {
+            chemistryGrade = +prompt("Enter chemistry grade : ");
+        } while (isNaN(chemistryGrade));
+        do {
+            biologyGrade = +prompt("Enter biology grade : ");
+        } while (isNaN(biologyGrade));
+
+        let sum = physicGrade + chemistryGrade + biologyGrade;
+        let average = sum / 3;
+
+        alert("The sum : " + sum + "\n" + "The average : " + average.toFixed(2));
+
+    </script>
+</body>
+
+</html>
