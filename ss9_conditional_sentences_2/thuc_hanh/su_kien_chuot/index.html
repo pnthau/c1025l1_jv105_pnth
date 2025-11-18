@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <img id="my-image" src=" https://upload.wikimedia.org/wikipedia/commons/6/6e/Football_%28soccer_ball%29.svg"
+            style="width: 30%">
+        <p>Click button below to move the image to right</p>
+        <input type="button" value="Click me" id="btn">
+    </form>
+    <script>
+        let img = null;
+        let btn = null;
+
+        function init() {
+            img = document.getElementById('my-image');
+            btn = document.getElementById('btn');
+            img.style.position = "relative";
+            img.style.left = "0px";
+
+            // Attach the click handler here after `btn` is available
+            btn.addEventListener('click', function () {
+                img.style.left = (parseInt(img.style.left, 10) + 10) + "px";
+            });
+        }
+        window.onload = init;
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Is leap year?</title>
+</head>
+
+<body>
+    <script>
+        let year = +prompt("Enter a year : ");
+        let isDivisibleBy4 = year % 4 == 0;
+        let isDivisibleBy100 = year % 100 == 0;
+        let isDivisibleBy400 = year % 400 == 0;
+        let isLeapYear = false;
+        if (isDivisibleBy4 && !isDivisibleBy100 || isDivisibleBy400) {
+            isLeapYear = true;
+        }
+        alert(isLeapYear ? year + " is a leap year" : year + " is not a leap year");  
+    </script>
+</body>
+
+</html>

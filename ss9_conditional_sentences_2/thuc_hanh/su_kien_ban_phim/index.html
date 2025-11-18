@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <img id="nobita" src="https://upload.wikimedia.org/wikipedia/vi/2/2c/Nobita.png" alt="nobita">
+    <script>
+        let img = null;
+        const LEFT = 37;
+        const UP = 38;
+        const RIGHT = 39;
+        const DOWN = 40;
+
+        function leftArrowPressed() {
+            img.style.left = (parseInt(img.style.left, 10) - 10) + 'px';
+        }
+        function rightArrowPressed() {
+            img.style.left = (parseInt(img.style.left, 10) + 10) + 'px';
+        }
+        function upArrowPressed() {
+            img.style.top = (parseInt(img.style.top, 10) - 10) + 'px';
+        }
+        function downArrowPressed() {
+            img.style.top = (parseInt(img.style.top, 10) + 10) + 'px';
+        }
+
+        function move(event) {
+            switch (event.keyCode) {
+                case LEFT:
+                    leftArrowPressed();
+                    break;
+                case RIGHT:
+                    rightArrowPressed();
+                    break;
+                case UP:
+                    upArrowPressed();
+                    break;
+                case DOWN:
+                    downArrowPressed();
+                    break;
+            }
+        }
+        function init() {
+            img = document.getElementById('nobita');
+            img.style.position = "absolute";
+            img.style.left = "0px";
+            img.style.top = "0px";
+
+            window.addEventListener('keydown', function (event) {
+                move(event)
+            });
+        }
+        window.onload = init;
+    </script>
+</body>
+
+</html>

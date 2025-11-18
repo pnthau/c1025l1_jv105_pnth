@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day of month</title>
+    <style>
+        input:first-child {
+            width: 50px;
+        }
+
+        .label {
+            display: flex;
+            justify-content: space-between;
+            width: 20vw;
+        }
+    </style>
+</head>
+
+<body>
+    <p class="label"><span>year</span>month</p>
+    <input type="number" id="year" min="1000">
+    <input type="number" id="month" min="1" max="12">
+    <input type="button" value="calculate days/month" id="btn">
+    <p id="result"></p>
+    <script>
+        let result = document.getElementById("result");
+        let btn = document.getElementById("btn");
+        btn.addEventListener('click', function () {
+            let year = +document.getElementById("year").value;
+            let month = +document.getElementById("month").value;
+            calculateDays(year, month);
+        })
+        function isLeapYear(year) {
+            return year % 400 === 0 || ((year % 4 == 0) && (year % 100 !== 0));
+        }
+        function calculateDays(year, month) {
+            switch (month) {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    result.innerText = "month " + month + " có 31 day";
+                    break;
+                case 2:
+                    result.innerText = isLeapYear(year) ? "month " + month + " có 29 day" : "month " + month + " có 28 day";
+                    break;
+                default:
+                    result.innerText = "month " + month + " có 30 day";
+                    break;
+            }
+        }
+    </script>
+</body>
+
+</html>

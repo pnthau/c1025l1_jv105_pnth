@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI</title>
+</head>
+
+<body>
+    <script>
+        const categories = [
+            { max: 18.5, label: "Underweight" },
+            { max: 25.0, label: "Normal" },
+            { max: 30.0, label: "Overweight" },
+            { max: Infinity, label: "Obese" }
+        ]
+
+        function calculateBMI(height, weight) {
+            let bmi = weight / (height ** 2);
+            let category = categories.find((cat, index, arr) => {
+                if (bmi < cat.max) {
+                    return cat.label;
+                }
+            });
+            alert("bmi :" + bmi.toFixed(2) + " category : " + category.label);
+        }
+        let height = 0;
+        let weight = 0;
+        do {
+            height = +prompt("Enter your height : ");
+        } while (isNaN(height) || height === 0);
+        do {
+            weight = +prompt("Enter your weight : ");
+        } while (isNaN(weight) || weight === 0);
+
+        calculateBMI(height, weight);
+
+    </script>
+</body>
+
+</html>

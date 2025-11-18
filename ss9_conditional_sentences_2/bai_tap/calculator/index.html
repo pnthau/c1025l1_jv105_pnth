@@ -123,14 +123,9 @@
             let rpnTokens = toRPN(tokens);
             let result = evalRPN(rpnTokens);
             display.value = result;
-            // preCalculator = display.value;
-            // currentCalculator = "";
-
         }
         function clickAllClear() {
             display.value = "0";
-            // preCalculator = "";
-            // currentCalculator = "";
         }
         function clickButton(event) {
             if (display.value === "0") {
@@ -140,7 +135,8 @@
         }
         
         let buttons = document.getElementsByClassName("btn");
-        let display = document.getElementById("display-screen");;
+        let display = document.getElementById("display-screen");
+        
         //trigger buttons clicked
         Array.from(buttons).forEach((button) => {
             button.addEventListener('click', function (event) {
