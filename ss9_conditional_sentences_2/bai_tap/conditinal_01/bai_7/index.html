@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="toggle.css">
+    <title>Document</title>
+    <style>
+        form {
+            width: 50vw;
+            text-align: center;
+            margin: 0 auto;
+            background: linear-gradient(180deg, hsl(240, 70%, 70%), hsl(200, 70%, 70%));
+            color: hsl(0, 0%, 10%);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        input[type="number"],
+        button {
+            width: 80%;
+            padding: 4px;
+        }
+
+        input[type="number"] {
+            border-radius: 5px;
+            border-color: cyan;
+        }
+
+        button {
+            margin-top: 10px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="#" method="post">
+        <label for="subcription-fee">Subcription fee (month): </label>
+        <input type="number" id="subcription-fee" min="1" name="subcription-fee" required>
+        <label for="local-call-charge">Local(220 vnd/m)</label>
+        <input type="number" name="lcc" id="lcc" min="1" data-role="calc" data-price="220">
+        <fieldset>
+            <legend>Long distance</legend>
+            <label for="ldc-178">178(790 vnd/m)</label>
+            <input type="number" name="ldc-178" id="ldc-178" min="1" data-role="calc" data-price="790">
+            <fieldset>
+                <legend>Classical</legend>
+                <label for="off-net">Off net(1000 vnd/m)</label>
+                <input type="number" id="ld-off-net" name="off-net" min="1" data-role="calc" data-price="1000"
+                    data-discount="0.2" data-discount-chk="discount-ld-off">
+                <input type="checkbox" class="discount toggle" id="discount-ld-off">
+                <label for="discount-ld-off" class="green small center">Discount
+                    20%</label>
+                <label for="on-net">On net(790 vnd/m)</label>
+                <input type="number" id="ld-on-net" name="on-net" min="1" data-discount="0.3" data-role="calc"
+                    data-price="790" data-discount-chk="discount-ld-on">
+                <input type="checkbox" class="discount toggle" id="discount-ld-on">
+                <label for="discount-ld-on" class="red small center">Discount
+                    30%</label>
+            </fieldset>
+        </fieldset>
+        <fieldset>
+            <legend>Mobile subscription</legend>
+            <label for="off-net">Off net(1.090 vnd/m)</label>
+            <input type="number" name="off-net" id="ms-off-net" min="1" data-role="calc" data-price="1090"
+                data-discount-chk="discount-msf-off" data-discount="0.2">
+            <input type="checkbox" class="discount toggle" id="discount-msf-off">
+            <label for="discount-msf-off" class="green small center">Discount 20%</label>
+            <label for="on-net">On net(790 vnd/m)</label>
+            <input type="number" name="on-net" id="ms-on-net" min="1" data-role="calc" data-price="790"
+                data-discount-chk="discount-msf-on" data-discount="0.3">
+            <input type="checkbox" class="discount toggle" id="discount-msf-on">
+            <label for="discount-msf-on" class="red small center">Discount 30%</label>
+        </fieldset>
+        <fieldset>
+            <legend>Inquiry service</legend>
+            <fieldset>
+                <legend>Scio-Ecomomic</legend>
+                <label for="local-call-charge">Local(2000 vnd/m)</label>
+                <input type="number" name="lcc" id="lcc" min="1" data-role="calc" data-price="2000">
+                <label for="ldc">Long distance(3000 vnd/m)</label>
+                <input type="number" name="ldc" id="ldc" min="1" data-role="calc" data-price="3000">
+            </fieldset>
+            <fieldset>
+                <legend>Consulting</legend>
+                <label for="local-call-charge">Local(3500 vnd/m)</label>
+                <input type="number" name="lcc" id="lcc" min="1" data-role="calc" data-price="3500">
+                <label for="ldc">Long distance(4500 vnd/m)</label>
+                <input type="number" name="ldc" id="ldc" min="1" data-role="calc" data-price="4500">
+            </fieldset>
+            <fieldset>
+                <legend>Auto-reply</legend>
+                <label for="local-call-charge">Local(3000 vnd/m)</label>
+                <input type="number" name="lcc" id="lcc" min="1" data-role="calc" data-price="3000">
+                <label for="ldc">Long distance(3000 vnd/m)</label>
+                <input type="number" name="ldc" id="ldc" min="1" data-role="calc" data-price="3000">
+            </fieldset>
+        </fieldset>
+        <button type="button" id="btnCalculate">Total</button>
+    </form>
+
+    <script>
+        // trigger Event show Elements
+        // function setupTrigger(trigger, index, array) {
+        //     trigger.addEventListener('input', function (event) {
+        //         const wrapper = this.closest(".trigger-row");
+        //         if (!wrapper) {
+        //             return;
+        //         }
+        //         const next = wrapper.nextElementSibling;
+        //         if (!next) {
+        //             return;
+        //         }
+        //         const isEmpty = this.value.trim() === "" || !this.checkValidity();
+        //         if (isEmpty) {
+
+        //             const isSubBlock = next.classList.contains("sub-block");
+        //             if (isSubBlock) {
+        //                 next.style.display = "none"
+        //             }
+
+        //             const isOptions = next.classList.contains("options");
+        //             if (isOptions) {
+        //                 next.style.display = "none"
+        //             }
+
+        //             const children = next.querySelectorAll("input.trigger-show");
+        //             children.forEach(function (child, index, array) {
+
+        //                 child.value = "";
+        //                 const subWrapper = child.closest(".trigger-block");
+
+        //                 const isSubInputElement = subWrapper && subWrapper.nextElementSibling;
+        //                 if (isSubInputElement) {
+        //                     subWrapper.nextElementSibling.style.display = "none";
+        //                 }
+        //             });
+
+        //             return;
+        //         }
+        //         if (next.classList.contains("sub-block")) {
+        //             next.style.display = "block";
+        //         }
+        //         if (next.classList.contains("options")) {
+        //             next.style.display = "block";
+        //         }
+
+        //         // Gắn trigger tiếp cho input con (nếu có)
+        //         next.querySelectorAll("input.trigger-show").forEach(setupTrigger);
+        //     });
+        // };
+        // let showSubItems = document.querySelectorAll('input.trigger-show');
+        // showSubItems.forEach(setupTrigger);
+        // Calculate Total free
+        function calculateTotal() {
+            if (Number(subcriptionInput.value) === 0) {
+                return;
+            }
+            let total = Number(subcriptionInput.value);
+            let calcs = document.querySelectorAll('[data-role="calc"]');
+            calcs.forEach(function (element, index, array) {
+                let minutes = Number(element.value);
+                if (minutes === 0) {
+                    return;
+                }
+
+                let price = Number(element.dataset.price) || 0;
+
+                let discount = 0;
+                if (element.dataset.discountChk) {
+                    const chkDiscount = document.getElementById(element.dataset.discountChk);
+                    if (chkDiscount.checked) {
+                        discount = Number(element.dataset.discount);
+                    }
+                }
+
+                total += (minutes * price) * (1 - discount);
+            });
+            alert("Total fee : " + total);
+        }
+        let subcriptionInput = document.getElementById('subcription-fee');
+        let btnCalculate = document.getElementById('btnCalculate');
+        btnCalculate.addEventListener('click', calculateTotal);
+
+    </script>
+</body>
+
+</html>

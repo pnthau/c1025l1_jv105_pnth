@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function getCommissionRates(salesRevenue) {
+            for (const [max, rate] of commissionRates) {
+                if (salesRevenue < max) {
+                    return rate;
+                }
+            }
+        }
+        let salesRevenue = prompt("Enter sales revenue (million VND):");
+        const commissionRates = new Map([
+            [10, 0.05],
+            [50, 0.1],
+            [Infinity, 0.15]
+        ]);
+        const commission = salesRevenue * getCommissionRates(salesRevenue);
+        alert("The Commission  : " + commission + " million VND")
+    </script>
+</body>
+
+</html>

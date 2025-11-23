@@ -1,0 +1,80 @@
+input[type="checkbox"].toggle {
+    opacity: 0;
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+}
+
+input[type="checkbox"].toggle+label {
+    width: max-content;
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+input[type="checkbox"].toggle+label.center {
+    margin: 0 auto;
+}
+
+input[type="checkbox"].toggle+label::before {
+    content: "";
+    width: 3em;
+    height: 1em;
+    background-color: hsl(0, 0%, 50%);
+    margin-right: .75em;
+    border-radius: 5em;
+    transition: background-color .1s ease-in-out;
+
+}
+
+input[type="checkbox"].toggle+label.small::before {
+    width: 2em;
+    height: 0.5em;
+}
+
+input[type="checkbox"].toggle+label.small::after {
+    width: 0.75em;
+    height: 0.75em;
+}
+
+input[type="checkbox"].toggle+label::after {
+    position: absolute;
+    content: "";
+    width: 1.5em;
+    height: 1.5em;
+    background-color: hsl(0, 0%, 80%);
+    margin-right: .75em;
+    border-radius: 5em;
+    transition: transform .3s ease-in-out, background-color .1s ease-in-out;
+}
+
+/* Green */
+input[type="checkbox"].toggle:checked+label.green::after {
+    transform: translateX(1.5em);
+    background-color: hsl(120, 100%, 35%);
+}
+
+input[type="checkbox"].toggle:checked+label.green::before {
+    background-color: hsl(120, 70%, 70%);
+}
+
+/* Blue */
+input[type="checkbox"].toggle:checked+label.blue::after {
+    transform: translateX(1.5em);
+    background-color: hsl(240, 100%, 35%);
+}
+
+input[type="checkbox"].toggle:checked+label.blue::before {
+    background-color: hsl(240, 70%, 70%);
+}
+
+/* Red */
+input[type="checkbox"].toggle:checked+label.red::after {
+    transform: translateX(1.5em);
+    background-color: hsl(10, 100%, 35%);
+}
+
+input[type="checkbox"].toggle:checked+label.red::before {
+    background-color: hsl(10, 70%, 70%);
+}

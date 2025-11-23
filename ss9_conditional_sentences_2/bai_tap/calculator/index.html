@@ -56,7 +56,8 @@
             let output = [];
             let predecence = {
                 "+": 1, "-": 1,
-                "*": 2, "/": 2
+                "*": 2, "/": 2, "%": 2,
+                
             }
             tokens.forEach(token => {
                 if (!isNaN(token)) {
@@ -133,10 +134,10 @@
             }
             display.value += event.target.innerText;
         }
-        
+
         let buttons = document.getElementsByClassName("btn");
         let display = document.getElementById("display-screen");
-        
+
         //trigger buttons clicked
         Array.from(buttons).forEach((button) => {
             button.addEventListener('click', function (event) {

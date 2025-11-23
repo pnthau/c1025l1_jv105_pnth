@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function getRank(score) {
+            for (const [min, rank] of academicRankingMap) {
+                let isLarger = score >= min;
+                if (score >= min) {
+                    alert("Academic ranking : " + rank);
+                    break;
+                }
+            }
+        }
+        let test = +prompt("Enter exam");
+        let midtermExam = prompt("Enter midterm exam");
+        let finalExam = prompt("Enter final exam");
+
+        let averageScore = (test + (2 * midtermExam) + (3 * finalExam)) / 6;
+
+        const academicRankingMap = new Map([
+            [8, "A"],
+            [6.5, "B"],
+            [5, "C"],
+            [-Infinity, "D"]
+        ]);
+
+        getRank(averageScore);
+    </script>
+</body>
+
+</html>

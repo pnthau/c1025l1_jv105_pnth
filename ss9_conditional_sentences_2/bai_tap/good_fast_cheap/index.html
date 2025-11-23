@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input[type="checkbox"].toggle {
+            opacity: 0;
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+        }
+
+        input[type="checkbox"].toggle+label {
+            position: relative;
+            display: flex;
+            align-items: center;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        input[type="checkbox"].toggle+label::before {
+            content: "";
+            width: 3em;
+            height: 1em;
+            background-color: hsl(0, 0%, 50%);
+            margin-right: .75em;
+            border-radius: 5em;
+            transition: background-color .1s ease-in-out;
+
+        }
+
+        input[type="checkbox"].toggle+label::after {
+            position: absolute;
+            content: "";
+            width: 1.5em;
+            height: 1.5em;
+            background-color: hsl(0, 0%, 80%);
+            margin-right: .75em;
+            border-radius: 5em;
+            transition: transform .3s ease-in-out, background-color .1s ease-in-out;
+        }
+
+        /* Green */
+        input[type="checkbox"].toggle:checked+label.green::after {
+            transform: translateX(1.5em);
+            background-color: hsl(120, 100%, 35%);
+        }
+
+        input[type="checkbox"].toggle:checked+label.green::before {
+            background-color: hsl(120, 70%, 70%);
+        }
+
+        /* Blue */
+        input[type="checkbox"].toggle:checked+label.blue::after {
+            transform: translateX(1.5em);
+            background-color: hsl(240, 100%, 35%);
+        }
+
+        input[type="checkbox"].toggle:checked+label.blue::before {
+            background-color: hsl(240, 70%, 70%);
+        }
+
+        /* Red */
+        input[type="checkbox"].toggle:checked+label.red::after {
+            transform: translateX(1.5em);
+            background-color: hsl(10, 100%, 35%);
+        }
+
+        input[type="checkbox"].toggle:checked+label.red::before {
+            background-color: hsl(10, 70%, 70%);
+        }
+    </style>
+</head>
+
+<body>
+    <input type="checkbox" id="good" class="toggle">
+    <label for="good" class="green">GOOD</label>
+    <br>
+    <input type="checkbox" id="cheap" class="toggle">
+    <label for="cheap" class="blue">CHEAP</label>
+    <br>
+    <input type="checkbox" id="fast" class="toggle">
+    <label for="fast" class="red">FAST</label>
+    <script>
+        function init() {
+            let chkGood = document.getElementById('good');
+            let chkCheap = document.getElementById('cheap');
+            let chkFast = document.getElementById('fast');
+
+            const map = {
+                'good': [chkCheap, chkFast],
+                'cheap': [chkFast, chkGood],
+                'fast': [chkGood, chkCheap],
+            }
+
+            const list = [chkCheap, chkFast, chkGood];
+            list.forEach(function (chk, index, arr) {
+                chk.addEventListener('change', function (event) {
+                    const [turnOn, turnOff] = map[event.target.id];
+                    if (turnOn.checked) {
+                        turnOff.checked = false;
+                    }
+                })
+            })
+
+        }
+        window.onload = init;
+    </script>
+</body>
+
+</html>

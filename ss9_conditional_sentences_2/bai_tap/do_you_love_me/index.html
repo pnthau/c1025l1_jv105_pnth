@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    h1 {
+        text-align: center;
+    }
+
+    .contain {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #btn-no {
+        position: fixed;
+        top: 54%;
+        left: 46%;
+
+    }
+</style>
+
+<body>
+    <div class="contain">
+        <h1>Do you love me?</h1>
+        <button type="button" id="btn-yes">Yes</button>
+    </div>
+    <button type="button" id="btn-no">No</button>
+
+    <script>
+        let btnYes = document.getElementById('btn-yes');
+        let btnNo = document.getElementById('btn-no');
+
+        btnYes.addEventListener('click', function (event) {
+            alert("That's right");
+        });
+
+        btnNo.addEventListener('mouseover', function (event) {
+            const width = btnNo.offsetWidth;
+            const height = btnNo.offsetHeight;
+
+            const maxX = window.innerWidth - width;
+            const maxY = window.innerHeight - height;
+
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+
+            btnNo.style.left = randomX + "px";
+            btnNo.style.top = randomY + "px";
+        });
+    </script>
+</body>
+
+</html>
