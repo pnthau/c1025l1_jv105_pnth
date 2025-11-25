@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let principal = +prompt("Enter principal (million VND) : ");
+        let months = +prompt("Enter months : ");
+        let interestRate = +prompt("Enter interest rate : ");
+
+        alert("Calculate interest : " + principal * (Math.pow(1 + interestRate, months) - 1));
+    </script>
+</body>
+
+</html>

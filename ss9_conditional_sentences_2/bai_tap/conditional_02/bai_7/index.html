@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let a = +prompt("Enter a  :");
+        let b = +prompt("Enter b  :");
+        let c = +prompt("Enter c :");
+        const handles = {
+            greater: function () {
+                return "x1 variable value : " + ((-b + Math.sqrt(delta)) / (2 * a)).toFixed(2) + "\n"
+                    + "x2 variable value : " + ((-b - Math.sqrt(delta) / (2 * a))).toFixed(2);
+            },
+            equal: function () {
+                return "x variable value : " + (-b / (2 * a)).toFixed(2);
+            },
+            less: function () {
+                return "No solution equation";
+            }
+        }
+
+        if (a === 0) {
+            alert("x variable value : " + -b / c);
+        }
+        let delta = (b * b) - (4 * a * c);
+        let key = delta > 0 ? "greater" : delta < 0 ? "less" : "equal";
+        alert(handles[key]());
+
+
+    </script>
+</body>
+
+</html>

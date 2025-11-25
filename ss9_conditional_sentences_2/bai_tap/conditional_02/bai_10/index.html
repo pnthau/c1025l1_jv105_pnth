@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let kWh = +prompt("Enter kWh : ");
+        let cost = new Map([
+            [50, 1984],
+            [100, 2050],
+            [200, 2380],
+            [300, 2998],
+            [400, 3350],
+            [Infinity, 3460],
+        ]);
+        (function calElectricity(kWh) {
+            const total = Array.from(cost).reduce((sum, [max, tariff]) => {
+                const used = Math.min(kWh, max);
+                kWh -= used;
+                return sum + used * tariff;
+            }, 0);
+
+            alert("Electricity bill : " + total.toLocaleString());
+        })(kWh);
+    </script>
+</body>
+
+</html>
