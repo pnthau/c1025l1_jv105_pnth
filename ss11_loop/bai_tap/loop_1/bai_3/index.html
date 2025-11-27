@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonacci</title>
+</head>
+
+<body>
+    <div id="fibonacci-line">
+
+    </div>
+    <script>
+        /* Approach 1 :  linear */
+
+        // let content = "";
+        // let f1 = 0;
+        // let f2 = 1;
+        // let f = 0;
+        // for (let i = 1; i <= 20; i++) {
+        //     f = f1 + f2;
+        //     f1 = f2;
+        //     f2 = f;
+        //     content += `<span> ${f} </span>`;
+        // }
+
+        /* Approach 2 :  recursion */
+        let content = "";
+        function fibRecursive(n, f1, f2) {
+            if (n <= 0) {
+                return;
+            }
+            const f = f1 + f2;
+            content += `<span> ${f} </span>`;
+            fibRecursive(n - 1, f2, f);
+        }
+        fibRecursive(20, 0, 1);
+        document.getElementById("fibonacci-line").innerHTML = content;
+
+        /* Approach 3 :  recrsion */
+        // let content = "";
+        // function fib(n) {
+        //     if (n <= 1) {
+        //         return n;
+        //     }
+        //     return fib(n - 1) + fib(n - 2);
+        // }
+        // document.getElementById("fibonacci-line").innerHTML = content;
+    </script>
+</body>
+
+</html>

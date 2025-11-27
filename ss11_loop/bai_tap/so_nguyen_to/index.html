@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sàn số nguyên tố</title>
+    <style>
+        span {
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="prime-line">
+
+    </div>
+    <script>
+        let n = 0;
+        let isExit = false;
+        do {
+            n = prompt("Enter prime numbers  :");
+            if (n === "exit" || n === "Exit") {
+                isExit = true;
+                n = 0;
+            }
+        } while ((isNaN(n) || n < 0) && (!isExit));
+
+        function isPrime(num) {
+            for (let i = 2; i * i <= num; i++) {
+                if (num % i === 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        let content = "";
+        let count = 0;
+        for (let i = 2; count < n; i++) {
+            if (isPrime(i)) {
+                content += `<span> ${i} </span>`;
+                count++;
+            }
+        }
+        document.getElementById("prime-line").innerHTML = content;
+
+
+        // const primeTable = new Array(100).fill(true);
+        // primeTable[0] = primeTable[1] = false;
+
+        // for (let i = 2; i * i < 100; i++) {
+        //     if (primeTable[i]) {
+        //         for (let j = i * i; j < n; j += i) {
+        //             primeTable[j] = false;
+        //         }
+        //     }
+        // }
+    </script>
+</body>
+
+</html>

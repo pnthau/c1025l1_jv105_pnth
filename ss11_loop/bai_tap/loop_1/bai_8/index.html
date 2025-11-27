@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #play {
+            font-size: 20px;
+            font-weight: 600;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <button type="button" id="play">Play</button>
+    <script>
+        const MAX = 100;
+        const MIN = 0;
+        const MAXIMUN_ANSWER = 3;
+        function generateNumber() {
+            return Math.ceil(Math.random() * MAX);
+        }
+        function checkAnswer(answer, key) {
+            if (answer === key) {
+                alert("The answer is correct : Congratuations");
+                return true;
+            }
+            else if (answer > key) {
+                alert("The answer is incorrect : greater than number. Try again!");
+            }
+            else {
+                alert("The answer is incorrect : less than number. Try again!");
+            }
+            return false;
+        }
+        const btnPlay = document.getElementById("play");
+        btnPlay.addEventListener('click', function (event) {
+            event.target.style.display = "none";
+            let number = generateNumber();
+            let count = 3;
+            let isCorrect = false;
+
+            do {
+                setTimeout(() => {
+                    let answer = +prompt("Enter your number between 1 and 100 :");
+                }, 0);
+                isCorrect = checkAnswer(answer, number);
+                count--;
+            } while (count > 0 && !isCorrect);
+            if (!isCorrect) {
+                alert("You lose!!!!");
+                this.style.display = "block";
+            }
+        });
+    </script>
+</body>
+
+</html>

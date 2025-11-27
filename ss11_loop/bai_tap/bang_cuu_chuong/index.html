@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="multiplication-table">
+
+    </table>
+    <script>
+        let content = "";
+        for (let r = 2; r <= 9; r++) {
+            content += "<tr>";
+            for (let c = 1; c <= 7; c++) {
+                content += `<td>${r} x ${c} =  ${r * c}</td>`;
+            }
+            content += "</tr>";
+        }
+        document.getElementById("multiplication-table").innerHTML = content;
+    </script>
+</body>
+
+</html>
