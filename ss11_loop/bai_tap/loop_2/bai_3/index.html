@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div:not(div:first-child) {
+            margin: 50px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="triangle-1">
+    </div>
+    <div id="triangle-2">
+    </div>
+    <div id="triangle-3">
+    </div>
+    <div id="triangle-4">
+    </div>
+    <script>
+        const LEFT = 1;
+        const LEFT_REVERSE = 2;
+        const RIGHT = 3;
+        const RIGHT_REVERSE = 4;
+        function drawStars(side, rows, r, col) {
+            switch (side) {
+                case LEFT:
+                    if (col < r + 1) {
+                        contentDislay += "<span>*</span>";
+                    }
+                    break;
+                case LEFT_REVERSE:
+                    if (col < rows - r) {
+                        contentDislay += "<span>*</span>";
+                    }
+                    break;
+                case RIGHT:
+                    if (col >= rows - r - 1) {
+                        contentDislay += "<span>*</span>";
+                    } else {
+                        contentDislay += "<span>&ensp;</span>";
+                    }
+                    break;
+                case RIGHT_REVERSE:
+                    if (col >= r) {
+                        contentDislay += "<span>*</span>";
+                    } else {
+                        contentDislay += "<span>&ensp;</span>";
+                    }
+                    break;
+            }
+        }
+        function drawLine(side, rows, r) {
+            contentDislay += "<p>";
+            for (let col = 0; col < rows; col++) {
+                drawStars(side, rows, r, col);
+            }
+            contentDislay += "</p>";
+
+        }
+        function drawTriangle(side, starNumber) {
+            const rows = starNumber;
+            for (let r = 0; r < rows; r++) {
+                drawLine(side, rows, r);
+            }
+
+        }
+
+        // const drawTriangle = {
+        //     "left": function (rows) {
+
+        //     },
+        //     "leftReverse": function (rows) {
+        //         for (let r = 0; r < rows; r++) {
+        //             contentDislay += "<p>";
+        //             for (let col = 0; col < rows; col++) {
+
+        //             }
+        //             contentDislay += "</p>";
+        //         }
+        //     },
+        //     "right": function (rows) {
+        //         for (let r = 0; r < rows; r++) {
+        //             contentDislay += "<p>";
+        //             for (let col = 0; col < rows; col++) {
+
+        //             }
+        //             contentDislay += "</p>";
+        //         }
+        //     },
+        //     "rightReverse": function (rows) {
+        //         for (let r = rows; r > 0; r--) {
+        //             contentDislay += "<p>";
+        //             for (let col = 0; col < rows; col++) {
+
+        //             }
+        //             contentDislay += "</p>";
+        //         }
+        //     },
+        // }
+        let contentDislay = "";
+        drawTriangle(LEFT, 5);
+        document.getElementById("triangle-1").innerHTML = contentDislay;
+        contentDislay = "";
+        drawTriangle(LEFT_REVERSE, 5);
+        document.getElementById("triangle-2").innerHTML = contentDislay;
+        contentDislay = "";
+        drawTriangle(RIGHT, 5);
+        document.getElementById("triangle-3").innerHTML = contentDislay;
+        contentDislay = "";
+        drawTriangle(RIGHT_REVERSE, 5);
+        document.getElementById("triangle-4").innerHTML = contentDislay;
+
+    </script>
+</body>
+
+</html>

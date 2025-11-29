@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="heart">
+
+    </div>
+    <script>
+        function drawStar() {
+            contentDislay += "<span>*</span>";
+        }
+        function drawSpace() {
+            contentDislay += "<span>&ensp;</span>";
+        }
+        function drawRectangle(size) {
+            for (let r = 0; r <= size / 4; r++) {
+                contentDislay += "<p>";
+                drawLine(size, r);
+                contentDislay += "</p>";
+            }
+        }
+        function drawLine2(size, row) {
+            for (let col = 0; col < size; col++) {
+                let isFirstRow = row === 0 && (col === Math.floor(size / 2) + 1 || col === (Math.floor(size / 2) - 1));
+                let isSecondRow = row === 1 && (col >= row && col <= size - row - 1);
+                let isOtherRow = row > 1 && col >= row - 2 && col < size + 2 - row;
+                if (isFirstRow || isSecondRow || isOtherRow) {
+                    drawStar();
+                }
+                else {
+                    drawSpace();
+                }
+            }
+        }
+        function drawHeart(size) {
+            for (let r = 0; r < size; r++) {
+                contentDislay += "<p>";
+                drawLine2(size, r);
+                contentDislay += "</p>";
+            }
+        }
+        let contentDislay = "";
+        drawHeart(7);
+        document.getElementById("heart").innerHTML = contentDislay;
+    </script>
+</body>
+
+</html>

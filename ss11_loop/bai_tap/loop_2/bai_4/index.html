@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p {
+            margin: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="rectangle">
+
+    </div>
+    <script>
+        function drawStar() {
+            contentDislay += "<span>*</span>";
+        }
+        function drawSpace() {
+            contentDislay += "<span>&ensp;</span>";
+        }
+        function drawLine(size, row) {
+            for (let col = 0; col < size; col++) {
+                let isFirstLastRow = row === 0 || row === Math.floor(size / 4);
+                let isFirstLastCol = col === 0 || col === size - 1;
+
+                let isDrawStar = isFirstLastRow || isFirstLastCol;
+                if (isDrawStar) {
+                    drawStar();
+                } else {
+                    drawSpace();
+                }
+            }
+        }
+        function drawRectangle(size) {
+            for (let r = 0; r <= size / 4; r++) {
+                contentDislay += "<p>";
+                drawLine(size, r);
+                contentDislay += "</p>";
+            }
+        }
+        let contentDislay = "";
+        drawRectangle(32);
+        document.getElementById("rectangle").innerHTML = contentDislay;
+    </script>
+</body>
+
+</html>

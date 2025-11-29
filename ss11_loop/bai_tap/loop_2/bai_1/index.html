@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="display"></div>
+    <script>
+        let contentDisplay = "";
+        function fib(nth) {
+            if (nth < 2) {
+                contentDisplay += `<span>${nth}<span>`;
+                return;
+            }
+            let f1 = 0;
+            contentDisplay += `<span>${f1}<span>`;
+            let f2 = 1;
+            contentDisplay += `<span>${f2}<span>`;
+            let f = 0;
+            for (let ith = 2; ith < nth; ith++) {
+                f = f1 + f2;
+                contentDisplay += `<span>${f2}<span>`;
+                f1 = f2;
+                f2 = f;
+            }
+
+        }
+        let nth = prompt("Enter nth fibonaci : ");
+        fib(nth);
+        document.getElementById("display").innerHTML = contentDisplay;
+    </script>
+</body>
+
+</html>

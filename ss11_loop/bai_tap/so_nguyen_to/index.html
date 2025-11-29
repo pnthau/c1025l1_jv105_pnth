@@ -17,16 +17,24 @@
 
     </div>
     <script>
-        let n = 0;
+        let primeNumber = 0;
         let isExit = false;
+        /* 
+        * Check prime number is correct.
+        * if prime number is incorrect. enter prime number until correct
+        */
         do {
-            n = prompt("Enter prime numbers  :");
-            if (n === "exit" || n === "Exit") {
+            primeNumber = prompt("Enter prime numbers  :");
+            if (primeNumber === "exit" || primeNumber === "Exit") {
                 isExit = true;
-                n = 0;
+                primeNumber = 0;
             }
-        } while ((isNaN(n) || n < 0) && (!isExit));
-
+        } while ((isNaN(primeNumber) || primeNumber < 0) && (!isExit));
+        /*
+        * check number is prime or not
+        * return true : prime
+        * return false : not prime.
+        */
         function isPrime(num) {
             for (let i = 2; i * i <= num; i++) {
                 if (num % i === 0) {
@@ -37,11 +45,10 @@
         }
 
         let content = "";
-        let count = 0;
-        for (let i = 2; count < n; i++) {
-            if (isPrime(i)) {
-                content += `<span> ${i} </span>`;
-                count++;
+        for (let num = 2; primeNumber > 0; num++) {
+            if (isPrime(num)) {
+                content += `<span> ${num} </span>`;
+                primeNumber--;
             }
         }
         document.getElementById("prime-line").innerHTML = content;
