@@ -13,8 +13,14 @@
         let b = +prompt("Enter b : ");
         let c = +prompt("Enter c : ");
 
-        alert("the largest number :" + (a > b && a > c) ? a : (b > c) ? b : c);
-        
+        if (a > b && a > c) {
+            alert("the largest number :" + a);
+        }
+        else if (b > c) {
+            alert("the largest number :" + b);
+        } else {
+            alert("the largest number :" + c);
+        }
     </script>
 </body>
 
