@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const strInput = 'The Quick Brown Fox';
+        // const regex = /[a-zA-Z]/g;
+        // const regex = /./g;
+        // const result = strInput.replace(regex, function (match) {
+        //     if (match === match.toUpperCase()) {
+        //         return match.toLocaleLowerCase();
+        //     }
+        //     return match.toUpperCase();
+        // });
+        // alert(result);
+
+        // const result = strInput.split('').map(function (char, index, array) {
+        //     if (char === char.toUpperCase()) {
+        //         return char.toLowerCase();
+        //     }
+        //     return char.toUpperCase();
+        // });
+        // alert(result.join(''));
+
+        const result = strInput.split('').reduce(function (result, char, index, array) {
+            if (char === char.toUpperCase()) {
+                return result + char.toLowerCase();
+            }
+            return result + char.toUpperCase();
+        }, '');
+        alert(result);
+    </script>
+</body>
+
+</html>

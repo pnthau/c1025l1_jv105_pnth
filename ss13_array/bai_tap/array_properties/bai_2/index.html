@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // const strInput = "025468";
+        // let strNew = strInput[0];
+        // for (let index = 1; index < strInput.length; index++) {
+        //     let isEvenPair = (strNew[strNew.length - 1] % 2 === 0 && strInput[index] % 2 === 0);
+        //     if (isEvenPair) {
+        //         strNew += '-' + strInput[index];
+        //     } else {
+        //         strNew += strInput[index];
+        //     }
+        // }
+        // alert(strNew);
+
+        // const result = "025468".split("").reduce(function (preValue, curValue, index, array) {
+        //     if (curValue % 2 == 0 && array[index + 1] % 2 == 0) {
+        //         return preValue + (curValue + '-');
+        //     }
+        //     return preValue + curValue;
+        // }, "");
+        // alert(result);
+
+        const regex = /([02468])(?=[02468])/g;
+        const result = "025468".replace(regex, "$1-");
+        alert(result);
+
+
+    </script>
+</body>
+
+</html>

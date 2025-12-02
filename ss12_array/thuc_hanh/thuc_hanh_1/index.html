@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" name="" id="txtValue">
+    <input type="button" value="Add" id="btnAdd">
+    <input type="button" value="Display" id="btnDisplay">
+    <div id="display">
+
+    </div>
+    <script>
+        const array = new Array();
+        let index = 0;
+        function addElement() {
+            array[index++] = document.getElementById("txtValue").value;
+            document.getElementById("txtValue").value = "";
+        }
+        function displayElement() {
+            document.getElementById("display").innerHTML = array.reduce(function (content, value, index, originArray) {
+                return content + `Element ${index} = ${value} <br>`;
+            }, "");
+        }
+        document.getElementById("btnAdd").addEventListener("click", addElement);
+        document.getElementById("btnDisplay").addEventListener("click", displayElement);
+    </script>
+</body>
+
+</html>

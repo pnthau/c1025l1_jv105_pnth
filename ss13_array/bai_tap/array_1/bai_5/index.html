@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const MAX = 20;
+        const MIN = -20;
+        function generateNumber() {
+            return Math.round(MIN + Math.random() * (MAX - MIN));
+        }
+        const numbers = Array.from({ length: 10 }).map(function (value, index, array) {
+            return generateNumber();
+        });
+        const countNegativeNumber = numbers.reduce(function (countNegativeNumber, value, index, array) {
+            return countNegativeNumber + (value > 0 ? 0 : 1);
+        }, 0);
+        alert(numbers);
+        alert(`Count negative number  : ${countNegativeNumber}`);
+    </script>
+</body>
+
+</html>

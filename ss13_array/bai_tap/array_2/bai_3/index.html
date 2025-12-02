@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function generateRandom(max, min) {
+            return Math.round(min + Math.random() * (max - min))
+        }
+        function generateAlphanumeric() {
+            const NUMERIC = 1;
+            const UPPER_ALPHA = 2;
+            const LOWER_ALPHA = 3;
+
+            const minType = 1;
+            const maxType = 3;
+
+            const minNumeric = 48;
+            const maxNumeric = 57;
+
+            const minUpperAlPha = 65;
+            const maxUppperAlpha = 90;
+
+            const minLowerAlpha = 97;
+            const maxLowerAlpha = 122;
+
+            const chooseCharacterType = generateRandom(maxType, minType);
+
+            let max = 0;
+            let min = 0;
+            switch (chooseCharacterType) {
+                case NUMERIC:
+                    max = maxNumeric;
+                    min = minNumeric;
+                    break;
+                case UPPER_ALPHA:
+                    max = maxUppperAlpha;
+                    min = minUpperAlPha;
+                    break;
+                case LOWER_ALPHA:
+                    max = maxLowerAlpha;
+                    min = minLowerAlpha;
+                    break;
+            }
+            return generateRandom(max, min);
+        }
+        const numbers = Array.from({ length: 10 }, function (value, index, array) {
+            return String.fromCharCode(generateAlphanumeric());
+        });
+        alert(numbers);
+        const countNumeric = numbers.reduce(function (countNumeric, value, index, array) {
+            const regex = /\d/g;
+            if (!regex.test(value)) {
+                return countNumeric;
+            }
+            return countNumeric + 1;
+        }, 0);
+        alert(countNumeric);
+    </script>
+</body>
+
+</html>

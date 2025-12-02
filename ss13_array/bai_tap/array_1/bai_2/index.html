@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const MAX = 20;
+        const MIN = 0;
+        const numbers = Array(10);
+
+        function generateNumber() {
+            let number = 0;
+            while (numbers.includes(number)) {
+                number = Math.round(MIN + Math.random() * (MAX - MIN));
+            }
+            return number;
+        }
+
+        for (let index = 0; index < numbers.length; index++) {
+            numbers[index] = generateNumber();
+        }
+        alert(numbers);
+        const max = Math.max(...numbers);
+        alert(`max = ${max} : index : ${numbers.indexOf(max)}`);
+    </script>
+</body>
+
+</html>

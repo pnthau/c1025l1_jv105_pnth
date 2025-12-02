@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <label for="search">Enter your phrases : </label>
+    <input type="text" name="search" id="search">
+    <table id="dictionary">
+    </table>
+    <script>
+        const englishPhrases = [
+            "The system crashed unexpectedly.",
+            "Please reboot the server.",
+            "We need to debug the code.",
+            "The application is running smoothly.",
+            "There’s a bug in the login module.",
+            "Can you deploy the latest version?",
+            "The database is corrupted.",
+            "Let’s push the changes to GitHub.",
+            "The network is down.",
+            "We need to upgrade the system.",
+            "What’s the IP address?",
+            "The code is not optimized.",
+            "Please check the firewall settings.",
+            "The server is overloaded.",
+            "We’re using cloud storage.",
+            "The UI needs improvement.",
+            "The backend is written in Node.js.",
+            "The frontend uses React.",
+            "Can you write a script for automation?",
+            "The codebase is too large."
+            // ... tiếp tục đến câu thứ 100
+        ];
+
+        const vietnameseMeanings = [
+            "Hệ thống bị sập một cách bất ngờ.",
+            "Vui lòng khởi động lại máy chủ.",
+            "Chúng ta cần gỡ lỗi đoạn mã.",
+            "Ứng dụng đang chạy mượt mà.",
+            "Có lỗi trong mô-đun đăng nhập.",
+            "Bạn có thể triển khai phiên bản mới nhất không?",
+            "Cơ sở dữ liệu bị hỏng.",
+            "Hãy đẩy các thay đổi lên GitHub.",
+            "Mạng bị ngắt.",
+            "Chúng ta cần nâng cấp hệ thống.",
+            "Địa chỉ IP là gì?",
+            "Mã chưa được tối ưu.",
+            "Vui lòng kiểm tra cài đặt tường lửa.",
+            "Máy chủ bị quá tải.",
+            "Chúng tôi đang sử dụng lưu trữ đám mây.",
+            "Giao diện người dùng cần cải thiện.",
+            "Phần backend được viết bằng Node.js.",
+            "Phần frontend sử dụng React.",
+            "Bạn có thể viết một script để tự động hóa không?",
+            "Mã nguồn quá lớn."
+            // ... tiếp tục đến câu thứ 100
+        ];
+        String.prototype.capitalize = function () {
+            return this.charAt(0).toUpperCase() + this.slice(1);
+        }
+        // document.getElementById("search").addEventListener('change', function (event) {
+        //     const value = event.target.value;
+        //     const index = englishPhrases.findIndex(function (phrase, index, array) {
+        //         return phrase.substring(0, phrase.length - 1).toLowerCase() === value.toLowerCase();
+        //     });
+        //     if (index > -1) {
+        //         document.getElementById('dictionary').innerHTML = `
+        //             <tr>
+        //                 <th>${value.capitalize()}</th>
+        //                 <td>${vietnameseMeanings[index]}</td>
+        //             </tr>`;
+        //     }
+        // });
+
+        document.getElementById("search").addEventListener('input', function (event) {
+            const value = event.target.value;
+            const results = englishPhrases.map(function (phrase, index) {
+                return { "phrase": phrase, "index": index };
+            }).filter(function (item, index, array) {
+                if (item.phrase.toLowerCase().includes(value.toLowerCase())) {
+                    return true;
+                }
+                return false;
+            });
+            document.getElementById('dictionary').innerHTML = results.map(function (item, index, array) {
+                return `<tr>
+                        <th>${item.phrase.capitalize()}</th>
+                        <td>${vietnameseMeanings[item.index]}</td>
+                    </tr>`;
+            }).join('');
+        });
+
+        // document.getElementById("search").addEventListener('change', function (event) {
+        //     const value = event.target.value;
+        //     const phrase = englishPhrases.find(function (phrase, index, array) {
+        //         return phrase.substring(0, phrase.length - 1).toLowerCase() === value.toLowerCase();
+        //     });
+        //     if (phrase) {
+        //         const index = englishPhrases.indexOf(phrase);
+        //         document.getElementById('dictionary').innerHTML = `
+        //             <tr>
+        //                 <th>${phrase.capitalize()}</th>
+        //                 <td>${vietnameseMeanings[index]}</td>
+        //             </tr>`;
+        //     }
+        // });
+
+        // document.getElementById("search").addEventListener('change', function (event) {
+        //     const value = event.target.value;
+        //     const phrase = englishPhrases.find(function (phrase, index, array) {
+        //         return phrase.substring(0, phrase.length - 1).toLowerCase() === value.toLowerCase();
+        //     });
+        //     if (phrase) {
+        //         const index = englishPhrases.indexOf(phrase);
+        //         document.getElementById('dictionary').innerHTML = `
+        //             <tr>
+        //                 <th>${phrase.capitalize()}</th>
+        //                 <td>${vietnameseMeanings[index]}</td>
+        //             </tr>`;
+        //     }
+        // });
+
+        // document.getElementById("search").addEventListener('change', function (event) {
+        //     const value = event.target.value;
+        //     let foundIndex = -1;
+        //     englishPhrases.forEach(function (phrase, index, array) {
+        //         if (phrase.substring(0, phrase.length - 1).toLowerCase() === value.toLowerCase()) {
+        //             foundIndex = index;
+        //         }
+        //     });
+        //     if (foundIndex > -1) {
+        //         document.getElementById('dictionary').innerHTML = `
+        //             <tr>
+        //                 <th>${value.capitalize()}</th>
+        //                 <td>${vietnameseMeanings[foundIndex]}</td>
+        //             </tr>`;
+        //     }
+        // });
+    </script>
+</body>
+
+</html>

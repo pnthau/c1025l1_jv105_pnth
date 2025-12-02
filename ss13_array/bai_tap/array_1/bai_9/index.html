@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const MAX = 20;
+        const MIN = -20;
+        function generateNumber() {
+            return Math.round(MIN + Math.random() * (MAX - MIN));
+        }
+        const a = Array.from({ length: 10 }).map(function (value, index, array) {
+            return generateNumber();
+        });
+        const b = Array.from({ length: 10 }).map(function (value, index, array) {
+            return generateNumber();
+        });
+        alert(a);
+        alert(b);
+        const c = Array().concat(a, b);
+        alert(c);
+    </script>
+</body>
+
+</html>

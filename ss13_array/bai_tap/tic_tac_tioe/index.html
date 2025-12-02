@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #board {
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 300px;
+            height: 300px;
+            margin: 20vh auto;
+            text-align: center;
+        }
+
+        td {
+            border: 1px solid black;
+            padding: 10px;
+            width: 50px;
+            height: 50px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <table id="board">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <script>
+        const MAXIMUN_CELL = 3;
+        const table = Array.from({ length: MAXIMUN_CELL }, function () {
+            return Array(MAXIMUN_CELL).fill('')
+        });
+        let player = true;
+        function checkDirection(winingCount, curValue, curRow, curCol, dRow, dCol) {
+            if (winingCount === 0) {
+                return true;
+            }
+            const isLoser = curRow < 0 || curCol < 0 || curRow >= MAXIMUN_CELL || curCol >= MAXIMUN_CELL || table[curRow][curCol] !== curValue;
+            if (isLoser) {
+                return false;
+            }
+            return checkDirection(winingCount - 1, curValue, curRow + dRow, curCol + dCol, dRow, dCol)
+        }
+        function checkWinner(winingCount, curValue, curRow, curCol) {
+            const directions = [
+                [-1, 0],
+                [1, 0],
+                [0, -1],
+                [0, 1],
+                [1, 1],
+                [-1, -1]
+            ];
+            for (const [dRow, dCol] of directions) {
+                if (checkDirection(winingCount, curValue, curRow, curCol, dRow, dCol)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        function getPlayerMark(player) {
+            return player ? 'X' : 'O';
+        }
+        function clearBoard() {
+            table.map(function (item, index, array) {
+                return item.fill('');
+            });
+            Array.from(document.getElementsByTagName('td')).map(function (value, index, array) {
+                return value = '';
+            });
+        }
+        const board = document.getElementById('board');
+        Array.from(document.getElementsByTagName('td')).forEach(function (tag, index, array) {
+            tag.addEventListener('click', function (event) {
+                if (event.target.innerText !== "") {
+                    return;
+                }
+                const tr = this.parentNode;
+
+                const rowIndex = Array.from(tr.parentElement.children).indexOf(tr);
+                const colIndex = Array.from(tr.children).indexOf(this);
+
+                event.target.innerHTML = getPlayerMark(player);
+                table[rowIndex][colIndex] = player;
+
+                let isWinner = checkWinner(3, player, rowIndex, colIndex);
+                let isTie = table.every(function (row, index, array) {
+                    return row.every(function (col, index, array) {
+                        return col !== '';
+                    });
+                });
+
+                if (isWinner) {
+                    const winner = getPlayerMark(player);
+                    setTimeout(function () {
+                        alert("You Win " + winner);
+                    }, 200)
+                    clearBoard();
+                } else if (isTie) {
+                    setTimeout(function () {
+                        alert("You All  Tie " + 'X' + " And " + 'O');
+                    }, 200);
+
+                    clearBoard();
+                }
+                player = !player;
+
+            });
+        });
+    </script>
+</body>
+
+</html>

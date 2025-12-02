@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const MAX = 20;
+        const MIN = 0;
+        function generateAlphanumeric() {
+            const minType = 1;
+            const maxType = 3;
+
+            const minNumeric = 48;
+            const maxNumeric = 57;
+
+            const minUpperAlPha = 65;
+            const maxUppperAlpha = 90;
+
+            const minLowerAlpha = 97;
+            const maxLowerAlpha = 122;
+
+            const chooseCharacterType = Math.round(minType + Math.random() * (maxType - minType));
+
+            switch (chooseCharacterType) {
+                case 1:
+                    return Math.round(minNumeric + Math.random() * (maxNumeric - minNumeric));
+                case 2:
+                    return Math.round(minUpperAlPha + Math.random() * (maxUppperAlpha - minUpperAlPha));
+                case 3:
+                    return Math.round(minLowerAlpha + Math.random() * (maxLowerAlpha - minLowerAlpha));
+            }
+        }
+        const numbers = Array.from({ length: 6 }, function (value, index, array) {
+            return String.fromCharCode(generateAlphanumeric());
+        });
+        alert(numbers);
+        numbers.reverse();
+        alert(numbers);
+    </script>
+
+</body>
+
+</html>

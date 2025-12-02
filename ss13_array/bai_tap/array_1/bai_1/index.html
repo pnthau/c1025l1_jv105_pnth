@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const MAX = 20;
+        const MIN = 0;
+        function generateNumber() {
+            return Math.round(MIN + Math.random() * (MAX - MIN));
+        }
+        const numbers = Array.from({ length: 10 }).map(function (value, index, array) {
+            return generateNumber();
+        });
+        alert(numbers);
+        const countLargerTen = numbers.reduce(function (countLargerTen, value, index, array) {
+            if (value < 10) {
+                return countLargerTen;
+            }
+            return countLargerTen + 1;
+        }, 0);
+
+        alert(countLargerTen);
+    </script>
+</body>
+
+</html>

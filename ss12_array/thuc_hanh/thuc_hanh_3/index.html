@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let value = prompt("Enter number : ");
+        const numbers = [-3, 5, 1, 3, 2, 10];
+        // let index = -1;
+        // for (let i = 0; i < numbers.length; i++) {
+        //     if (numbers[i] == value) {
+        //         index = i;
+        //     }
+        // }
+        // if (index > -1) {
+        //     alert("Value " + value + " found at " + index);
+        // } else {
+        //     alert("Value " + value + " not found");
+        // }
+        index = numbers.findIndex(function (val, index, array) {
+            return val == value;
+        });
+        if (index > -1) {
+            alert("Value " + value + " found at " + index);
+        } else {
+            alert("Value " + value + " not found");
+        }
+    </script>
+</body>
+
+</html>
