@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function sievePrimes() {
+            const sortedPrime = Array.from({ length: 10000 }).fill(true);
+            sortedPrime[0] = sortedPrime[1] = false;
+            return function () {
+                for (let index = 2; index <= Math.sqrt(sortedPrime.length); index++) {
+                    let indexSquared = index * index;
+                    while (sortedPrime[indexSquared] &&
+                        indexSquared < sortedPrime.length) {
+                        sortedPrime[indexSquared] = false;
+                        indexSquared += index;
+                    }
+                }
+                return sortedPrime;
+            }
+        }
+        function isPrime(numbers) {
+            return !Number.isInteger(numbers) || numbers < 2 ? false : primes[numbers];
+        }
+        const generatePrimes = sievePrimes();
+        const primes = generatePrimes();
+        alert(isPrime(3.5));
+    </script>
+</body>
+
+</html>

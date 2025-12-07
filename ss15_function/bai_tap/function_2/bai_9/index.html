@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function countCharacter(str, character) {
+            const regex = new RegExp(character, "g");
+            const matches = str.match(regex);
+            return matches ? matches.length : 0;
+        }
+        countCharacter("hello", 'l');
+    </script>
+</body>
+
+</html>

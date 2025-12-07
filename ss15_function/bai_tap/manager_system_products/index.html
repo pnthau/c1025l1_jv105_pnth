@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 500px;
+            border-collapse: collapse;
+        }
+
+        button {
+            background-color: greenyellow;
+            padding: 10px 20px;
+            margin: 0px 5px;
+            border-radius: 10px;
+            border: none;
+            transition: all 0.2s ease-out;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            /* đổi màu khi hover */
+            transform: translateY(-2px);
+            /* hơi nhấc lên */
+        }
+
+        button:active {
+            transform: translateY(2px);
+            /* nhấn xuống */
+            box-shadow: 0 1px #2e7d32;
+            /* bóng đổ ngắn lại */
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: hsl(0, 3%, 95%);
+        }
+
+        td,
+        th {
+            padding: 10px 0px 10px 10px;
+            text-align: left;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>
+        Add new Product
+    </h2>
+    <div class="add-product">
+        <input type="text" name="product-name" id="product-name" placeholder="New Product" required>
+        <input type="button" value="Add" id="add-product">
+    </div>
+    <h2>
+        Display All Products
+    </h2>
+    <table id="tb-products">
+        <thead>
+            <tr>
+                <th>Numbers</th>
+                <th>Product Name</th>
+                <th colspan="2">
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+        const hotPhones2025 = [
+            "iPhone 17 Pro Max",
+            "Samsung Galaxy S25 Ultra",
+            "Google Pixel 10 Pro XL",
+            "Oppo Find X9 Pro",
+            "Apple iPhone 17",
+            "OnePlus 15",
+            "Google Pixel 9a",
+            "Nothing Phone 3a Pro",
+            "Samsung Galaxy Z Flip 7",
+            "iPhone Air"
+        ];
+        const tbody = document.querySelector('#tb-products tbody');
+        const txtProductName = document.getElementById('product-name');
+
+        function loadTotalProducts() {
+            document.querySelector("#tb-products thead tr th:nth-child(3)").innerText = hotPhones2025.length + " products";
+        }
+        //createElement.
+        function createRow(index, productName) {
+            const tr = document.createElement("tr");
+
+            const tdIndex = document.createElement("td");
+            tdIndex.textContent = index;
+
+            const tdName = document.createElement("td");
+            tdName.textContent = productName;
+
+            tdName.addEventListener('click', function (event) {
+                txtProductName.value = tdName.innerText;
+            });
+
+            const tdAction = document.createElement("td");
+            const btnDel = document.createElement("button");
+            btnDel.textContent = "Delete";
+            tdAction.appendChild(btnDel);
+
+            btnDel.addEventListener('click', function (event) {
+                const isConfirm = confirm("Do you want to delete this product?");
+                if (isConfirm === false) {
+                    return;
+                }
+                hotPhones2025.splice(index, 1);
+                alert(`Deleted product : ${productName}`);
+                loadTable();
+            });
+
+            const btnEdit = document.createElement("button");
+            btnEdit.textContent = "Edit";
+            tdAction.appendChild(btnEdit);
+
+            btnEdit.addEventListener('click', function () {
+                if (txtProductName.value.trim() === "") {
+                    return;
+                }
+                const isConfirm = confirm("Do you want to edit this product?");
+                if (isConfirm === false) {
+                    return;
+                }
+                const productName = txtProductName.value;
+                hotPhones2025[index] = productName;
+                txtProductName.value = "";
+                loadTable();
+            });
+
+            tr.append(tdIndex, tdName, tdAction);
+            return tr;
+        }
+        function loadTable() {
+            tbody.innerHTML = "";
+            hotPhones2025.forEach(function (product, index, array) {
+                tbody.append(createRow(index, product));
+            });
+            loadTotalProducts();
+        }
+
+        loadTable();
+
+        // function loadProductToTable() {
+        //     tbody.innerHTML = hotPhones2025.map(function (product, index, array) {
+        //         return displayProduct(index, product);
+        //     }).join("");
+        //     loadTotalProducts();
+        // }
+        // function displayProduct(index, productName) {
+        //     return `<tr>
+        //         <td>${index}</td>
+        //         <td class="product-name">${productName}</td>
+        //         <td><button  class="btn-edit">Edit</button></td>
+        //         <td><button  class="btn-del">Delete</button></td>
+        //     </tr>`;
+        // }
+
+        // const btnAdd = document.getElementById('add-product');
+        // const tbProducts = document.getElementById('tb-products');
+        // const tbody = document.querySelector('#tb-products tbody');
+
+
+        // loadProductToTable();
+
+        // btnAdd.addEventListener('click', function (event) {
+        //     const productName = document.getElementById('product-name').value;
+        //     hotPhones2025.push(productName);
+        //     tbody.innerHTML += displayProduct(productName);
+        //     loadTotalProducts();
+        // });
+
+        //(event delegation)
+        // tbody.addEventListener("click", function (e) {
+        //     const row = e.target.closest("tr");
+        //     if (!row) return;
+
+        //     const id = Number(row.children[0].innerText.trim());
+
+        //     if (e.target.classList.contains("product-name")) {
+        //         const productName = row.children[1].innerText.trim();
+        //         document.getElementById("product-name").value = productName;
+        //     }
+
+        //     if (e.target.classList.contains("btn-edit")) {
+        //         const productName = document.getElementById("product-name").value;
+        //         hotPhones2025[id] = productName;
+
+        //     }
+
+        //     if (e.target.classList.contains("btn-del")) {
+        //         const del = hotPhones2025.splice(id, 1);
+        //         alert(`The product with id: ${id}, name: ${del} is deleted.`);
+        //     }
+
+        //     loadProductToTable();
+        // });
+    </script>
+</body>
+
+</html>

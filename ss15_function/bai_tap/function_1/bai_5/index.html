@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const stars = ["Polaris", "Aldebaran", "Deneb", "Vega", "Altair", "Dubhe", "Regulus"];
+        const constellation = ["Ursa Minor", "Taurus", "Cygnus", "Lyra", "Aquila", "Ursa Major", "Leo"];
+        let starName = "";
+        function findConstellationByStarNames(starName) {
+            const NOT_FOUND = - 1;
+            const currentIndex = stars.findIndex(function (value, index, array) {
+                if (starName.trim().toLowerCase() === value.trim().toLowerCase()) {
+                    return true;
+                }
+                return false;
+            });
+            if (currentIndex === NOT_FOUND) {
+                return "Not Found";
+            }
+            return constellation[currentIndex];
+        }
+        findConstellationByStarNames("polaris");
+    </script>
+</body>
+
+</html>

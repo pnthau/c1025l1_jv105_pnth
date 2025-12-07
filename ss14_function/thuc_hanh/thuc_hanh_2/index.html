@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Temperature Converter</h1>
+    <p>Type a value in the Fahrenheit field to convert the value to Celcius: </p>
+    <input type="number" name="fehrenheit" id="fehrenheit">
+    <p>Celcius : <span id="result"></span> </p>
+    <script>
+        function calculateFehrenheitToCelcius(temperature) {
+            return temperature - 32 / 1.8;
+        }
+        document.getElementById("fehrenheit").addEventListener('input', function (event) {
+            document.getElementById("result").innerText = calculateFehrenheitToCelcius(event.target.value).toFixed(2);
+        });
+    </script>
+</body>
+
+</html>
