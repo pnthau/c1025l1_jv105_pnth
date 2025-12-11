@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+            box-sizing: border-box;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: inherit;
+        }
+
+        .border {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        canvas {
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="border">
+        <canvas id="game-canvas">
+
+        </canvas>
+    </div>
+
+    <script>
+        class GameManager {
+            #score = undefined;
+            #gameStatus = undefined;
+            #car = null;
+            #items = null;
+            #obstacles = null;
+            #goalCollision = undefined;
+            constructor(gameStatus) {
+                this.#gameStatus = gameStatus;
+                this.#score = 0;
+            }
+            draw(ctx) {
+                ctx.clearRect(0, 0, boundary.x, boundary.y);
+                this.#car.draw(ctx);
+                this.#items.forEach(item => {
+                    item.draw(ctx);
+                });
+                this.#obstacles.forEach(obstacle => {
+                    obstacle.draw(ctx);
+                });
+                ctx.fillStyle = "green";
+                ctx.fillText(`Score :  ${this.#score}`, boundary.x - 50, 10);
+                ctx.fillText(`Live :  ${this.#car.getLive()}`, boundary.x - 50, 20);
+            }
+            startGame(car, items = [], obstacles) {
+                this.#car = car;
+                this.#items = items;
+                this.#obstacles = obstacles;
+                this.#gameStatus = "playing";
+                this.#goalCollision = false;
+            }
+            endGame() {
+                if (!this.#car.hasLive()) {
+                    const centerX = Math.round(boundary.x / 2 - 10);
+                    const centerY = Math.round(boundary.y / 2);
+                    ctx.fillStyle = "red";
+                    ctx.fillText("End Game", centerX, centerY);
+                    return true;
+                }
+                if (this.#goalCollision) {
+                    const centerX = Math.round(boundary.x / 2 - 10);
+                    const centerY = Math.round(boundary.y / 2);
+                    ctx.fillStyle = "red";
+                    ctx.fillText("You win", centerX, centerY);
+                    return true;
+                }
+                return false;
+            }
+            addScore() {
+                this.#items = this.#items.filter(function (item, index, array) {
+                    if (this.#car.collideWith(item)) {
+                        this.#score += item.getValue();
+                        if (item.getType() === "goal") {
+                            this.#goalCollision = true;
+                        }
+                        return false;
+                    }
+                    return true;
+                }.bind(this))
+            }
+            decreaseLife() {
+                this.#obstacles = this.#obstacles.filter(function (obstacle, index, array) {
+                    if (this.#car.collideWith(obstacle)) {
+                        const remainingLives = this.#car.getLive() - 1;
+                        this.#car.setLive(remainingLives);
+                        return false;
+                    }
+                    return true;
+                }.bind(this))
+            }
+        }
+        class Car {
+            #live = undefined;
+            #speed = undefined;
+            #position = null;
+            #size = null;
+
+            constructor(live, speed, position, size) {
+                this.#live = live;
+                this.#speed = speed;
+                this.#position = position;
+                this.#size = size;
+            }
+            move(dir) {
+                switch (dir) {
+                    case direction.LEFT:
+                        if (this.#position.x <= 0) {
+                            return;
+                        }
+                        this.#position.x -= this.#speed;
+                        break;
+                    case direction.RIGHT:
+                        if (this.#position.x + this.#size.width >= boundary.x) {
+                            return;
+                        }
+                        this.#position.x += this.#speed;
+                        break;
+                    case direction.UP:
+                        if (this.#position.y <= 0) {
+                            return;
+                        }
+                        this.#position.y -= this.#speed;
+                        break;
+                    case direction.DOWN:
+                        if (this.#position.y + this.#size.height >= boundary.y) {
+                            return;
+                        }
+                        this.#position.y += this.#speed;
+                        break;
+                }
+            }
+            draw(ctx) {
+                ctx.fillStyle = "blue";
+                ctx.fillRect(this.#position.x, this.#position.y, this.#size.width, this.#size.height);
+            }
+            collideWith(object) {
+                const { minX: minOriginX, minY: minOriginY, maxX: maxOriginX, maxY: maxOriginY } = calculateCoordinates(this.#position, this.#size);
+                const { minX, minY, maxX, maxY } = calculateCoordinates(object.getPosition(), object.getSize());
+
+                const isCollision = !(
+                    maxOriginX < minX ||  // Đối tượng gốc nằm hoàn toàn bên trái
+                    minOriginX > maxX ||  // Đối tượng gốc nằm hoàn toàn bên phải
+                    maxOriginY < minY ||  // Đối tượng gốc nằm hoàn toàn bên trên
+                    minOriginY > maxY     // Đối tượng gốc nằm hoàn toàn bên dưới
+                );
+                return isCollision;
+            }
+            getLive() {
+                return this.#live;
+            }
+            setLive(live) {
+                this.#live = live;
+            }
+            hasLive() {
+                return this.#live !== 0;
+            }
+        }
+        class Item {
+            #type = undefined;
+            #value = undefined;
+            #position = null;
+            #size = null;
+
+            constructor(type = "coin", value, position, size) {
+                this.#type = type;
+                this.#value = value;
+                this.#position = position;
+                this.#size = size;
+            }
+            draw(ctx) {
+                ctx.fillStyle = this.chooseType();
+                ctx.fillRect(this.#position.x, this.#position.y, this.#size.width, this.#size.height);
+            }
+            getPosition() {
+                return this.#position;
+            }
+            setPosition(position) {
+                this.#position = position
+            }
+            getSize() {
+                return this.#size;
+            }
+            getValue() {
+                return this.#value;
+            }
+            getType() {
+                return this.#type;
+            }
+            chooseType() {
+                const type = {
+                    "heart": "red",
+                    "coin": "yellow",
+                    "goal": "cyan"
+                };
+                return type[this.#type];
+            }
+        }
+        class Obstacle {
+            #damage = undefined;
+            #position = null;
+            #size = null;
+            constructor(damage, position, size) {
+                this.#damage = damage;
+                this.#position = position;
+                this.#size = size;
+            }
+            effect() {
+
+            }
+            draw(ctx) {
+                ctx.fillStyle = "black";
+                ctx.fillRect(this.#position.x, this.#position.y, this.#size.width, this.#size.height);
+            }
+            getSize() {
+                return this.#size;
+            }
+            getPosition() {
+                return this.#position;
+            }
+        }
+
+        const direction = {
+            UP: "up",
+            DOWN: "down",
+            LEFT: "left",
+            RIGHT: "right",
+        }
+
+        function generateRandom(lowerBound, upperBound) {
+            return lowerBound + Math.floor(Math.random() * (upperBound - lowerBound + 1));
+        }
+        function generatePosition(size = { width: 0, height: 0 }) {
+            return {
+                x: generateRandom(0, boundary.x - size.width),
+                y: generateRandom(0, boundary.y - size.height)
+            }
+        }
+        function generateSize() {
+            return {
+                width: generateRandom(5, 20),
+                height: generateRandom(10, 30)
+            }
+        }
+        function calculateCoordinates(position, size) {
+            return {
+                minX: position.x,
+                minY: position.y,
+                maxX: position.x + size.width,
+                maxY: position.y + size.height,
+            };
+        }
+        function isOverLap(object, exitingArray = []) {
+            const { minX: A_minX, minY: A_minY, maxX: A_maxX, maxY: A_maxY } = calculateCoordinates(object.getPosition(), object.getSize());
+            return exitingArray.some(function (item, index, array) {
+                const { minX: B_minX, minY: B_minY, maxX: B_maxX, maxY: B_maxY } = calculateCoordinates(item.getPosition(), item.getSize());
+                // Va chạm xảy ra khi KHÔNG có khoảng trống (Tương tự logic trong Car.collideWith)
+                const isCollision = !(
+                    A_maxX < B_minX || // A bên trái B
+                    A_minX > B_maxX || // A bên phải B
+                    A_maxY < B_minY || // A bên trên B
+                    A_minY > B_maxY    // A bên dưới B
+                );
+                return isCollision;
+            });
+        }
+        function changePositionWhenOverLap(items, obstacles) {
+            for (let index = 0; index < items.length; index++) {
+                while (isOverLap(items[index], obstacles)) {
+                    items[index].setPosition(generatePosition({ width: 10, height: 5 }));
+                }
+            }
+        }
+        function initData() {
+            const LIVE = 3;
+            const SPEED = 5;
+
+            car = new Car(LIVE, SPEED, { x: boundary.x - 80, y: boundary.y - 10 }, { width: 20, height: 10 });
+            items = Array.from({ length: 3 }, function (item, index, array) {
+                const type = generateRandom(0, 1) ? "heart" : "coin";
+                const value = generateRandom(1, 10);
+                const { x, y } = generatePosition({ width: 10, height: 5 });
+                return new Item(type, value, { x, y }, { width: 10, height: 5 })
+            })
+            const goal = new Item("goal", 0, generatePosition({ width: 10, height: 5 }), { width: 10, height: 5 });
+            items.push(goal);
+            obstacles = Array.from({ length: 10 }, function (obstacle, index, array) {
+                const damage = 1;
+                const { x, y } = generatePosition({ width: 10, height: 5 });
+                return new Obstacle(damage, { x, y }, { width: 10, height: 5 });
+            });
+            changePositionWhenOverLap(items, obstacles);
+            game.startGame(car, items, obstacles);
+        }
+
+        const canvas = document.getElementById("game-canvas");
+        const ctx = canvas.getContext("2d");
+
+        let car, items, obstacles;
+        const game = new GameManager();
+        let isGameOver = true;
+        let animationId = null;
+
+        const boundary = {
+            x: canvas.width,
+            y: canvas.height
+        }
+        function gameLoop() {
+            game.draw(ctx);
+            game.addScore();
+            game.decreaseLife();
+            if (game.endGame()) {
+                isGameOver = true;
+                cancelAnimationFrame(animationId);
+                return;
+            }
+            animationId = requestAnimationFrame(gameLoop);
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (isGameOver && event.key === "Enter") {
+                isGameOver = false;
+                initData();
+                gameLoop();
+            }
+            if (!isGameOver) {
+                switch (event.key) {
+                    case "ArrowLeft":
+                        car.move("left");
+                        break;
+                    case "ArrowRight":
+                        car.move("right");
+                        break;
+                    case "ArrowDown":
+                        car.move("down");
+                        break;
+                    case "ArrowUp":
+                        car.move("up");
+                        break;
+                }
+            }
+        });
+
+        alert("Please press 'Enter'  button to play game!");
+
+    </script>
+</body>
+
+</html>

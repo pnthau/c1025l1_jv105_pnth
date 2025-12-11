@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Simulation</title>
+</head>
+
+<body>
+    <script>
+        // class Mobile {
+        //     static MAX_PIN = 100;
+        //     static MIN_PIN = 0;
+
+        //     constructor(statusPower = false, statusPin = Mobile.MAX_PIN) {
+        //         this.statusPower = statusPower;
+        //         this.statusPin = statusPin;
+        //         this.currentMessage = "";
+        //         this.messageBox = {
+        //             received: [],
+        //             sent: []
+        //         };
+        //     }
+
+        //     isPoweredOn() {
+        //         return this.statusPower;
+        //     }
+
+        //     turnOn() {
+        //         if (this.statusPin > Mobile.MIN_PIN) {
+        //             this.statusPower = true;
+        //         }
+        //     }
+
+        //     turnOff() {
+        //         this.statusPower = false;
+        //     }
+
+        //     chargePower() {
+        //         if (this.statusPin < Mobile.MAX_PIN) {
+        //             this.statusPin++;
+        //             console.log(`Pin = ${this.statusPin}`);
+        //         }
+        //     }
+
+        //     consumePower() {
+        //         if (this.statusPin > Mobile.MIN_PIN) {
+        //             this.statusPin--;
+        //         } else {
+        //             this.turnOff();
+        //             alert("Battery empty. Phone turned off.");
+        //         }
+        //     }
+        //     writeMessage() {
+        //         if (!this.isPoweredOn()) {
+        //             alert("Turn on the phone.");
+        //             return;
+        //         }
+        //         this.currentMessage = prompt("Enter message: ");
+        //         this.consumePower();
+        //     }
+
+        //     sendMessage() {
+        //         if (!this.isPoweredOn()) {
+        //             alert("Turn on the phone.");
+        //             return;
+        //         }
+        //         this.messageBox.sent.push(this.currentMessage);
+        //         this.consumePower();
+        //         return this.currentMessage;
+        //     }
+
+        //     receiveMessage(message) {
+        //         if (!this.isPoweredOn()) {
+        //             alert("Turn on the phone.");
+        //             return;
+        //         }
+        //         this.currentMessage = message;
+        //         this.messageBox.received.push(message);
+        //         this.consumePower();
+        //     }
+
+        //     getLastMessage() {
+        //         return this.currentMessage;
+        //     }
+
+        //     getReceivedMessages() {
+        //         if (!this.isPoweredOn()) {
+        //             alert("Turn on the phone.");
+        //             return [];
+        //         }
+        //         this.consumePower();
+        //         return [...this.messageBox.received];
+        //     }
+
+        //     getSentMessages() {
+        //         if (!this.isPoweredOn()) {
+        //             alert("Turn on the phone.");
+        //             return [];
+        //         }
+        //         this.consumePower();
+        //         return [...this.messageBox.sent];
+        //     }
+        // }
+
+        class IMessageBox {
+            send() { throw new Error("Not implemented"); }
+            receive() { throw new Error("Not implemented"); }
+            sentMessages() { throw new Error("Not implemented"); }
+            receivedMessages() { throw new Error("Not implemented"); }
+        }
+        class IPinManager {
+            chargePin() { throw new Error("Not implemented"); }
+            consume() { throw new Error("Not implemented"); }
+            getLevel() { throw new Error("Not implemented"); }
+        }
+        class MessageBox extends IMessageBox {
+            #message = "";
+            #messageReceived = [];
+            #messageSent = [];
+
+            constructor() {
+                super();
+            }
+            send(message) {
+                this.#messageSent.push(message);
+            }
+            receive(message) {
+                this.#message = message;
+                this.#messageReceived.push(this.#message);
+            }
+            sentMessages() {
+                return [...this.#messageSent];
+            }
+            receivedMessages() {
+                return [...this.#messageReceived];
+            }
+        }
+        class MessageService {
+            #messageBox = null;
+            #pinManager = null;
+            constructor(messageBox, pinManager) {
+                if (!(messageBox instanceof IMessageBox)) {
+                    throw new Error("messageBox must implement IMessageBox");
+                }
+                if (!(pinManager instanceof IPinManager)) {
+                    throw new Error("managerPin must implement IPinManager");
+                }
+                this.#messageBox = messageBox;
+                this.#pinManager = pinManager;
+            }
+            write() {
+                this.#pinManager.consume();
+            }
+            send(message) {
+                this.#messageBox.send(message);
+                this.#pinManager.consume();
+            }
+            receive(message) {
+                this.#messageBox.receive(message);
+                this.#pinManager.consume();
+            }
+            receivedMessages() {
+                this.#pinManager.consume();
+                return this.#messageBox.receivedMessages();
+            }
+            sentMessages() {
+                this.#pinManager.consume();
+                return this.#messageBox.sentMessages();
+            }
+            hasBattery() {
+                return !this.#pinManager.isEmpty();
+            }
+        }
+        class PinManager extends IPinManager {
+            static #MIN_PIN = 0;
+            static #MAX_PIN = 100;
+            #level = undefined;
+            constructor(level = PinManager.#MAX_PIN) {
+                super();
+                this.#level = level;
+            }
+            chargePin() {
+                if (this.#level > PinManager.#MAX_PIN) {
+                    return;
+                }
+                this.#level++;
+            }
+            consume() {
+                if (this.isEmpty()) {
+                    throw new Error("Battery empty");
+                }
+                this.#level--;
+            }
+            getLevel() {
+                return this.#level;
+            }
+            isEmpty() {
+                return this.#level <= PinManager.#MIN_PIN;
+            }
+        }
+        class Mobile {
+            #messageService = null;
+            #poweredOn = undefined;
+            #currentMessage = undefined;
+            constructor(messageService) {
+                this.#messageService = messageService;
+                this.#poweredOn = false;
+                this.#currentMessage = "";
+            }
+            isPoweredOn() {
+                return this.#poweredOn;
+            }
+            turnOn() {
+                if (!this.#messageService.hasBattery()) {
+                    throw new Error("Battery empty");
+                }
+                this.#poweredOn = true;
+            }
+            turnOff() {
+                this.#poweredOn = false;
+            }
+
+            writeMessage(message) {
+                if (!this.isPoweredOn()) {
+                    throw new Error("Phone is off")
+                }
+                this.#currentMessage = message;
+                this.#messageService.write();
+            }
+            sendMessage() {
+                if (!this.isPoweredOn()) {
+                    throw new Error("Phone is off")
+                }
+                this.#messageService.send(this.#currentMessage);
+            }
+            receiveMessage(message) {
+                if (!this.isPoweredOn()) {
+                    throw new Error("Phone is off")
+                }
+                this.#currentMessage = message;
+                this.#messageService.receive(this.#currentMessage);
+            }
+            getLastMessage() {
+                if (!this.isPoweredOn()) {
+                    throw new Error("Phone is off")
+                }
+                return this.#currentMessage;
+            }
+            getReceivedMessages() {
+                if (!this.isPoweredOn()) {
+                    throw new Error("Phone is off")
+                }
+                return this.#messageService.receivedMessages();
+            }
+            getSentMessages() {
+                if (!this.isPoweredOn()) {
+                    throw new Error("Phone is off")
+                }
+                return this.#messageService.sentMessages();
+            }
+        }
+
+        function demoSendMessage() {
+            const nokia = new Mobile(new MessageService(new MessageBox(), new PinManager()));
+            const iphone = new Mobile(new MessageService(new MessageBox(), new PinManager()));
+
+            nokia.turnOn();
+            iphone.turnOn();
+
+            alert(`nokia is turn on :  ${nokia.isPoweredOn()}`);
+            alert(`iphone is turn on :  ${iphone.isPoweredOn()}`);
+            let message = prompt("Enter message : ");
+            nokia.writeMessage(message);
+            nokia.sendMessage();
+
+            message = nokia.getLastMessage();
+
+            iphone.receiveMessage(message);
+
+            console.log("nokia sent:", nokia.getSentMessages());
+            console.log("iPhone received:", iphone.getReceivedMessages());
+            console.log("Last message:", iphone.getLastMessage());
+        }
+        demoSendMessage();
+    </script>
+</body>
+
+</html>

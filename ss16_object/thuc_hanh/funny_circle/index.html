@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="1368px" height="768px" style="border:1px solid #d3d3d3;">
+        <script>
+            class Circle {
+                constructor(x, y, radius) {
+                    this.x = x;
+                    this.y = y;
+                    this.radius = radius;
+                }
+            }
+
+            const point = {
+                x: 100,
+                y: -10,
+            }
+            const angle = {
+                start: 0,
+                end: 2 * Math.PI
+            }
+
+            function getRandomHex() {
+                const MAX_HEX = 255;
+                return Math.floor(Math.random() * MAX_HEX);
+            }
+
+            function getRandomColor() {
+                const red = getRandomHex();
+                const blue = getRandomHex();
+                const green = getRandomHex();
+
+                return `rgb(${red}, ${blue}, ${green})`;
+            }
+            function createCircle() {
+                let ctx = document.getElementById("myCanvas").getContext("2d");
+                const radius = Math.floor(Math.random() * 80);
+                const x = 300 + Math.floor(Math.random() * (500));
+                const y = 100 + Math.floor(Math.random() * (250));
+                const circle = new Circle(x, y, radius);
+                ctx.beginPath();
+                ctx.arc(circle.x, circle.y, circle.radius, angle.start, angle.end);
+                const color = getRandomColor();
+                ctx.fillStyle = color;
+                ctx.fill();
+            }
+
+            createCircle();
+
+            function createMultipleCircle() {
+                for (var i = 0; i < 40; i++) {
+                    createCircle();
+                }
+            }
+
+            createMultipleCircle();
+        </script>
+</body>
+
+</html>
