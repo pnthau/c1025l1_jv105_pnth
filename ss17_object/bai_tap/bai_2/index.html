@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Apple {
+            #weight = undefined;
+            constructor(weight) {
+                this.#weight = weight;
+            }
+            decrease() {
+                this.#weight--;
+            }
+            isEmpty() {
+                return this.#weight == 0;
+            }
+            getWeight() {
+                return this.#weight;
+            }
+        }
+        class Human {
+            #name = undefined;
+            #gender = undefined;
+            #weight = undefined;
+            constructor(name, gender, weight) {
+                this.#name = name;
+                this.#gender = gender;
+                this.#weight = weight;
+            }
+            isMale() {
+                return this.gender;
+            }
+            setGender(gender) {
+                this.#gender = gender;
+            }
+            checkApple(apple) {
+                return apple.isEmpty();
+            }
+            eat(apple) {
+                this.#weight++;
+                apple.decrease();
+            }
+            say(words) {
+                console.log(words);
+            }
+            getName() {
+                return this.#name;
+            }
+            setName(name) {
+                this.#name = name;
+            }
+            getWeight() {
+                return this.#weight;
+            }
+            setWeight(weight) {
+                this.#weight = weight;
+            }
+        }
+
+        const adam = new Human("adam", true, 50);
+        const eva = new Human("eva", false, 49);
+        const apple = new Apple(10);
+
+        while (!apple.isEmpty()) {
+            adam.say("Em an tao di eva");
+            eva.say("Da. cam on anh, em an truoc nha");
+            eva.eat(apple);
+            if (apple.isEmpty()) {
+                console.log("Tui may an het tao roi ma khong cam on tao");
+            }
+            console.log("apple weight : " + apple.getWeight());
+            console.log("eva weight : " + eva.getWeight());
+            eva.say("anh an di adam. em no roi");
+            adam.say("cam on em, anh an nha");
+            adam.eat(apple);
+            if (apple.isEmpty()) {
+                console.log("Tui may an het tao roi ma khong cam on tao");
+            }
+            console.log("apple weight : " + apple.getWeight());
+            console.log("adam weight : " + adam.getWeight());
+        }
+    </script>
+</body>
+
+</html>

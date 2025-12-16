@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #board {
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 300px;
+            height: 300px;
+            margin: 20vh auto;
+            text-align: center;
+        }
+
+        td {
+            border: 1px solid black;
+            padding: 10px;
+            width: 50px;
+            height: 50px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <table id="board">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <script>
+        class BoardGame {
+            table
+            players
+            status
+            winningCount
+            constructor(cells, winningCount) {
+                this.table = Array.from({ length: cells }, function () {
+                    return Array(cells).fill('')
+                });
+                this.winningCount = winningCount;
+            }
+            connect(players) {
+                this.players = players;
+            }
+            clearBoard() {
+                this.table.map(function (item, index, array) {
+                    return item.fill('');
+                });
+                // Array.from(document.getElementsByTagName('td')).map(function (value, index, array) {
+                //     return value = '';
+                // });
+            }
+
+            checkWinner(playerStatus, x, y) {
+                function checkDirection(winingCount, playerStatus, x0, y0, x, y) {
+                    if (winingCount === 0) {
+                        return true;
+                    }
+                    const isNotWin = x0 < 0 || y0 < 0 || x0 >= this.cells || y0 >= this.cells || table[x0][y0] !== playerStatus;
+                    if (isNotWin) {
+                        return false;
+                    }
+                    return checkDirection(winingCount - 1, playerStatus, x0 + x, y0 + y, x, y)
+                }
+                const directions = [
+                    [-1, 0], //left
+                    [1, 0], // right
+                    [0, -1], //top
+                    [0, 1], //bot
+                    [1, 1], //bot-right
+                    [-1, -1] //top-left
+                    [-1, 1], //bot-left
+                    [1, -1] //top-right
+                ];
+                for (const [x, y] of directions) {
+                    if (checkDirection(this.winningCount, curValue, x0, y0, x, y)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            switchTurn() {
+                players.forEach(function (player, index, players) {
+                    player.setTurn(player)
+                });
+            }
+        }
+        class Player {
+            type
+            turn
+            constructor(type) {
+                this.type = type;
+            }
+            getPlayerMark() {
+                return this.type;
+            }
+            getTurn() {
+                return turn;
+            }
+            setTurn(turn) {
+                this.turn = turn;
+            }
+        }
+        const MAXIMUN_CELL = 20;
+        const WINNING_COUNT = 5;
+
+        const board = document.getElementById('board');
+
+        const player1 = new Player("x");
+        const player2 = new Player("O");
+        const boardGame = new BoardGame(MAXIMUN_CELL, WINNING_COUNT);
+
+        Array.from(document.getElementsByTagName('td')).forEach(function (tag, index, array) {
+            tag.addEventListener('click', function (event) {
+                if (event.target.innerText !== "") {
+                    return;
+                }
+                const tr = this.parentNode;
+
+                const rowIndex = Array.from(tr.parentElement.children).indexOf(tr);
+                const colIndex = Array.from(tr.children).indexOf(this);
+
+                event.target.innerHTML = getPlayerMark(player);
+                table[rowIndex][colIndex] = player;
+
+                let isWinner = checkWinner(3, player, rowIndex, colIndex);
+                let isTie = table.every(function (row, index, array) {
+                    return row.every(function (col, index, array) {
+                        return col !== '';
+                    });
+                });
+
+                if (isWinner) {
+                    const winner = getPlayerMark(player);
+                    setTimeout(function () {
+                        alert("You Win " + winner);
+                    }, 200)
+                    clearBoard();
+                } else if (isTie) {
+                    setTimeout(function () {
+                        alert("You All  Tie " + 'X' + " And " + 'O');
+                    }, 200);
+
+                    clearBoard();
+                }
+                player = !player;
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Remote {
+            id
+            tv
+            constructor(id) {
+                this.id = id;
+            }
+            remote(tv) {
+                this.tv = tv;
+            }
+            pressChannel(number) {
+                if (this.tv.isPowerOn()) {
+                    this.tv.switchChannel(number);
+                }
+            }
+            pressVolumn(number) {
+                if (this.tv.isPowerOn()) {
+                    this.tv.adjustVolume(number);
+                }
+            }
+            pressPower() {
+                this.tv.status = !this.tv.status;
+            }
+        }
+        class Tivi {
+            currentChannel
+            currentVolumn
+            status
+            constructor(status) {
+                this.status = status;
+                this.currentChannel = 0;
+                this.currentVolumn = 0;
+            }
+            isPowerOn() {
+                return this.status;
+            }
+            switchChannel(number) {
+                this.currentChannel = number;
+                console.log("switch channel " + number)
+            }
+            adjustVolume(number) {
+                this.currentVolumn += number;
+                if (number > 0) {
+                    console.log("increase volumn : " + number)
+                }
+                else {
+                    console.log("decrease volumn : " + number)
+                }
+            }
+        }
+
+        const remote = new Remote();
+        const tivi = new Tivi(false);
+
+        remote.remote(tivi);
+
+        remote.pressPower();
+        remote.pressChannel(3);
+        remote.pressVolumn(7);
+        console.log(`volumn :  ${tivi.currentVolumn}`);
+
+
+    </script>
+</body>
+
+</html>

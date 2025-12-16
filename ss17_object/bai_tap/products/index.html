@@ -7,7 +7,7 @@
     <title>Document</title>
     <style>
         table {
-            width: 500px;
+            width: 800px;
             border-collapse: collapse;
         }
 
@@ -62,6 +62,7 @@
         <thead>
             <tr>
                 <th>Numbers</th>
+                <th>ID</th>
                 <th>Product Name</th>
                 <th colspan="2">
                 </th>
@@ -72,29 +73,91 @@
     </table>
     <script>
         const hotPhones2025 = [
-            "iPhone 17 Pro Max",
-            "Samsung Galaxy S25 Ultra",
-            "Google Pixel 10 Pro XL",
-            "Oppo Find X9 Pro",
-            "Apple iPhone 17",
-            "OnePlus 15",
-            "Google Pixel 9a",
-            "Nothing Phone 3a Pro",
-            "Samsung Galaxy Z Flip 7",
-            "iPhone Air"
+            {
+                id: 1,
+                name: "iPhone 17 Pro Max",
+                price: '$16'
+            },
+            {
+                id: 2,
+                name: "Samsung Galaxy S25 Ultra",
+                price: '$16'
+            },
+            {
+                id: 3,
+                name: "Google Pixel 10 Pro XL",
+                price: '$16'
+            },
+            {
+                id: 4,
+                name: "Oppo Find X9 Pro",
+                price: '$16'
+            },
+            {
+                id: 5,
+                name: "Apple iPhone 17",
+                price: '$16'
+            },
         ];
+        class Product {
+            id
+            name
+            price
+            constructor(id, name, price) {
+                this.id = id;
+                this.name = name;
+                this.price = price;
+            }
+        }
+        class ManagerProduct {
+            products
+            constructor(products) {
+                this.products = products;
+            }
+            deleteProduct(id) {
+                const index = this.products.findIndex(function (product, index, array) {
+                    return product.id === id;
+                });
+                if (index > -1) {
+                    return this.products.splice(index, 1)[0];
+                }
+                return undefined;
+            }
+            editProduct(id, name) {
+                const index = this.products.findIndex(function (product, index, array) {
+                    return product.id === id;
+                });
+                if (index > -1) {
+                    this.products[index].name = name;
+                }
+            }
+            addProduct(product) {
+                this.products.push(product);
+            }
+            getTotalProduct() {
+                return this.products.length;
+            }
+        }
+
         const tbody = document.querySelector('#tb-products tbody');
         const txtProductName = document.getElementById('product-name');
         const btnAdd = document.getElementById('add-product');
+
+        const managerProduct = new ManagerProduct(hotPhones2025);
+
+
         function loadTotalProducts() {
-            document.querySelector("#tb-products thead tr th:nth-child(3)").innerText = hotPhones2025.length + " products";
+            document.querySelector("#tb-products thead tr th:nth-child(4)").innerText = managerProduct.getTotalProduct() + " products";
         }
         //createElement.
-        function createRow(index, productName) {
+        function createRow(index, id, productName) {
             const tr = document.createElement("tr");
 
             const tdIndex = document.createElement("td");
             tdIndex.textContent = index;
+
+            const tdID = document.createElement("td");
+            tdID.textContent = id;
 
             const tdName = document.createElement("td");
             tdName.textContent = productName;
@@ -113,8 +176,8 @@
                 if (isConfirm === false) {
                     return;
                 }
-                hotPhones2025.splice(index, 1);
-                alert(`Deleted product : ${productName}`);
+                const product = managerProduct.deleteProduct(id);
+                alert(`Deleted product : ${product.name}`);
                 loadTable();
             });
 
@@ -131,84 +194,30 @@
                     return;
                 }
                 const productName = txtProductName.value;
-                hotPhones2025[index] = productName;
+                managerProduct.editProduct(id, productName);
                 txtProductName.value = "";
                 loadTable();
             });
 
-            tr.append(tdIndex, tdName, tdAction);
+            tr.append(tdIndex, tdID, tdName, tdAction);
             return tr;
         }
         function loadTable() {
             tbody.innerHTML = "";
-            hotPhones2025.forEach(function (product, index, array) {
-                tbody.append(createRow(index, product));
+            managerProduct.products.forEach(function (product, index, array) {
+                tbody.append(createRow(index, product.id, product.name));
             });
             loadTotalProducts();
         }
         btnAdd.addEventListener('click', function (event) {
             const productName = document.getElementById('product-name').value;
-            hotPhones2025.push(productName);
-            tbody.innerHTML += displayProduct(productName);
+            const newProduct = new Product(managerProduct.getTotalProduct() + 1, productName, "$20");
+            managerProduct.addProduct(newProduct);
             loadTotalProducts();
+            loadTable();
         });
 
         loadTable();
-
-        // function loadProductToTable() {
-        //     tbody.innerHTML = hotPhones2025.map(function (product, index, array) {
-        //         return displayProduct(index, product);
-        //     }).join("");
-        //     loadTotalProducts();
-        // }
-        // function displayProduct(index, productName) {
-        //     return `<tr>
-        //         <td>${index}</td>
-        //         <td class="product-name">${productName}</td>
-        //         <td><button  class="btn-edit">Edit</button></td>
-        //         <td><button  class="btn-del">Delete</button></td>
-        //     </tr>`;
-        // }
-
-        // const btnAdd = document.getElementById('add-product');
-        // const tbProducts = document.getElementById('tb-products');
-        // const tbody = document.querySelector('#tb-products tbody');
-
-
-        // loadProductToTable();
-
-        // btnAdd.addEventListener('click', function (event) {
-        //     const productName = document.getElementById('product-name').value;
-        //     hotPhones2025.push(productName);
-        //     tbody.innerHTML += displayProduct(productName);
-        //     loadTotalProducts();
-        // });
-
-        //(event delegation)
-        // tbody.addEventListener("click", function (e) {
-        //     const row = e.target.closest("tr");
-        //     if (!row) return;
-
-        //     const id = Number(row.children[0].innerText.trim());
-
-        //     if (e.target.classList.contains("product-name")) {
-        //         const productName = row.children[1].innerText.trim();
-        //         document.getElementById("product-name").value = productName;
-        //     }
-
-        //     if (e.target.classList.contains("btn-edit")) {
-        //         const productName = document.getElementById("product-name").value;
-        //         hotPhones2025[id] = productName;
-
-        //     }
-
-        //     if (e.target.classList.contains("btn-del")) {
-        //         const del = hotPhones2025.splice(id, 1);
-        //         alert(`The product with id: ${id}, name: ${del} is deleted.`);
-        //     }
-
-        //     loadProductToTable();
-        // });
     </script>
 </body>
 

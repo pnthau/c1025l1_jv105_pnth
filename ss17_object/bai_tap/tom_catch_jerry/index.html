@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Animal {
+            name
+            speed
+            weight
+            constructor(name, speed, weight) {
+                this.name = name;
+                this.weight = weight;
+                this.speed = speed;
+            }
+            say(words) {
+
+            }
+        }
+        class Rat extends Animal {
+            status
+            static LIVE = true;
+            static DEATH = false;
+            constructor(name, status, speed, weight) {
+                super(name, speed, weight);
+                this.status = status;
+            }
+            say(words) {
+                console.log(`${name} :  ${words}`);
+            }
+        }
+        class Cat extends Animal {
+            constructor(name, speed, weight) {
+                super(name, speed, weight);
+            }
+            say(words) {
+                console.log(`${name} :  ${words}`);
+            }
+            catch(rat) {
+                if (rat.speed < this.speed) {
+                    console.log(`${this.name} : catch ${rat.name}`);
+                }
+            }
+            eat(rat) {
+                if (rat.status === Rat.LIVE) {
+                    console.log(`eat ${rat.name}`);
+                    this.weight += rat.weight;
+                }
+                else {
+                    cat.say(`${cat.name} :  ${rat.name} spoiled meat `);
+                }
+            }
+        }
+
+        const cat = new Cat("Tom", 20, 10);
+        const rat = new Rat("Jerry", true, 19, 1);
+        const rat2 = new Rat("Jerry2", false, 19, 1);
+        for (const r of [rat, rat2]) {
+            cat.catch(r);
+            cat.eat(r);
+        }
+    </script>
+</body>
+
+</html>
