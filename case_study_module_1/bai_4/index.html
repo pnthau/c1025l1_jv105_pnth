@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function gcd(a, b) {
+            while (b != 0) {
+                [a, b] = [b, a % b];
+            }
+            return a;
+        }
+
+        function find(x) {
+            let [numerator, denominator] = x.split('/').map(function (value, index, array) {
+                return Number(value);
+            });
+            if (isNaN(numerator) || !denominator) {
+                console.log("Not fraction");
+                return;
+            }
+            const result = gcd(numerator, denominator);
+
+            numerator = numerator / result;
+            denominator = denominator / result;
+            if (denominator === 1) {
+                console.log(numerator);
+                return;
+            }
+            console.log([numerator, denominator].join("/"));
+        }
+        find("2/4");
+    </script>
+</body>
+
+</html>

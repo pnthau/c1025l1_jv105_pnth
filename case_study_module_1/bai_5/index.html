@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function isFourDigitNumber(n) {
+            const str = n;
+            return str.length === 4;
+        }
+        function greaterNumber(n) {
+            let str = n + "";
+            let curIdx = str.length - 1;
+            for (let idx = 0; idx < str.length - 1; idx++) {
+                if (str[idx] < str[idx + 1]) {
+                    curIdx = idx;
+                    break;
+                }
+            }
+            str = str.slice(0, curIdx) + str.slice(curIdx + 1);
+            return Number(str);
+
+        }
+        function findMaxNumber(n) {
+            if (!isFourDigitNumber(n)) {
+                return -1;
+            }
+            return greaterNumber(n)
+        }
+    </script>
+</body>
+
+</html>

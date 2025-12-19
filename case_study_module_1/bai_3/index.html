@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function generateNumbers(length) {
+            let nth = 0;
+            const array = [];
+            do {
+                const num = +prompt("Enter number : ");
+                if (num === "exit") {
+                    break;
+                }
+                if (Number.isInteger(num)) {
+                    array[nth] = Number.parseInt(num);
+                    nth++;
+                }
+            } while (nth < length);
+            return array;
+        }
+        function generateNLength() {
+            let isInteger = true;
+            let num = 0;
+            do {
+                isInteger = true
+                num = +prompt("Enter n : ");
+                if (!Number.isInteger(num) || num == 0) {
+                    isInteger = false;
+                    console.log("N not integer or equal Zero !!! please input again");
+                }
+            } while (!isInteger);
+            return num;
+        }
+        function isPalindrome(array) {
+            let l = 0;
+            let r = array.length - 1;
+
+            while (l < r) {
+                if (array[l] !== array[r]) {
+                    return false;
+                }
+                l++;
+                r--;
+            }
+            return true;
+        }
+        const n = generateNLength();
+        const numbers = generateNumbers(n);
+        if (isPalindrome([0, 1, 2])) {
+            console.log("OK");
+        }
+        else {
+            console.log("NO");
+        }
+    </script>
+</body>
+
+</html>

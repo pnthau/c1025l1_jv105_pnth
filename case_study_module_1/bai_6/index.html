@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function checkArray(array) {
+            let even = false;
+            let odd = false;
+            for (let i = 0; i < array.length; i++) {
+                if (even && odd) {
+                    return -1;
+                }
+                if (array[i] % 2 === 0) {
+                    even = true;
+                }
+                else {
+                    odd = true;
+                }
+            }
+            return even ? 1 : 0;
+        }
+
+        checkArray([1, 4, 5]);
+    </script>
+</body>
+
+</html>

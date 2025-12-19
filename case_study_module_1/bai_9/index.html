@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function generateNumbers(length) {
+            let nth = 0;
+            const array = [];
+            do {
+                const num = +prompt("Enter number : ");
+                if (num === "exit") {
+                    break;
+                }
+                if (Number.isInteger(num)) {
+                    array[nth] = Number.parseInt(num);
+                    nth++;
+                }
+            } while (nth < length);
+            return array;
+        }
+        function generateNLength() {
+            let isInteger = true;
+            let num = 0;
+            do {
+                isInteger = true
+                num = +prompt("Enter n : ");
+                if (!Number.isInteger(num) || num == 0 || num % 2 !== 0) {
+                    isInteger = false;
+                    console.log("N not integer, N not even or equal Zero !!! please input again");
+                }
+            } while (!isInteger);
+            return num;
+        }
+        function hasAdjacentPair(array) {
+            for (let index = 0; index < array.length; index += 2) {
+                let point1 = array[index];
+                let point2 = array[index + 1];
+                if (point1 > point2) {
+                    console.log("NO");
+                    return;
+                }
+            }
+            console.log("OK");
+        }
+        const n = generateNLength();
+        const numbers = generateNumbers(n);
+        hasAdjacentPair([1, 2, 6, 7, 5, 4]);
+    </script>
+</body>
+
+</html>

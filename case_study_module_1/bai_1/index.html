@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const MAX_LENGTH = 20;
+
+        function generateNumbers(length) {
+            let nth = 0;
+            const numbers = [];
+            do {
+                const num = +prompt("Enter number : ");
+                if (num === "exit") {
+                    break;
+                }
+                if (Number.isInteger(num)) {
+                    numbers[nth] = Number.parseInt(num);
+                    nth++;
+                }
+            } while (nth <= length);
+            return numbers;
+        }
+        function isArithmetic(numbers) {
+            if (numbers.length === 0) {
+                return false;
+            }
+            if (numbers.length <= 2) {
+                return true;
+            }
+            const d = numbers[1] - numbers[0];
+            for (let idx = 1; idx < numbers.length - 1; idx++) {
+                if (numbers[idx] + d !== numbers[idx + 1]) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        const numbers = generateNumbers(MAX_LENGTH);
+        // isArithmetic([0, 2, 4, 6, 8]);
+        // isArithmetic([2, 4, 7, 9]);
+        isArithmetic(numbers);
+    </script>
+</body>
+
+</html>

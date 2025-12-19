@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function isPrime(num) {
+            if (num < 2) {
+                return false;
+            }
+            for (let index = 2; index <= Math.sqrt(num); index++) {
+                if (num % index === 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        function checkPrime(array) {
+            for (let index = 0; index < array.length; index++) {
+                if (!isPrime(array[index])) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        console.log(checkPrime([1, 3, 2, 7]));
+    </script>
+</body>
+
+</html>

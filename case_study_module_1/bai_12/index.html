@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            padding: 10px 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="actions">
+        <button id="add">Add student</button>
+        <button id="delete">Delete student</button>
+        <button id="edit">Edit student</button>
+    </div>
+    <div id="students-info">
+
+    </div>
+    <script>
+        class Student {
+            id = undefined
+            name = undefined
+            course = undefined
+            email = undefined
+            dob = null // date of birth
+            module = undefined
+            constructor(id, name, course, email, dob, module) {
+                this.id = id;
+                this.name = name;
+                this.course = course;
+                this.email = email;
+                this.dob = dob;
+                this.module = module;
+            }
+        }
+        class LMS {
+            #students
+            constructor() {
+                this.#students = [];
+            }
+            addStudent(student) {
+                this.#students.push(student);
+            }
+            addStudents(students) {
+                this.#students.push(...students);
+            }
+            deleteStudent(index) {
+                const studentDeleted = this.#students.splice(index, 1);
+                console.log(studentDeleted);
+            }
+            editStudent(student, { name, course, email, dob, module }) {
+                student.name = name || student.name;
+                student.course = course || student.course;
+                student.email = email || student.email;
+                student.dob = dob || student.dob;
+                student.module = module || student.module;
+                console.log(student);
+            }
+            findStudent(id) {
+                const index = this.#students.findIndex(function (student, index, array) {
+                    return student.id === id;
+                });
+                return index;
+            }
+            displayStudents() {
+                let content = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Class</th>
+                                <th>Email</th>
+                                <th>Date of birth</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+                this.#students.forEach(function (student, index, array) {
+                    content += `
+                            <tr>
+                                <td>${student.id}</td>
+                                <td>${student.name}</td>
+                                <td>${student.course}</td>
+                                <td>${student.email}</td>
+                                <td>${student.dob}</td>
+                            </tr>`;
+                });
+                content += `</tbody>
+                    </table>`;
+
+                const table = document.getElementById("students-info");
+                table.innerHTML = content;
+            }
+            getStudents() {
+                return this.#students;
+            }
+        }
+        const lms = new LMS();
+        const student = new Student("hv-0001", "Nguyen Van A", "c1022g1", "nguyenvanA@gmail.com", "01/01/2004");
+        const student1 = new Student("hv-0002", "Nguyen Van A", "c1022g1", "nguyenvanA@gmail.com", "01/01/2004");
+        const student2 = new Student("hv-0003", "Nguyen Van A", "c1022g1", "nguyenvanA@gmail.com", "01/01/2004");
+        lms.addStudents([student, student1, student2]);
+        lms.displayStudents();
+
+        //actions
+        const add = document.getElementById("add");
+        const remove = document.getElementById("delete");
+        const edit = document.getElementById("edit");
+
+        add.addEventListener('click', function (event) {
+            let flag = false;
+            let id = validateInputText(/^HV-\d{4}$/, "Enter id : ", "Id format : HV-XXXX (X : number). please enter again!");
+            const name = validateInputText(/^[A-Z][a-z\s]{1,50}$/, "Enter name : ", "Name is invalid or too long (max : 50 characters). please enter again!");
+            const course = validateInputText(/^[1-6]$/, "Enter class : ", "Class is invalid. please enter again! [1->6]. please enter again!");
+            const dob = validateInputDate("Enter Date of birth : ", "Date is invalid( date format : dd/mm/yyyy). Please enter again!");
+            const email = prompt("Enter email : ");
+            const module = prompt("Enter module : ");
+            const newStudent = new Student(id, name, course, email, dob, module);
+            lms.addStudent(newStudent);
+            lms.displayStudents();
+        });
+        remove.addEventListener('click', function (event) {
+            const id = prompt("Enter id : ");
+            const index = lms.findStudent(id);
+            if (index === -1) {
+                console.log("Not found");
+                alert("The Student id is not exited")
+                return;
+            }
+
+            lms.deleteStudent(index);
+            lms.displayStudents();
+        });
+        edit.addEventListener('click', function (event) {
+            const id = prompt("Enter id : ");
+            const index = lms.findStudent(id);
+            if (index === -1) {
+                console.log("Not found");
+                alert("The Student id is not exited")
+                return;
+            }
+            const name = prompt("Enter name : ");
+            const course = prompt("Enter class : ");
+            const email = prompt("Enter email : ");
+            const dob = prompt("Enter dob : ");
+            const module = prompt("Enter module : ");
+
+            lms.editStudent(lms.getStudents()[index], { name, course, email, dob, module });
+            lms.displayStudents();
+        });
+        function validateInputText(regex, placeholder, error) {
+            let flag = false;
+            let input = undefined;
+            do {
+                flag = true;
+                input = prompt(`${placeholder}`);
+                if (!id.text(regex)) {
+                    alert(error);
+                    flag = false;
+                }
+            } while (!flag)
+            return input;
+        }
+        function validateInputDate(placeholder, error) {
+            let flag = false;
+            let input = undefined;
+            do {
+                flag = true;
+                input = prompt(`${placeholder}`);
+                if (!isValidDate(input)) {
+                    alert(error);
+                    flag = false;
+                }
+            } while (!flag)
+            return input;
+        }
+        function isValidDate(str) {
+            const [day, month, year] = str.split("/").map(function (value, index, array) {
+                return Number(value);
+            });
+            const date = new Date(year, month - 1, day);
+            return (date.getFullYear() === year && date.getMonth() === month && date.getDay() === day);
+        }
+    </script>
+</body>
+
+</html>
