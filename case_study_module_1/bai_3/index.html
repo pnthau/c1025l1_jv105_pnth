@@ -26,27 +26,27 @@
         }
         function generateNLength() {
             let isInteger = true;
-            let num = 0;
+            let n = 0;
             do {
                 isInteger = true
-                num = +prompt("Enter n : ");
-                if (!Number.isInteger(num) || num == 0) {
+                n = +prompt("Enter length of array : ");
+                if (!Number.isInteger(n) || n == 0) {
                     isInteger = false;
                     console.log("N not integer or equal Zero !!! please input again");
                 }
             } while (!isInteger);
-            return num;
+            return n;
         }
         function isPalindrome(array) {
-            let l = 0;
-            let r = array.length - 1;
+            let left = 0;
+            let right = array.length - 1;
 
             while (l < r) {
                 if (array[l] !== array[r]) {
                     return false;
                 }
-                l++;
-                r--;
+                left++;
+                right--;
             }
             return true;
         }

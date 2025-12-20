@@ -11,19 +11,25 @@
     <script>
         const MAX_LENGTH = 20;
 
-        function generateNumbers(length) {
-            let nth = 0;
+        function generateN() {
+            let n = 0;
+            do {
+                n = +prompt("Enter length of array : ");
+            } while (n === 0 || !Number.isInteger(n) || n > MAX_LENGTH);
+            return n;
+        }
+
+        function generateNumbers() {
+            const n = generateN();
+            let i = 0;
             const numbers = [];
             do {
                 const num = +prompt("Enter number : ");
-                if (num === "exit") {
-                    break;
-                }
                 if (Number.isInteger(num)) {
-                    numbers[nth] = Number.parseInt(num);
-                    nth++;
+                    numbers[i] = Number.parseInt(num);
+                    i++;
                 }
-            } while (nth <= length);
+            } while (i < n);
             return numbers;
         }
         function isArithmetic(numbers) {
@@ -41,7 +47,7 @@
             }
             return true;
         }
-        const numbers = generateNumbers(MAX_LENGTH);
+        const numbers = generateNumbers();
         // isArithmetic([0, 2, 4, 6, 8]);
         // isArithmetic([2, 4, 7, 9]);
         isArithmetic(numbers);
