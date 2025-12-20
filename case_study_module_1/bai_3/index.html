@@ -10,18 +10,16 @@
 <body>
     <script>
         function generateNumbers(length) {
-            let nth = 0;
+            let i = 0;
             const array = [];
             do {
-                const num = +prompt("Enter number : ");
-                if (num === "exit") {
-                    break;
+                const num = +prompt(`Enter ${i} element of the array : `);
+                if (!Number.isInteger(num)) {
+                    continue;
                 }
-                if (Number.isInteger(num)) {
-                    array[nth] = Number.parseInt(num);
-                    nth++;
-                }
-            } while (nth < length);
+                array.push(num);
+                i++;
+            } while (i < length);
             return array;
         }
         function generateNLength() {
