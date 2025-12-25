@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function isFibonaci(number) {
+            if (number === 1 || number === 0) {
+                return true;
+            }
+            let f0 = 0;
+            let f1 = 1;
+            while (f1 <= number) {
+                let temp = f0 + f1;
+                f0 = f1;
+                f1 = temp;
+                if (f1 === number) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        function findFibonacies(array) {
+            const newArray = [];
+            for (let i = 0; i < array.length; i++) {
+                if (isFibonaci(array[i])) {
+                    newArray.push(array[i]);
+                }
+            }
+            return newArray.sort(function (a, b) {
+                return a - b;
+            });
+        }
+        console.log(findFibonacies([1, 5, 6, 13, 9, 12, 8, 0, 5, 1]));
+    </script>
+</body>
+
+</html>

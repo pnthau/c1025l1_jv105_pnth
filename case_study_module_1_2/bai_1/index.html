@@ -9,8 +9,7 @@
 
 <body>
     <script>
-        const MAX_LENGTH = 20;
-
+        const MAX_LENGTH = 50;
         function generateLengthOfArray() {
             let n = 0;
             do {
@@ -32,26 +31,39 @@
             } while (i < length);
             return array;
         }
-        function isArithmetic(numbers) {
-            if (numbers.length === 0) {
+        function isPrime(number) {
+            if (number < 2) {
                 return false;
             }
-            if (numbers.length <= 2) {
-                return true;
-            }
-            const d = numbers[1] - numbers[0];
-            for (let idx = 1; idx < numbers.length - 1; idx++) {
-                if (numbers[idx] + d !== numbers[idx + 1]) {
+            for (let index = 2; index <= Math.sqrt(number); index++) {
+                if (number % 2 === 0) {
                     return false;
                 }
             }
             return true;
         }
+
+        function displayArray(array) {
+            for (let i = 0; i < array.length; i++) {
+                console.log(`The element array[${i}]  = ${array[i]}`);
+            }
+        }
+
+        function totalPrimes(array) {
+            let sum = 0;
+            for (let i = 0; i < array.length; i++) {
+                if (!isPrime(i)) {
+                    continue;
+                }
+                sum += array[i];
+            }
+            return sum;
+        }
         const n = generateLengthOfArray();
         const numbers = generateNumbers(n);
-        // isArithmetic([0, 2, 4, 6, 8]);
-        // isArithmetic([2, 4, 7, 9]);
-        isArithmetic(numbers);
+        displayArray([5, 2, 4, 8, 10, 15, 7]);
+        console.log(totalPrimes([5, 2, 4, 8, 10, 15, 7]));
+
     </script>
 </body>
 

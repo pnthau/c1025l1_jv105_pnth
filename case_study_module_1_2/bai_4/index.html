@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Computer {
+            id = undefined;
+            name = undefined;
+            manufacturer = undefined;
+            price = undefined;
+            constructor(id, name, manufacturer, price) {
+                this.id = id;
+                this.name = name;
+                this.manufacturer = manufacturer;
+                this.price = price;
+            }
+            setName(name) {
+                this.name = name;
+            }
+            setManufacturer(manufacturer) {
+                this.manufacturer = manufacturer;
+            }
+            setPrice(price) {
+                this.price = price;
+            }
+            getName() {
+                return this.name;
+            }
+            getManufacturer() {
+                return this.manufacturer;
+            }
+            getPrice() {
+                return this.price;
+            }
+            toString() {
+                return `Id : ${this.id} -  Name : ${this.name} - Manufacturer : ${this.manufacturer} - price : ${this.price}`;
+            }
+        }
+        class ManagerComputer {
+            computers = null;
+            constructor() {
+                this.computers = [];
+            }
+            add(computer) {
+                this.computers.push(computer);
+            }
+            display() {
+                this.computers.foreach(function (value, index, array) {
+                    console.log(`The element ${index}  \n:  ${value.toString()}`);
+                });
+            }
+        }
+        const computer = new Computer();
+    </script>
+</body>
+
+</html>
