@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            padding: 10px 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Manager Workers</h1>
+    <div id="workers-info">
+
+    </div>
+    <script>
+        class Worker {
+            fullName = undefined
+            dob = undefined
+            address = undefined
+            salary = undefined
+            ordinalNumber = undefined
+            role = undefined
+            constructor(ordinalNumber, fullName, dob, address, salary, role) {
+                this.ordinalNumber = ordinalNumber;
+                this.fullName = fullName;
+                this.dob = dob;
+                this.address = address;
+                this.salary = salary;
+                this.role = role;
+            }
+        }
+        class ManagerWorkers {
+            #workers = null
+            constructor() {
+                this.#workers = [];
+            }
+            addWorker(worker) {
+                this.#workers.push(worker);
+            }
+            addWorkers(workers) {
+                this.#workers.push(...workers);
+            }
+
+            displayWorkers() {
+                let content = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Ordinal number</th>
+                                <th>Full name</th>
+                                <th>Date of birth</th>
+                                <th>Address</th>
+                                <th>Salary</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+                this.#workers.forEach(function (worker, index, array) {
+                    content += `
+                            <tr>
+                                <td>${worker.ordinalNumber}</td>
+                                <td>${worker.fullName}</td>
+                                <td>${worker.dob}</td>
+                                <td>${worker.address}</td>
+                                <td>${worker.salary}</td>
+                                <td>${worker.role}</td>
+                                
+                            </tr>`;
+                });
+                content += `</tbody>
+                    </table>`;
+
+                const table = document.getElementById("workers-info");
+                table.innerHTML = content;
+            }
+        }
+        const managerWorkers = new ManagerWorkers();
+        const worker1 = new Worker(1, "Truong Tan A", "01/01/2004", "Sai Gon", 2000, "abc");
+        const worker2 = new Worker(2, "Truong Tan B", "01/01/2005", "Sai Gon", 2000, "abc");
+        const worker3 = new Worker(3, "Truong Tan C", "01/01/2006", "Sai Gon", 2000, "abc");
+        managerWorkers.addWorkers([worker1, worker2, worker3]);
+        managerWorkers.displayWorkers();
+    </script>
+</body>
+
+</html>

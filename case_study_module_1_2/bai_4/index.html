@@ -51,12 +51,15 @@
                 this.computers.push(computer);
             }
             display() {
-                this.computers.foreach(function (value, index, array) {
-                    console.log(`The element ${index}  \n:  ${value.toString()}`);
+                this.computers.forEach(function (value, index, array) {
+                    console.log(`The element ${index}:\n${value.toString()}`);
                 });
             }
         }
-        const computer = new Computer();
+        const computer = new Computer("1", "computer1", "Vietnam", 5);
+        const managerComputer = new ManagerComputer();
+        managerComputer.add(computer);
+        managerComputer.display();
     </script>
 </body>
 

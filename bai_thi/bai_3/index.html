@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function isLeapYear(year) {
+            return year % 400 === 0 || ((year % 4 == 0) && (year % 100 !== 0));
+        }
+        function calculateDays(year, month) {
+            switch (month) {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    return 31;
+                case 2:
+                    return isLeapYear(year) ? 29 : 28;
+                default:
+                    return 30;
+            }
+        }
+        function validateInputText(regex, placeholder, error) {
+            let flag = false;
+            let input = undefined;
+            do {
+                flag = true;
+                input = prompt(`${placeholder}`);
+                if (!id.text(regex)) {
+                    alert(error);
+                    flag = false;
+                }
+            } while (!flag)
+            return input;
+        }
+        function validateInputDate(placeholder, error) {
+            let flag = false;
+            let input = undefined;
+            do {
+                flag = true;
+                input = prompt(`${placeholder}`);
+                if (!isValidMonthYear(input)) {
+                    alert(error);
+                    flag = false;
+                }
+            } while (!flag)
+            return input;
+        }
+        function isValidMonthYear(input) {
+            const regex = /^(0[1-9]|1[0-2])\/\d{4}$/;
+            return regex.test(input);
+        }
+
+        const date = validateInputDate("Enter month and year (MM/yyyy)  :", "Please input again!!!");
+        const [month, year] = date.split("/").map(function (value, index, array) {
+            return Number(value);
+        });
+        const days = calculateDays(year, month);
+        console.log(`the days of ${month} month and ${year} year : ${days}`);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function generatePositiveInterger() {
+            let n = 0;
+            do {
+                n = +prompt("Enter positive integer : ");
+            } while (n <= 0 || !Number.isInteger(n));
+            return n;
+        }
+
+        function sumOfDivisors(number) {
+            let sum = 0;
+            for (let i = 1; i <= number / 2; i++) {
+                if (number % i !== 0) {
+                    continue;
+                }
+                sum += i;
+            }
+            return sum;
+        }
+
+        function isPerfectNumber(number) {
+            if (number === 1) {
+                return false;
+            }
+            return number === sumOfDivisors(number);
+        }
+
+        const num = generatePositiveInterger();
+        const result = isPerfectNumber(num) ? "perfect" : "not perfect";
+        console.log(`${num} is ${result}`);
+
+    </script>
+</body>
+
+</html>

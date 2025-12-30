@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const MAX_LENGTH = 50;
+        function generateLengthOfArray() {
+            let n = 0;
+            do {
+                n = +prompt("Enter length of array : ");
+            } while (n === 0 || !Number.isInteger(n) || n >= MAX_LENGTH);
+            return n;
+        }
+
+        function generateNumbers(length) {
+            let i = 0;
+            const array = [];
+            do {
+                const num = +prompt(`Enter element ${i} of the array:`);
+                if (!Number.isInteger(num)) {
+                    continue;
+                }
+                array.push(num);
+                i++;
+            } while (i < length);
+            return array;
+        }
+
+        function displayArray(array) {
+            for (let i = 0; i < array.length; i++) {
+                console.log(`The element array[${i}]  = ${array[i]}`);
+            }
+        }
+
+        function isEvenlyDivisible(num) {
+            return num % 3 === 0;
+        }
+
+        function calculateAverageNumbers(array) {
+            let sum = 0;
+            let count = 0;
+            for (let i = 0; i < array.length; i++) {
+                if (!isEvenlyDivisible(array[i])) {
+                    continue;
+                }
+                sum += array[i];
+                count++;
+            }
+            const average = sum / count;
+            return average;
+        }
+        // [5, 2, 4, 8, 10, 15, 7]
+        const n = generateLengthOfArray();
+        const numbers = generateNumbers(n);
+        displayArray(numbers);
+        const average = calculateAverageNumbers(numbers);
+        console.log(`The average evenly divisible  3 :  ${average}`);
+    </script>
+</body>
+
+</html>
