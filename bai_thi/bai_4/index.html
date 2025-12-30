@@ -53,7 +53,6 @@
             addWorkers(workers) {
                 this.#workers.push(...workers);
             }
-
             displayWorkers() {
                 let content = `
                     <table>
@@ -68,7 +67,7 @@
                             </tr>
                         </thead>
                         <tbody>`;
-                this.#workers.forEach(function (worker, index, array) {
+                this.#workers.sort((a, b) => a.fullName.localeCompare(b.fullName)).forEach(function (worker, index, array) {
                     content += `
                             <tr>
                                 <td>${worker.ordinalNumber}</td>
@@ -88,9 +87,9 @@
             }
         }
         const managerWorkers = new ManagerWorkers();
-        const worker1 = new Worker(1, "Truong Tan A", "01/01/2004", "Sai Gon", 2000, "abc");
-        const worker2 = new Worker(2, "Truong Tan B", "01/01/2005", "Sai Gon", 2000, "abc");
-        const worker3 = new Worker(3, "Truong Tan C", "01/01/2006", "Sai Gon", 2000, "abc");
+        const worker1 = new Worker(1, "Zruong Tan A", "01/01/2004", "Sai Gon", 2000, "abc");
+        const worker2 = new Worker(2, "Aruong Tan B", "01/01/2005", "Sai Gon", 2000, "abc");
+        const worker3 = new Worker(3, "Lruong Tan C", "01/01/2006", "Sai Gon", 2000, "abc");
         managerWorkers.addWorkers([worker1, worker2, worker3]);
         managerWorkers.displayWorkers();
     </script>
