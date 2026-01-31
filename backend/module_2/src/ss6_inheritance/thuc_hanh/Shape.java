@@ -1,6 +1,8 @@
 package module_2.src.ss6_inheritance.thuc_hanh;
 
-public class Shape {
+import module_2.src.ss7_abstract_class_interface.bai_tap.IResizeable;
+
+public abstract class Shape implements IResizeable {
     private String color;
     private boolean filled;
 

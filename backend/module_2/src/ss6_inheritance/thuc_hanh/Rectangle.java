@@ -42,4 +42,9 @@ public class Rectangle extends Shape {
     }
 
 
+    @Override
+    public void resize(double precent) {
+        this.setWidth(this.getWidth() * precent);
+        this.setLength(this.getLength() * precent);
+    }
 }

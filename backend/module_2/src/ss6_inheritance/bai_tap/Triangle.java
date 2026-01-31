@@ -57,4 +57,9 @@ public class Triangle extends Shape {
     public String toString() {
         return "A Triangle with side1= " + this.side1 + "and side2= " + this.side2 + "and side3= " + this.side3 + ", color = " + this.getColor();
     }
+
+    @Override
+    public void resize(double precent) {
+
+    }
 }

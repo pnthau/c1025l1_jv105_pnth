@@ -36,4 +36,9 @@ public class Circle extends Shape {
     public String toString() {
         return "A Circle with radius=" + this.radius + " , which is a subclass of " + super.getClassName();
     }
+
+    @Override
+    public void resize(double precent) {
+        this.setRadius(this.getRadius() * precent);
+    }
 }
