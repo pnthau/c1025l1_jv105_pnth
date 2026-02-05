@@ -1,19 +1,20 @@
-package module_2.src.ss2_loop.thuc_hanh;
+package module_2.src.ss8_clean_code.CodeGymManagerMVC.View;
+
+import module_2.src.ss8_clean_code.CodeGymManagerMVC.Controller.StudentController;
 
 import java.util.Scanner;
 
-public class Menu {
+public class RunApp {
+    static StudentController studentController = new StudentController();
+
     public static void main(String[] args) {
         boolean flag = true;
         Scanner scanner = new Scanner(System.in);
         byte choice = 0;
         while (flag) {
-            System.out.println(
-                    "1. Add \n" +
-                    "2. Remove \n" +
-                    "3. Update \n" +
-                    "4. Search \n" +
-                    "5. Display \n" +
+            System.out.println("" +
+                    "1. Student manager \n" +
+                    "2. Instructor manager\n" +
                     "0. Exit ");
             choice = Byte.parseByte(scanner.nextLine());
             createMenu(choice);
@@ -27,19 +28,11 @@ public class Menu {
 
         switch (choice) {
             case 1:
-                System.out.println("Add");
+                System.out.println("Student Manager");
+                studentController.displayMenu();
                 break;
             case 2:
-                System.out.println("Remove");
-                break;
-            case 3:
-                System.out.println("Update");
-                break;
-            case 4:
-                System.out.println("Search");
-                break;
-            case 5:
-                System.out.println("Display");
+                System.out.println("Instructor Manager");
                 break;
             case 0:
                 System.out.println("Exit");
