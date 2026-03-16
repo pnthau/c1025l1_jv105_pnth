@@ -1,40 +1,30 @@
 package module_2.src.bai_tap_lam_them_1.view;
 
-import module_2.src.bai_tap_lam_them_1.controller.IController;
+import module_2.src.bai_tap_lam_them_1.controller.VehicleController;
 import module_2.src.bai_tap_lam_them_1.entity.*;
+import module_2.src.bai_tap_lam_them_1.service.VehicleValidate;
 
 import java.util.*;
 
 public class VehicleFoundView {
-    Map<String, IController<? extends Vehicle>> controllerMap;
-
-    public VehicleFoundView() {
-        this.controllerMap = new HashMap<>();
-    }
-
-    public VehicleFoundView(Map<String, IController<? extends Vehicle>> controllerMap) {
-        this.controllerMap = controllerMap;
-    }
+    private VehicleController controller = new VehicleController();
+    private VehicleValidate validate = new VehicleValidate();
 
     public void displayFoundVehicleView() {
         Scanner scanner = new Scanner(System.in);
         String licensePlate = scanner.nextLine();
-
-        List<Vehicle> vehiclesList = new ArrayList<>();
-        for (IController<? extends Vehicle> controller : controllerMap.values()) {
-            vehiclesList.addAll(controller.findVehicleByLicensePlate(licensePlate));
+        boolean isLicensePlateValid = this.validate.isValidLicensePlate(licensePlate);
+        if (!isLicensePlateValid) {
+            System.out.println("The license plate is invalid");
+            return;
         }
 
-        displayVehicleList(vehiclesList);
+        List<Vehicle> vehicleFoundLicensePlateList = this.controller.findByLicensePlate(licensePlate);
+        vehicleFoundLicensePlateList.forEach(System.out::println);
 
-        if (vehiclesList.isEmpty()) {
+        if (vehicleFoundLicensePlateList.isEmpty()) {
             System.out.println("Not found any vehicles");
         }
     }
 
-    private void displayVehicleList(List<? extends Vehicle> vehicles) {
-        for (Vehicle vehicle : vehicles) {
-            System.out.println(vehicle);
-        }
-    }
 }

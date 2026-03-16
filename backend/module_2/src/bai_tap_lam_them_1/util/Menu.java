@@ -1,6 +1,4 @@
-package module_2.src.bai_tap_lam_them_1.until;
-
-import module_2.src.bai_tap_lam_them_1.entity.Truck;
+package module_2.src.bai_tap_lam_them_1.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

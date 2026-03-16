@@ -1,22 +1,18 @@
 package module_2.src.bai_tap_lam_them_1.view;
 
-import module_2.src.bai_tap_lam_them_1.controller.BikeController;
-import module_2.src.bai_tap_lam_them_1.controller.CarController;
-import module_2.src.bai_tap_lam_them_1.controller.IController;
-import module_2.src.bai_tap_lam_them_1.controller.TruckController;
+import module_2.src.bai_tap_lam_them_1.controller.VehicleController;
 import module_2.src.bai_tap_lam_them_1.entity.*;
-import module_2.src.bai_tap_lam_them_1.until.ConstantsVariables;
-import module_2.src.bai_tap_lam_them_1.until.Menu;
+import module_2.src.bai_tap_lam_them_1.service.VehicleFactory;
+import module_2.src.bai_tap_lam_them_1.service.VehicleValidate;
+import module_2.src.bai_tap_lam_them_1.util.ConstantsVariables;
+import module_2.src.bai_tap_lam_them_1.util.Menu;
 
 import java.util.Map;
 import java.util.Scanner;
 
 public class VehicleAddView {
-    private final Map<String, IController<? extends Vehicle>> controlllerMap;
-
-    public VehicleAddView(Map<String, IController<? extends Vehicle>> controlllerMap) {
-        this.controlllerMap = controlllerMap;
-    }
+    private VehicleController controller = new VehicleController();
+    private VehicleValidate validate = new VehicleValidate();
 
     public void displayAddMenu(String announceContent) {
         boolean flag = true;
@@ -51,17 +47,18 @@ public class VehicleAddView {
             case ConstantsVariables.TRUCK:
                 System.out.println(Menu.getOptionMenu(optionContents[0]));
                 vehicleInfor = inputFields();
-
                 System.out.println("Enter payload capacity : ");
                 payloadCapacityString = scanner.nextLine();
                 payloadCapacity = Double.parseDouble(payloadCapacityString);
 
-                isAdd = ((TruckController) this.controlllerMap.get("truck")).add(
-                        new Truck(vehicleInfor.getLicensePlate(),
-                                vehicleInfor.getManufacture(),
-                                vehicleInfor.getManufactureYears(),
-                                vehicleInfor.getOwnerName(),
-                                payloadCapacity));
+                Truck truck = (Truck) VehicleFactory.create(VehicleType.TRUCK);
+                truck.setLicensePlate(vehicleInfor.getLicensePlate());
+                truck.setManufacture(vehicleInfor.getManufacture());
+                truck.setManufactureYears(vehicleInfor.getManufactureYears());
+                truck.setOwnerName(vehicleInfor.getOwnerName());
+                truck.setPayloadCapacity(payloadCapacity);
+
+                isAdd = this.controller.addVehicle((Vehicle) truck);
                 if (isAdd) {
                     System.out.println("Succeed");
                 } else {
@@ -78,12 +75,15 @@ public class VehicleAddView {
                 System.out.println("Enter type : ");
                 type = scanner.nextLine();
 
-                isAdd = ((CarController) this.controlllerMap.get("car")).add(
-                        new Car(vehicleInfor.getLicensePlate(),
-                                vehicleInfor.getManufacture(),
-                                vehicleInfor.getManufactureYears(),
-                                vehicleInfor.getOwnerName(),
-                                seats, type));
+                Car car = (Car) VehicleFactory.create(VehicleType.CAR);
+                car.setLicensePlate(vehicleInfor.getLicensePlate());
+                car.setManufacture(vehicleInfor.getManufacture());
+                car.setManufactureYears(vehicleInfor.getManufactureYears());
+                car.setOwnerName(vehicleInfor.getOwnerName());
+                car.setSeats(seats);
+                car.setType(type);
+
+                isAdd = this.controller.addVehicle((Vehicle) car);
                 if (isAdd) {
                     System.out.println("Succeed");
                 } else {
@@ -93,22 +93,25 @@ public class VehicleAddView {
             case ConstantsVariables.BIKE:
                 System.out.println(Menu.getOptionMenu(optionContents[2]));
                 vehicleInfor = inputFields();
-
                 System.out.println("Enter enginePower : ");
                 enginePowerString = scanner.nextLine();
                 enginePower = Integer.parseInt(enginePowerString);
 
-                isAdd = ((BikeController) this.controlllerMap.get("car")).add(
-                        new Bike(vehicleInfor.getLicensePlate(),
-                                vehicleInfor.getManufacture(),
-                                vehicleInfor.getManufactureYears(),
-                                vehicleInfor.getOwnerName(), enginePower));
+                Bike bike = (Bike) VehicleFactory.create(VehicleType.BIKE);
+                bike.setLicensePlate(vehicleInfor.getLicensePlate());
+                bike.setManufacture(vehicleInfor.getManufacture());
+                bike.setManufactureYears(vehicleInfor.getManufactureYears());
+                bike.setOwnerName(vehicleInfor.getOwnerName());
+                bike.setEnginePower(enginePower);
+
+                isAdd = this.controller.addVehicle((Vehicle) bike);
                 if (isAdd) {
                     System.out.println("Succeed");
                 } else {
                     System.out.println("Fail");
                 }
                 break;
+
             case 4:
                 System.out.println(Menu.getOptionMenu(optionContents[3]));
                 break;
@@ -117,10 +120,19 @@ public class VehicleAddView {
         }
     }
 
-    public static Vehicle inputFields() {
+    public Vehicle inputFields() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter licensePlate : ");
-        String licensePlate = scanner.nextLine();
+        boolean flag = true;
+        String licensePlateValidated = "";
+        do {
+            System.out.println("Enter licensePlate : ");
+            licensePlateValidated = scanner.nextLine();
+            boolean isValid = this.validate.isValidLicensePlate(licensePlateValidated);
+            if (isValid) {
+                flag = false;
+            }
+        } while (flag);
+        String licensePlate = licensePlateValidated;
 
         System.out.println("Enter manufacture id : ");
         String manufactureID = scanner.nextLine();

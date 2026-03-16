@@ -1,38 +1,15 @@
 package module_2.src.bai_tap_lam_them_1.view;
 
-import module_2.src.bai_tap_lam_them_1.controller.BikeController;
-import module_2.src.bai_tap_lam_them_1.controller.CarController;
-import module_2.src.bai_tap_lam_them_1.controller.TruckController;
-import module_2.src.bai_tap_lam_them_1.controller.IController;
 import module_2.src.bai_tap_lam_them_1.entity.Vehicle;
-import module_2.src.bai_tap_lam_them_1.until.ConstantsVariables;
+import module_2.src.bai_tap_lam_them_1.util.ConstantsVariables;
 
 import java.util.*;
 
 public class RunApp {
-    private static final CarController carController = new CarController();
-    private static final BikeController bikeController = new BikeController();
-    private static final TruckController truckController = new TruckController();
-
-    private static final VehicleAddView vehicleAddView;
-    private static final VehicleDisplayView vehicleDisplayView;
-    private static final VehicleDeletedView vehicleDeletedView;
-    private static final VehicleFoundView vehicleFoundView;
-
-    private static final Map<String, IController<? extends Vehicle>> controlllerMap;
-
-    static {
-        controlllerMap = new HashMap<>();
-        controlllerMap.put("car", carController);
-        controlllerMap.put("bike", bikeController);
-        controlllerMap.put("truck", truckController);
-
-        vehicleAddView = new VehicleAddView(controlllerMap);
-        vehicleDisplayView = new VehicleDisplayView(controlllerMap);
-        vehicleDeletedView = new VehicleDeletedView(controlllerMap);
-        vehicleFoundView = new VehicleFoundView(controlllerMap);
-    }
-
+    private static final VehicleAddView vehicleAddView = new VehicleAddView();
+    private static final VehicleDisplayView vehicleDisplayView = new VehicleDisplayView();
+    private static final VehicleDeletedView vehicleDeletedView = new VehicleDeletedView();
+    private static final VehicleFoundView vehicleFoundView = new VehicleFoundView();
 
     public static void main(String[] args) {
         boolean flag = true;
@@ -54,7 +31,6 @@ public class RunApp {
     }
 
     private static void createMenu(byte choice) {
-
         switch (choice) {
             case 1:
                 System.out.println("Add a new vehicle");

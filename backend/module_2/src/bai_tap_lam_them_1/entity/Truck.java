@@ -1,6 +1,6 @@
 package module_2.src.bai_tap_lam_them_1.entity;
 
-import module_2.src.bai_tap_lam_them_1.until.ConstantsVariables;
+import module_2.src.bai_tap_lam_them_1.util.ConstantsVariables;
 
 public class Truck extends Vehicle {
     private double payloadCapacity;

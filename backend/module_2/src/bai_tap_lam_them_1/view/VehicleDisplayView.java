@@ -1,19 +1,16 @@
 package module_2.src.bai_tap_lam_them_1.view;
 
-import module_2.src.bai_tap_lam_them_1.controller.IController;
+import module_2.src.bai_tap_lam_them_1.controller.VehicleController;
 import module_2.src.bai_tap_lam_them_1.entity.Vehicle;
-import module_2.src.bai_tap_lam_them_1.until.ConstantsVariables;
-import module_2.src.bai_tap_lam_them_1.until.Menu;
+import module_2.src.bai_tap_lam_them_1.entity.VehicleType;
+import module_2.src.bai_tap_lam_them_1.util.ConstantsVariables;
+import module_2.src.bai_tap_lam_them_1.util.Menu;
 
 import java.util.Map;
 import java.util.Scanner;
 
 public class VehicleDisplayView {
-    private final Map<String, IController<? extends Vehicle>> controlllerMap;
-
-    public VehicleDisplayView(Map<String, IController<? extends Vehicle>> controlllerMap) {
-        this.controlllerMap = controlllerMap;
-    }
+    private VehicleController controller = new VehicleController();
 
     public void displayViewMenu(String announceContent) {
         boolean flag = true;
@@ -35,21 +32,15 @@ public class VehicleDisplayView {
         switch (choice) {
             case ConstantsVariables.TRUCK:
                 System.out.println(Menu.getOptionMenu(optionContents[0]));
-                if (controlllerMap.containsKey("truck")) {
-                    controlllerMap.get("truck").display();
-                }
+                this.controller.displayType(VehicleType.TRUCK);
                 break;
             case ConstantsVariables.CAR:
                 System.out.println(Menu.getOptionMenu(optionContents[1]));
-                if (controlllerMap.containsKey("car")) {
-                    controlllerMap.get("car").display();
-                }
+                this.controller.displayType(VehicleType.CAR);
                 break;
             case ConstantsVariables.BIKE:
                 System.out.println(Menu.getOptionMenu(optionContents[2]));
-                if (controlllerMap.containsKey("bike")) {
-                    controlllerMap.get("bike").display();
-                }
+                this.controller.displayType(VehicleType.BIKE);
                 break;
             case 4:
                 System.out.println(Menu.getOptionMenu(optionContents[3]));

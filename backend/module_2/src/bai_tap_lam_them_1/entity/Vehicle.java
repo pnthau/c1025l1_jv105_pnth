@@ -1,11 +1,11 @@
 package module_2.src.bai_tap_lam_them_1.entity;
 
 public abstract class Vehicle {
-    String licensePlate;
-    Manufacture manufacture;
-    String manufactureYears;
-    String ownerName;
-
+    private String licensePlate;
+    private Manufacture manufacture;
+    private String manufactureYears;
+    private String ownerName;
+    private VehicleType vehicleType;
     public Vehicle() {
     }
 
@@ -63,12 +63,16 @@ public abstract class Vehicle {
         return this.getLicensePlate().hashCode();
     }
 
-    public boolean contain(String keyword) {
+    public boolean contains(String keyword) {
         return this.licensePlate.contains(keyword);
     }
 
     @Override
     public String toString() {
         return String.join(" - ", this.getLicensePlate(), this.getManufacture().toString(), this.getManufactureYears(), this.getOwnerName());
+    }
+
+    public VehicleType getVehicleType() {
+        return vehicleType;
     }
 }
