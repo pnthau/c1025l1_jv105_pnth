@@ -50,8 +50,17 @@ public abstract class Vehicle {
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Vehicle)) {
+            return false;
+        }
         Vehicle vehicle = (Vehicle) obj;
         return this.licensePlate.equals(vehicle.licensePlate);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getLicensePlate().hashCode();
     }
 
     public boolean contain(String keyword) {
