@@ -1,18 +1,18 @@
 package module_2.src.bai_tap_lam_them_1.view;
 
-import module_2.src.bai_tap_lam_them_1.controller.IVehicleController;
+import module_2.src.bai_tap_lam_them_1.controller.IController;
 import module_2.src.bai_tap_lam_them_1.entity.*;
 
 import java.util.*;
 
 public class VehicleFoundView {
-    Map<String, IVehicleController<? extends Vehicle>> controllerMap;
+    Map<String, IController<? extends Vehicle>> controllerMap;
 
     public VehicleFoundView() {
         this.controllerMap = new HashMap<>();
     }
 
-    public VehicleFoundView(Map<String, IVehicleController<? extends Vehicle>> controllerMap) {
+    public VehicleFoundView(Map<String, IController<? extends Vehicle>> controllerMap) {
         this.controllerMap = controllerMap;
     }
 
@@ -21,7 +21,7 @@ public class VehicleFoundView {
         String licensePlate = scanner.nextLine();
 
         List<Vehicle> vehiclesList = new ArrayList<>();
-        for (IVehicleController<? extends Vehicle> controller : controllerMap.values()) {
+        for (IController<? extends Vehicle> controller : controllerMap.values()) {
             vehiclesList.addAll(controller.findVehicleByLicensePlate(licensePlate));
         }
 

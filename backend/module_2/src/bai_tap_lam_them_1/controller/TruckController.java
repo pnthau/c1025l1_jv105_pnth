@@ -2,12 +2,10 @@ package module_2.src.bai_tap_lam_them_1.controller;
 
 import module_2.src.bai_tap_lam_them_1.entity.Truck;
 import module_2.src.bai_tap_lam_them_1.entity.Vehicle;
-import module_2.src.bai_tap_lam_them_1.service.ITruckService;
-import module_2.src.bai_tap_lam_them_1.service.TruckService;
 
 import java.util.List;
 
-public class TruckController implements IVehicleController<Truck> {
+public class TruckController implements IController<Truck> {
     private ITruckService service;
 
     public TruckController() {

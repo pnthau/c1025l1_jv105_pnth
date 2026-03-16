@@ -3,7 +3,7 @@ package module_2.src.bai_tap_lam_them_1.view;
 import module_2.src.bai_tap_lam_them_1.controller.BikeController;
 import module_2.src.bai_tap_lam_them_1.controller.CarController;
 import module_2.src.bai_tap_lam_them_1.controller.TruckController;
-import module_2.src.bai_tap_lam_them_1.controller.IVehicleController;
+import module_2.src.bai_tap_lam_them_1.controller.IController;
 import module_2.src.bai_tap_lam_them_1.entity.Vehicle;
 import module_2.src.bai_tap_lam_them_1.until.ConstantsVariables;
 
@@ -19,7 +19,7 @@ public class RunApp {
     private static final VehicleDeletedView vehicleDeletedView;
     private static final VehicleFoundView vehicleFoundView;
 
-    private static final Map<String, IVehicleController<? extends Vehicle>> controlllerMap;
+    private static final Map<String, IController<? extends Vehicle>> controlllerMap;
 
     static {
         controlllerMap = new HashMap<>();

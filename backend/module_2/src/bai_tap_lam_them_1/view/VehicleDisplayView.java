@@ -1,9 +1,6 @@
 package module_2.src.bai_tap_lam_them_1.view;
 
-import module_2.src.bai_tap_lam_them_1.controller.BikeController;
-import module_2.src.bai_tap_lam_them_1.controller.CarController;
-import module_2.src.bai_tap_lam_them_1.controller.IVehicleController;
-import module_2.src.bai_tap_lam_them_1.controller.TruckController;
+import module_2.src.bai_tap_lam_them_1.controller.IController;
 import module_2.src.bai_tap_lam_them_1.entity.Vehicle;
 import module_2.src.bai_tap_lam_them_1.until.ConstantsVariables;
 import module_2.src.bai_tap_lam_them_1.until.Menu;
@@ -12,9 +9,9 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class VehicleDisplayView {
-    private final Map<String, IVehicleController<? extends Vehicle>> controlllerMap;
+    private final Map<String, IController<? extends Vehicle>> controlllerMap;
 
-    public VehicleDisplayView(Map<String, IVehicleController<? extends Vehicle>> controlllerMap) {
+    public VehicleDisplayView(Map<String, IController<? extends Vehicle>> controlllerMap) {
         this.controlllerMap = controlllerMap;
     }
 
