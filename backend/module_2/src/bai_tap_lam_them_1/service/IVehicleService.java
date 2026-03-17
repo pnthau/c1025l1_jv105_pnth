@@ -1,5 +1,6 @@
 package module_2.src.bai_tap_lam_them_1.service;
 
+import module_2.src.bai_tap_lam_them_1.dto.VehicleRequest;
 import module_2.src.bai_tap_lam_them_1.entity.Vehicle;
 import module_2.src.bai_tap_lam_them_1.entity.VehicleType;
 
@@ -13,6 +14,8 @@ public interface IVehicleService {
     boolean deleteByLicensePlate(String plate);
 
     public List<Vehicle> getAll();
+
+    boolean add(VehicleRequest request);
 
     public List<Vehicle> getType(VehicleType vehicleType);
 }

@@ -1,9 +1,9 @@
 package module_2.src.bai_tap_lam_them_1.controller;
 
+import module_2.src.bai_tap_lam_them_1.dto.VehicleRequest;
 import module_2.src.bai_tap_lam_them_1.entity.Vehicle;
 import module_2.src.bai_tap_lam_them_1.entity.VehicleType;
 import module_2.src.bai_tap_lam_them_1.service.IVehicleService;
-import module_2.src.bai_tap_lam_them_1.service.VehicleService;
 
 import java.util.List;
 
@@ -16,11 +16,10 @@ public class VehicleController {
 
     public boolean addVehicle(Vehicle vehicle) {
         return service.add(vehicle);
-
     }
 
-    public void displayAll() {
-        service.getAll().forEach(System.out::println);
+    public boolean addVehicle(VehicleRequest request) {
+        return service.add(request);
     }
 
     public List<Vehicle> displayType(VehicleType vehicleType) {

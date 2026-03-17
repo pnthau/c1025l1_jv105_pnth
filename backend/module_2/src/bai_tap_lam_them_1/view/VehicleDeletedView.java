@@ -2,19 +2,16 @@ package module_2.src.bai_tap_lam_them_1.view;
 
 import module_2.src.bai_tap_lam_them_1.controller.VehicleController;
 import module_2.src.bai_tap_lam_them_1.entity.Vehicle;
-import module_2.src.bai_tap_lam_them_1.service.VehicleValidate;
+import module_2.src.bai_tap_lam_them_1.service.VehicleValidator;
 
 
-import java.util.Map;
 import java.util.Scanner;
 
 public class VehicleDeletedView {
     private final VehicleController controller;
-    private final VehicleValidate validate;
 
-    public VehicleDeletedView(VehicleController controller, VehicleValidate validate) {
+    public VehicleDeletedView(VehicleController controller) {
         this.controller = controller;
-        this.validate = validate;
     }
 
     public void displayDeletedView() {
@@ -24,13 +21,12 @@ public class VehicleDeletedView {
 
         System.out.println("Enter licensePlate : ");
         String licensePlate = scanner.nextLine();
-        boolean isLicensePlateValid = this.validate.isValidLicensePlate(licensePlate);
-        if (!isLicensePlateValid) {
-            System.out.println("the license plate is invalid");
-            return;
-        }
 
-        isDeleted = this.controller.deleteByLicensePlate(licensePlate);
+        try {
+            isDeleted = this.controller.deleteByLicensePlate(licensePlate);
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+        }
 
         if (isDeleted) {
             System.out.println("Succeed");
