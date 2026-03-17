@@ -46,26 +46,14 @@ public class VehicleService implements IVehicleService {
         if (!this.vehicleValidator.isValidLicensePlate(request.licensePlate)) {
             throw new IllegalArgumentException("the license plate is invalid");
         }
-        
-        Vehicle vehicle = VehicleFactory.create(request.vehicleType);
+
+        Vehicle vehicle = VehicleFactory.create(request);
 
         vehicle.setLicensePlate(request.licensePlate);
         vehicle.setManufacture(request.manufacture);
         vehicle.setManufactureYears(request.manufactureYears);
         vehicle.setOwnerName(request.ownerName);
 
-        switch (request.vehicleType) {
-            case TRUCK:
-                ((Truck) vehicle).setPayloadCapacity(request.payloadCapacity);
-                break;
-            case CAR:
-                ((Car) vehicle).setSeats(request.seats);
-                ((Car) vehicle).setType(request.type);
-                break;
-            case BIKE:
-                ((Bike) vehicle).setEnginePower(request.enginePower);
-                break;
-        }
         return vehicleRepository.add(vehicle);
     }
 

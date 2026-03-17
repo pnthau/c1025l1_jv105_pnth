@@ -1,16 +1,24 @@
 package module_2.src.bai_tap_lam_them_1.service;
 
+import module_2.src.bai_tap_lam_them_1.dto.VehicleRequest;
 import module_2.src.bai_tap_lam_them_1.entity.*;
 
 public class VehicleFactory {
-    public static Vehicle create(VehicleType type) {
-        switch (type) {
+    public static Vehicle create(VehicleRequest request) {
+        switch (request.vehicleType) {
             case CAR:
-                return new Car();
+                Car car = new Car();
+                car.setSeats(request.seats);
+                car.setType(request.type);
+                return car;
             case BIKE:
-                return new Bike();
+                Bike bike = new Bike();
+                bike.setEnginePower(request.enginePower);
+                return bike;
             case TRUCK:
-                return new Truck();
+                Truck truck = new Truck();
+                truck.setPayloadCapacity(request.payloadCapacity);
+                return truck;
             default:
                 throw new IllegalArgumentException("Unknown type");
         }

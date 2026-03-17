@@ -18,7 +18,7 @@ public class VehicleAddView {
 
     public void displayAddMenu(String announceContent) {
         boolean flag = true;
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = ConstantsVariables.scanner;
         byte choice = 0;
         while (flag) {
             System.out.println(announceContent);
@@ -54,8 +54,8 @@ public class VehicleAddView {
         System.out.println(result ? "Succeed" : "Fail");
     }
 
-    public VehicleRequest inputData(VehicleType vehicleType) {
-        Scanner scanner = new Scanner(System.in);
+    private VehicleRequest inputData(VehicleType vehicleType) {
+        Scanner scanner = ConstantsVariables.scanner;
         VehicleRequest request = new VehicleRequest();
 
         System.out.println("Enter licensePlate: ");

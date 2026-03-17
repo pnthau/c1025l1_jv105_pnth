@@ -16,7 +16,7 @@ public class VehicleDisplayView {
 
     public void displayViewMenu(String announceContent) {
         boolean flag = true;
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = ConstantsVariables.scanner;
         byte choice = 0;
         while (flag) {
             System.out.println(announceContent);
