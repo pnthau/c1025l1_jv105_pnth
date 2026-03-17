@@ -44,8 +44,9 @@ public class VehicleDisplayView {
                 System.out.println(MenuOptions.getOptionMenu(optionContents[2]));
                 this.controller.displayType(VehicleType.BIKE).forEach(System.out::println);
                 break;
-            case 4:
+            case ConstantsVariables.ELECTRIC:
                 System.out.println(MenuOptions.getOptionMenu(optionContents[3]));
+                this.controller.displayType(VehicleType.ELECTRIC_VEHICLE).forEach(System.out::println);
                 break;
             default:
                 System.out.println("No choice");

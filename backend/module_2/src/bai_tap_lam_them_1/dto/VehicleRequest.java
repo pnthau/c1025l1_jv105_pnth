@@ -13,6 +13,7 @@ public class VehicleRequest {
     public Integer seats;
     public String type;
     public Double enginePower;
+    public Double batteryCapacity;
 
     public VehicleType vehicleType;
 

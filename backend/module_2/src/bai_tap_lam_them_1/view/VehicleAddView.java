@@ -38,20 +38,47 @@ public class VehicleAddView {
             case ConstantsVariables.TRUCK:
                 System.out.println(MenuOptions.getOptionMenu(optionContents[0]));
                 request = inputData(VehicleType.TRUCK);
-                result = this.controller.addVehicle(request);
+                try {
+                    result = this.controller.addVehicle(request);
+                    System.out.println(result ? "Succeed" : "Fail");
+                } catch (IllegalArgumentException exception) {
+                    System.out.println(exception.getMessage());
+                }
                 break;
             case ConstantsVariables.CAR:
                 System.out.println(MenuOptions.getOptionMenu(optionContents[1]));
                 request = inputData(VehicleType.CAR);
-                result = this.controller.addVehicle(request);
+                try {
+                    result = this.controller.addVehicle(request);
+                    System.out.println(result ? "Succeed" : "Fail");
+                } catch (IllegalArgumentException exception) {
+                    System.out.println(exception.getMessage());
+                }
                 break;
             case ConstantsVariables.BIKE:
                 System.out.println(MenuOptions.getOptionMenu(optionContents[2]));
                 request = inputData(VehicleType.BIKE);
-                result = this.controller.addVehicle(request);
+                try {
+                    result = this.controller.addVehicle(request);
+                    System.out.println(result ? "Succeed" : "Fail");
+                } catch (IllegalArgumentException exception) {
+                    System.out.println(exception.getMessage());
+                }
                 break;
+            case ConstantsVariables.ELECTRIC:
+                System.out.println(MenuOptions.getOptionMenu(optionContents[3]));
+                request = inputData(VehicleType.ELECTRIC_VEHICLE);
+                try {
+                    result = this.controller.addVehicle(request);
+                    System.out.println(result ? "Succeed" : "Fail");
+                } catch (IllegalArgumentException exception) {
+                    System.out.println(exception.getMessage());
+                }
+                break;
+            default:
+                System.out.println("No choice");
         }
-        System.out.println(result ? "Succeed" : "Fail");
+
     }
 
     private VehicleRequest inputData(VehicleType vehicleType) {
@@ -94,6 +121,10 @@ public class VehicleAddView {
             case BIKE:
                 System.out.println("Enter engine power:");
                 request.enginePower = Double.parseDouble(scanner.nextLine());
+                break;
+            case ELECTRIC_VEHICLE:
+                System.out.println("Enter battery capacity:");
+                request.batteryCapacity = Double.parseDouble(scanner.nextLine());
                 break;
         }
         return request;

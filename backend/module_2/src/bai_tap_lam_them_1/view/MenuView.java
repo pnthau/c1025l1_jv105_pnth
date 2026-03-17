@@ -42,31 +42,33 @@ public class MenuView {
 
     private void createMenu(byte choice) {
         switch (choice) {
-            case 1:
+            case ConstantsVariables.ADD:
                 System.out.println("Add a new vehicle");
                 vehicleAddView.displayAddMenu(
                         "1. Add a truck \n" +
                                 "2. Add a car \n" +
                                 "3. Add a bike \n" +
-                                "4. Back the main menu \n");
+                                "4. Add a electric \n" +
+                                "5. Back the main menu \n");
                 break;
-            case 2:
+            case ConstantsVariables.DISPLAY:
                 System.out.println("Display vehicle");
                 vehicleDisplayView.displayViewMenu(
-                        "1. Display truck \n" +
-                                "2. Display car \n" +
-                                "3. Display bike \n" +
-                                "4. Back the main menu \n");
+                        "1. Display trucks \n" +
+                                "2. Display cars \n" +
+                                "3. Display bikes \n" +
+                                "4. Display electrics \n" +
+                                "5. Back the main menu \n");
                 break;
-            case 3:
+            case ConstantsVariables.DELETE:
                 System.out.println("Delete vehicle");
                 vehicleDeletedView.displayDeletedView();
                 break;
-            case 4:
+            case ConstantsVariables.FIND:
                 System.out.println("Find by license plate");
                 vehicleFoundView.displayFoundVehicleView();
                 break;
-            case 5:
+            case ConstantsVariables.EXIT:
                 System.out.println("Exit");
                 break;
             default:

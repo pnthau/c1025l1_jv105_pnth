@@ -19,6 +19,10 @@ public class VehicleFactory {
                 Truck truck = new Truck();
                 truck.setPayloadCapacity(request.payloadCapacity);
                 return truck;
+            case ELECTRIC_VEHICLE:
+                ElectricVehicle electricVehicle = new ElectricVehicle();
+                electricVehicle.setBatteryCapacity(request.batteryCapacity);
+                return electricVehicle;
             default:
                 throw new IllegalArgumentException("Unknown type");
         }
