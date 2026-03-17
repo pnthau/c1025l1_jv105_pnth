@@ -4,6 +4,7 @@ import module_2.src.bai_thi.entity.ExportProduct;
 import module_2.src.bai_thi.entity.ImportProduct;
 import module_2.src.bai_thi.entity.Product;
 import module_2.src.bai_thi.service.ExportProductService;
+import module_2.src.bai_thi.service.ImportProductService;
 
 import java.util.Scanner;
 
@@ -13,14 +14,14 @@ public class ImportProductController {
     public static final byte DELETE = 3;
     public static final byte UPDATE = 4;
 
-    private final ExportProductService service;
+    private final ImportProductService service;
 
     public ImportProductController() {
-        this.service = new ExportProductService();
+        this.service = new ImportProductService();
     }
 
-    public ImportProductController(ExportProductService service) {
-        this.service = (ExportProductService) service;
+    public ImportProductController(ImportProductService service) {
+        this.service = (ImportProductService) service;
     }
 
     public void displayMenu() {
