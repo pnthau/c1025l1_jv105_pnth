@@ -1,17 +1,29 @@
 package module_2.src.bai_tap_lam_them_1.view;
 
-import module_2.src.bai_tap_lam_them_1.entity.Vehicle;
+import module_2.src.bai_tap_lam_them_1.controller.VehicleController;
+import module_2.src.bai_tap_lam_them_1.service.VehicleValidate;
 import module_2.src.bai_tap_lam_them_1.util.ConstantsVariables;
 
-import java.util.*;
+import java.util.Scanner;
 
-public class RunApp {
-    private static final VehicleAddView vehicleAddView = new VehicleAddView();
-    private static final VehicleDisplayView vehicleDisplayView = new VehicleDisplayView();
-    private static final VehicleDeletedView vehicleDeletedView = new VehicleDeletedView();
-    private static final VehicleFoundView vehicleFoundView = new VehicleFoundView();
+public class MenuView {
+    private final VehicleController controller;
+    private final VehicleValidate vehicleValidate;
+    private final VehicleAddView vehicleAddView;
+    private final VehicleDisplayView vehicleDisplayView;
+    private final VehicleDeletedView vehicleDeletedView;
+    private final VehicleFoundView vehicleFoundView;
 
-    public static void main(String[] args) {
+    public MenuView(VehicleController controller, VehicleValidate vehicleValidate) {
+        this.controller = controller;
+        this.vehicleValidate = vehicleValidate;
+        this.vehicleAddView = new VehicleAddView(controller, vehicleValidate);
+        this.vehicleDisplayView = new VehicleDisplayView(controller);
+        this.vehicleDeletedView = new VehicleDeletedView(controller, vehicleValidate);
+        this.vehicleFoundView = new VehicleFoundView(controller, vehicleValidate);
+    }
+
+    public void start() {
         boolean flag = true;
         Scanner scanner = new Scanner(System.in);
         byte choice = 0;
@@ -30,7 +42,7 @@ public class RunApp {
         }
     }
 
-    private static void createMenu(byte choice) {
+    private  void createMenu(byte choice) {
         switch (choice) {
             case 1:
                 System.out.println("Add a new vehicle");
@@ -63,4 +75,5 @@ public class RunApp {
                 System.out.println("No choice");
         }
     }
+
 }

@@ -6,6 +6,7 @@ public abstract class Vehicle {
     private String manufactureYears;
     private String ownerName;
     private VehicleType vehicleType;
+
     public Vehicle() {
     }
 
@@ -72,7 +73,5 @@ public abstract class Vehicle {
         return String.join(" - ", this.getLicensePlate(), this.getManufacture().toString(), this.getManufactureYears(), this.getOwnerName());
     }
 
-    public VehicleType getVehicleType() {
-        return vehicleType;
-    }
+    public abstract VehicleType getVehicleType();
 }

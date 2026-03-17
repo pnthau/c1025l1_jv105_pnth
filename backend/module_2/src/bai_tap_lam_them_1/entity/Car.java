@@ -35,4 +35,9 @@ public class Car extends Vehicle {
     public String toString() {
         return String.join(ConstantsVariables.SPACE_CHAR, super.toString(), this.seats + "", this.type);
     }
+
+    @Override
+    public VehicleType getVehicleType() {
+        return VehicleType.CAR;
+    }
 }

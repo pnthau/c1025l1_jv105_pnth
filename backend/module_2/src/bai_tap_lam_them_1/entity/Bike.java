@@ -24,4 +24,9 @@ public class Bike extends Vehicle {
     public String toString() {
         return String.join(" - ", super.toString(), this.getEnginePower() + "");
     }
+
+    @Override
+    public VehicleType getVehicleType() {
+        return VehicleType.BIKE;
+    }
 }

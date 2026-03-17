@@ -5,14 +5,18 @@ import module_2.src.bai_tap_lam_them_1.entity.*;
 import module_2.src.bai_tap_lam_them_1.service.VehicleFactory;
 import module_2.src.bai_tap_lam_them_1.service.VehicleValidate;
 import module_2.src.bai_tap_lam_them_1.util.ConstantsVariables;
-import module_2.src.bai_tap_lam_them_1.util.Menu;
+import module_2.src.bai_tap_lam_them_1.util.MenuOptions;
 
-import java.util.Map;
 import java.util.Scanner;
 
 public class VehicleAddView {
-    private VehicleController controller = new VehicleController();
-    private VehicleValidate validate = new VehicleValidate();
+    private final VehicleController controller;
+    private final VehicleValidate validate;
+
+    public VehicleAddView(VehicleController controller, VehicleValidate validate) {
+        this.controller = controller;
+        this.validate = validate;
+    }
 
     public void displayAddMenu(String announceContent) {
         boolean flag = true;
@@ -45,7 +49,7 @@ public class VehicleAddView {
         double enginePower = 0;
         switch (choice) {
             case ConstantsVariables.TRUCK:
-                System.out.println(Menu.getOptionMenu(optionContents[0]));
+                System.out.println(MenuOptions.getOptionMenu(optionContents[0]));
                 vehicleInfor = inputFields();
                 System.out.println("Enter payload capacity : ");
                 payloadCapacityString = scanner.nextLine();
@@ -66,7 +70,7 @@ public class VehicleAddView {
                 }
                 break;
             case ConstantsVariables.CAR:
-                System.out.println(Menu.getOptionMenu(optionContents[1]));
+                System.out.println(MenuOptions.getOptionMenu(optionContents[1]));
                 vehicleInfor = inputFields();
 
                 System.out.println("Enter seats : ");
@@ -91,7 +95,7 @@ public class VehicleAddView {
                 }
                 break;
             case ConstantsVariables.BIKE:
-                System.out.println(Menu.getOptionMenu(optionContents[2]));
+                System.out.println(MenuOptions.getOptionMenu(optionContents[2]));
                 vehicleInfor = inputFields();
                 System.out.println("Enter enginePower : ");
                 enginePowerString = scanner.nextLine();
@@ -113,7 +117,7 @@ public class VehicleAddView {
                 break;
 
             case 4:
-                System.out.println(Menu.getOptionMenu(optionContents[3]));
+                System.out.println(MenuOptions.getOptionMenu(optionContents[3]));
                 break;
             default:
                 System.out.println("No choice");
@@ -168,6 +172,11 @@ public class VehicleAddView {
             @Override
             public String getOwnerName() {
                 return ownerName;
+            }
+
+            @Override
+            public VehicleType getVehicleType() {
+                return null;
             }
 
         };

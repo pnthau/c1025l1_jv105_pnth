@@ -1,5 +1,7 @@
 package module_2.src.bai_tap_lam_them_1.util;
 
+import java.util.Scanner;
+
 public final class ConstantsVariables {
     public static final String SPACE_CHAR = " - ";
     public static final int NOT_FOUND = -1;
@@ -8,8 +10,8 @@ public final class ConstantsVariables {
     public static final byte TRUCK = 1;
     public static final byte CAR = 2;
     public static final byte BIKE = 3;
+    public static final Scanner scanner = new Scanner(System.in);
 
     private ConstantsVariables() {
-
     }
 }

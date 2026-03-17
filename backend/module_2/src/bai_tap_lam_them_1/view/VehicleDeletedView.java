@@ -9,9 +9,13 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class VehicleDeletedView {
-    private VehicleController controller = new VehicleController();
-    private VehicleValidate validate = new VehicleValidate();
+    private final VehicleController controller;
+    private final VehicleValidate validate;
 
+    public VehicleDeletedView(VehicleController controller, VehicleValidate validate) {
+        this.controller = controller;
+        this.validate = validate;
+    }
 
     public void displayDeletedView() {
         Vehicle vehicle = null;

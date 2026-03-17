@@ -1,16 +1,18 @@
 package module_2.src.bai_tap_lam_them_1.view;
 
 import module_2.src.bai_tap_lam_them_1.controller.VehicleController;
-import module_2.src.bai_tap_lam_them_1.entity.Vehicle;
 import module_2.src.bai_tap_lam_them_1.entity.VehicleType;
 import module_2.src.bai_tap_lam_them_1.util.ConstantsVariables;
-import module_2.src.bai_tap_lam_them_1.util.Menu;
+import module_2.src.bai_tap_lam_them_1.util.MenuOptions;
 
-import java.util.Map;
 import java.util.Scanner;
 
 public class VehicleDisplayView {
-    private VehicleController controller = new VehicleController();
+    private VehicleController controller;
+
+    public VehicleDisplayView(VehicleController controller) {
+        this.controller = controller;
+    }
 
     public void displayViewMenu(String announceContent) {
         boolean flag = true;
@@ -31,19 +33,19 @@ public class VehicleDisplayView {
 
         switch (choice) {
             case ConstantsVariables.TRUCK:
-                System.out.println(Menu.getOptionMenu(optionContents[0]));
-                this.controller.displayType(VehicleType.TRUCK);
+                System.out.println(MenuOptions.getOptionMenu(optionContents[0]));
+                this.controller.displayType(VehicleType.TRUCK).forEach(System.out::println);
                 break;
             case ConstantsVariables.CAR:
-                System.out.println(Menu.getOptionMenu(optionContents[1]));
-                this.controller.displayType(VehicleType.CAR);
+                System.out.println(MenuOptions.getOptionMenu(optionContents[1]));
+                this.controller.displayType(VehicleType.CAR).forEach(System.out::println);
                 break;
             case ConstantsVariables.BIKE:
-                System.out.println(Menu.getOptionMenu(optionContents[2]));
-                this.controller.displayType(VehicleType.BIKE);
+                System.out.println(MenuOptions.getOptionMenu(optionContents[2]));
+                this.controller.displayType(VehicleType.BIKE).forEach(System.out::println);
                 break;
             case 4:
-                System.out.println(Menu.getOptionMenu(optionContents[3]));
+                System.out.println(MenuOptions.getOptionMenu(optionContents[3]));
                 break;
             default:
                 System.out.println("No choice");

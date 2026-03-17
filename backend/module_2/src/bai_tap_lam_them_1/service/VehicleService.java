@@ -2,21 +2,17 @@ package module_2.src.bai_tap_lam_them_1.service;
 
 import module_2.src.bai_tap_lam_them_1.entity.Vehicle;
 import module_2.src.bai_tap_lam_them_1.entity.VehicleType;
+import module_2.src.bai_tap_lam_them_1.repository.IVehicleRepository;
 import module_2.src.bai_tap_lam_them_1.repository.VehicleRepository;
 
 import java.util.List;
 
-public class VehicleService {
-    private final VehicleRepository vehicleRepository;
+public class VehicleService implements IVehicleService {
+    private final IVehicleRepository vehicleRepository;
 
-    public VehicleService() {
-        this.vehicleRepository = new VehicleRepository();
-    }
-
-    public VehicleService(VehicleRepository vehicleRepository) {
+    public VehicleService(IVehicleRepository vehicleRepository) {
         this.vehicleRepository = vehicleRepository;
     }
-
 
     public boolean add(Vehicle vehicle) {
         if (vehicle == null) {
@@ -25,12 +21,6 @@ public class VehicleService {
         return this.vehicleRepository.add(vehicle);
 
     }
-
-
-//    public Vehicle findByLicensePlate(String plate) {
-//        return this.vehicleRepository.findByLicensePlate(plate);
-//    }
-
 
     public List<Vehicle> findByLicensePlate(String plate) {
         return this.vehicleRepository.findByLicensePlate(plate);

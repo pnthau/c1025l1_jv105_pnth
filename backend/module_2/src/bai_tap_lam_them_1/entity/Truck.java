@@ -25,5 +25,10 @@ public class Truck extends Vehicle {
     public String toString() {
         return String.join(ConstantsVariables.SPACE_CHAR, super.toString(), this.getPayloadCapacity() + "");
     }
+
+    @Override
+    public VehicleType getVehicleType() {
+        return VehicleType.TRUCK;
+    }
 }
 

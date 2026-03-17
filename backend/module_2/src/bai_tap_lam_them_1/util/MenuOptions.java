@@ -3,7 +3,7 @@ package module_2.src.bai_tap_lam_them_1.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Menu {
+public class MenuOptions {
     public static String getOptionMenu(String optionString) {
         String regex = "\\d+\\.\\s*(.+)";
 
