@@ -20,7 +20,7 @@ public class WriterAndReaderFile {
 
     public static void writeCSVFile(String studentString, String filePath) throws IOException {
         File file = new File(filePath);
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
             bufferedWriter.write(studentString);
             bufferedWriter.newLine();
         }

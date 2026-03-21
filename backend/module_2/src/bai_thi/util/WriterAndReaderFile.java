@@ -24,7 +24,7 @@ public class WriterAndReaderFile {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
             bufferedWriter.write(studentString);
             bufferedWriter.newLine();
-            bufferedWriter.close();
+            bufferedWriter.flush();
         }
     }
 

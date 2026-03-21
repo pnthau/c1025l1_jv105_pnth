@@ -18,8 +18,6 @@ public class StudentRepository implements IStudentRepository {
             String[] infoStudent = studentString.split(",");
             students.add(new StudentEntity(infoStudent[0], infoStudent[1], infoStudent[2], Float.parseFloat(infoStudent[3])));
         }
-
-
         return students;
     }
 

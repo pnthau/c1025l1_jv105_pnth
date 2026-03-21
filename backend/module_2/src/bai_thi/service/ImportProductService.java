@@ -23,6 +23,11 @@ public class ImportProductService {
 
     //    @Override
     public List<Product> getAll() {
+        try {
+            this.products = productRepository.getAll();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return this.products;
     }
 
