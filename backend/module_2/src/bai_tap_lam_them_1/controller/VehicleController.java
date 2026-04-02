@@ -1,5 +1,6 @@
 package module_2.src.bai_tap_lam_them_1.controller;
 
+import module_2.src.bai_tap_lam_them_1.criteria.VehicleCriteria;
 import module_2.src.bai_tap_lam_them_1.dto.IVehicleRequest;
 import module_2.src.bai_tap_lam_them_1.entity.Vehicle;
 import module_2.src.bai_tap_lam_them_1.entity.VehicleType;
@@ -26,12 +27,11 @@ public class VehicleController {
         return service.getType(vehicleType);
     }
 
-    public boolean deleteByLicensePlate(String plate) {
-        return service.deleteByLicensePlate(plate);
+    public boolean delete(VehicleCriteria criteria) {
+        return service.delete(criteria);
     }
 
-    public List<Vehicle> findByLicensePlate(String plate) {
-        return this.service.findByLicensePlate(plate);
+    public List<Vehicle> find(VehicleCriteria criteria) {
+        return this.service.find(criteria);
     }
-
 }

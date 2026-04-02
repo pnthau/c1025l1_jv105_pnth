@@ -16,10 +16,10 @@ public class VehicleFactory {
                 vehicle = new Car(data[0], manufacture, data[4], data[5], Integer.parseInt(data[6]), data[7]);
                 break;
             case ELECTRIC_VEHICLE:
-                vehicle = new ElectricVehicle(data[0], manufacture, data[4], data[5], Double.parseDouble(data[7]));
+                vehicle = new ElectricVehicle(data[0], manufacture, data[4], data[5], Double.parseDouble(data[6]));
                 break;
             case BIKE:
-                vehicle = new Bike(data[0], manufacture, data[4], data[5], Double.parseDouble(data[7]));
+                vehicle = new Bike(data[0], manufacture, data[4], data[5], Double.parseDouble(data[6]));
                 break;
             default:
                 break;

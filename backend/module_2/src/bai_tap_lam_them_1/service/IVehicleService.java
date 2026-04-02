@@ -1,5 +1,6 @@
 package module_2.src.bai_tap_lam_them_1.service;
 
+import module_2.src.bai_tap_lam_them_1.criteria.VehicleCriteria;
 import module_2.src.bai_tap_lam_them_1.dto.IVehicleRequest;
 import module_2.src.bai_tap_lam_them_1.entity.Vehicle;
 import module_2.src.bai_tap_lam_them_1.entity.VehicleType;
@@ -9,9 +10,9 @@ import java.util.List;
 public interface IVehicleService {
     boolean add(Vehicle vehicle);
 
-    public List<Vehicle> findByLicensePlate(String plate);
+    public List<Vehicle> find(VehicleCriteria criteria);
 
-    boolean deleteByLicensePlate(String plate);
+    boolean delete(VehicleCriteria criteria);
 
     public List<Vehicle> getAll();
 

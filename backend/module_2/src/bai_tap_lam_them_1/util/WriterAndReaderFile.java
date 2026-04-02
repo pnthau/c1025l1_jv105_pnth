@@ -19,9 +19,9 @@ public class WriterAndReaderFile {
         }
     }
 
-    public static void writeCSVFile(String vehiclesString, String filePath) throws IOException {
+    public static void writeCSVFile(String vehiclesString, String filePath, boolean isAppend) throws IOException {
         File file = new File(filePath);
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, isAppend))) {
             bufferedWriter.write(vehiclesString);
             bufferedWriter.newLine();
             bufferedWriter.flush();

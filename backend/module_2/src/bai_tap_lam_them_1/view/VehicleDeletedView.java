@@ -1,6 +1,7 @@
 package module_2.src.bai_tap_lam_them_1.view;
 
 import module_2.src.bai_tap_lam_them_1.controller.VehicleController;
+import module_2.src.bai_tap_lam_them_1.criteria.VehicleCriteria;
 import module_2.src.bai_tap_lam_them_1.entity.Vehicle;
 import module_2.src.bai_tap_lam_them_1.service.VehicleValidator;
 import module_2.src.bai_tap_lam_them_1.util.ConstantsVariables;
@@ -23,8 +24,12 @@ public class VehicleDeletedView {
         System.out.println("Enter licensePlate : ");
         String licensePlate = scanner.nextLine();
 
+        VehicleCriteria criteria = VehicleCriteria.
+                builder()
+                .setLicensePlate(licensePlate)
+                .build();
         try {
-            isDeleted = this.controller.deleteByLicensePlate(licensePlate);
+            isDeleted = this.controller.delete(criteria);
             if (isDeleted) {
                 System.out.println("Succeed");
             } else {

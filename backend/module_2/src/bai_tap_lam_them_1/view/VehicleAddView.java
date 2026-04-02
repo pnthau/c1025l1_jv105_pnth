@@ -56,6 +56,9 @@ public class VehicleAddView {
             case ConstantsVariables.BIKE:
                 System.out.println(MenuOptions.getOptionMenu(optionContents[2]));
                 return inputBike();
+            case ConstantsVariables.ELECTRIC:
+                System.out.println(MenuOptions.getOptionMenu(optionContents[3]));
+                return inputElectrics();
             default:
                 return null;
         }
@@ -112,6 +115,16 @@ public class VehicleAddView {
 
         System.out.println("Enter engine power: ");
         request.enginePower = Double.parseDouble(scanner.nextLine());
+
+        return request;
+    }
+
+    private IVehicleRequest inputElectrics() {
+        ElectricVehicleRequest request = new ElectricVehicleRequest();
+        inputCommon(request);
+
+        System.out.println("Enter battery capacity: ");
+        request.batteryCapacity = Double.parseDouble(scanner.nextLine());
 
         return request;
     }

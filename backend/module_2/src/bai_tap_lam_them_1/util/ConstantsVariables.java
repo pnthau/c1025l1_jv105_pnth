@@ -18,7 +18,7 @@ public final class ConstantsVariables {
     public static final byte FIND = 4;
 
     public static final Scanner scanner = new Scanner(System.in);
-
+    
     private ConstantsVariables() {
     }
 }

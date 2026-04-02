@@ -1,5 +1,6 @@
 package module_2.src.bai_tap_lam_them_1.service;
 
+import module_2.src.bai_tap_lam_them_1.criteria.VehicleCriteria;
 import module_2.src.bai_tap_lam_them_1.dto.IVehicleRequest;
 import module_2.src.bai_tap_lam_them_1.entity.*;
 import module_2.src.bai_tap_lam_them_1.repository.IVehicleRepository;
@@ -24,18 +25,18 @@ public class VehicleService implements IVehicleService {
     }
 
     @Override
-    public List<Vehicle> findByLicensePlate(String plate) {
+    public List<Vehicle> find(VehicleCriteria criteria) {
         return this.vehicleRepository.getAll().
                 stream().
-                filter(v -> v.contains(plate)).
+                filter(v -> v.contains(criteria.getLicensePlate())).
                 toList();
     }
 
-    public boolean deleteByLicensePlate(String plate) {
-        if (!this.vehicleValidator.isValidLicensePlate(plate)) {
-            throw new IllegalArgumentException("the license plate is invalid");
-        }
-        return this.vehicleRepository.deleteByLicensePlate(plate);
+    public boolean delete(VehicleCriteria criteria) {
+//        if (!this.vehicleValidator.isValidLicensePlate(criteria.getLicensePlate())) {
+//            throw new IllegalArgumentException("the license plate is invalid");
+//        }
+        return this.vehicleRepository.delete(criteria);
     }
 
     public List<Vehicle> getAll() {
