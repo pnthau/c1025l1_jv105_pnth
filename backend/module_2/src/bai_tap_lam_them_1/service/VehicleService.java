@@ -11,7 +11,6 @@ public class VehicleService implements IVehicleService {
     private final IVehicleRepository vehicleRepository;
     private final VehicleValidator vehicleValidator;
 
-
     public VehicleService(IVehicleRepository vehicleRepository, VehicleValidator vehicleValidator) {
         this.vehicleRepository = vehicleRepository;
         this.vehicleValidator = vehicleValidator;
@@ -21,11 +20,17 @@ public class VehicleService implements IVehicleService {
         if (vehicle == null) {
             throw new IllegalArgumentException("Vehicle cannot be null");
         }
+        if (!this.vehicleValidator.isValidLicensePlate(vehicle.getLicensePlate())) {
+            throw new IllegalArgumentException("the license plate is invalid");
+        }
         return this.vehicleRepository.add(vehicle);
     }
 
     @Override
     public List<Vehicle> find(VehicleCriteria criteria) {
+        if (!this.vehicleValidator.isValidLicensePlate(criteria.getLicensePlate())) {
+            throw new IllegalArgumentException("the license plate is invalid");
+        }
         return this.vehicleRepository.getAll().
                 stream().
                 filter(v -> v.contains(criteria.getLicensePlate())).
@@ -33,9 +38,9 @@ public class VehicleService implements IVehicleService {
     }
 
     public boolean delete(VehicleCriteria criteria) {
-//        if (!this.vehicleValidator.isValidLicensePlate(criteria.getLicensePlate())) {
-//            throw new IllegalArgumentException("the license plate is invalid");
-//        }
+        if (!this.vehicleValidator.isValidLicensePlate(criteria.getLicensePlate())) {
+            throw new IllegalArgumentException("the license plate is invalid");
+        }
         return this.vehicleRepository.delete(criteria);
     }
 
@@ -45,13 +50,10 @@ public class VehicleService implements IVehicleService {
 
     @Override
     public boolean add(IVehicleRequest request) {
+        if (!this.vehicleValidator.isValidLicensePlate(request.toEntity().getLicensePlate())) {
+            throw new IllegalArgumentException("the license plate is invalid");
+        }
         Vehicle vehicle = request.toEntity();
-
-//        vehicle.setLicensePlate(vehicle.getLicensePlate());
-//        vehicle.setManufacture(vehicle.getManufacture());
-//        vehicle.setManufactureYears(vehicle.getManufactureYears());
-//        vehicle.setOwnerName(vehicle.getOwnerName());
-
         return vehicleRepository.add(vehicle);
     }
 
