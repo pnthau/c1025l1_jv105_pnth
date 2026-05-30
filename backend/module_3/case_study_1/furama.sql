@@ -7,7 +7,7 @@
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -24,16 +24,16 @@ DROP TABLE IF EXISTS `contract_detail_other_service`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `contract_detail_other_service` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `contract_id` int NOT NULL,
   `other_service_id` int DEFAULT NULL,
-  `price` decimal(10,2) NOT NULL,
-  `quantity` smallint not null,
+  `contract_id` int NOT NULL,
+  `total_money_other_service` decimal(10,2) NOT NULL,
+  `create_at` datetime NOT NULL,
+  `quantity` smallint DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `contract_id` (`contract_id`),
-  KEY `other_service_id` (`other_service_id`),
+  KEY `other_service_idx` (`other_service_id`),
   CONSTRAINT `contract_detail_other_service_ibfk_1` FOREIGN KEY (`contract_id`) REFERENCES `contracts` (`id`) ON DELETE RESTRICT,
-  CONSTRAINT `contract_detail_other_service_ibfk_2` FOREIGN KEY (`other_service_id`) REFERENCES `other_services` (`id`) ON DELETE RESTRICT,
-  CONSTRAINT `contract_detail_other_service_chk_1` CHECK ((`price` > 0))
+  CONSTRAINT `other_service_id` FOREIGN KEY (`other_service_id`) REFERENCES `other_services` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -74,7 +74,7 @@ CREATE TABLE `contracts` (
   CONSTRAINT `contracts_chk_1` CHECK ((`total_money` >= 0)),
   CONSTRAINT `contracts_chk_2` CHECK ((`deposit` > 0)),
   CONSTRAINT `contracts_chk_3` CHECK ((`contract_end_date` > `contract_start_date`))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='													';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -237,62 +237,6 @@ LOCK TABLES `employees` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `homes`
---
-
-DROP TABLE IF EXISTS `homes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `homes` (
-  `id` int NOT NULL,
-  `room_standard` varchar(100) DEFAULT NULL,
-  `other_amenities_description` varchar(255) DEFAULT NULL,
-  `number_of_floors` smallint unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `homes_ibfk_1` FOREIGN KEY (`id`) REFERENCES `residences` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `homes`
---
-
-LOCK TABLES `homes` WRITE;
-/*!40000 ALTER TABLE `homes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `homes` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `other_service_service_unit_link`
---
-
-DROP TABLE IF EXISTS `other_service_service_unit_link`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `other_service_service_unit_link` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `other_service_id` int DEFAULT NULL,
-  `service_unit_id` int DEFAULT NULL,
-  `price` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `other_service_id` (`other_service_id`),
-  KEY `service_unit_id` (`service_unit_id`),
-  CONSTRAINT `other_service_service_unit_link_ibfk_1` FOREIGN KEY (`other_service_id`) REFERENCES `other_services` (`id`) ON DELETE SET NULL,
-  CONSTRAINT `other_service_service_unit_link_ibfk_2` FOREIGN KEY (`service_unit_id`) REFERENCES `service_units` (`id`) ON DELETE SET NULL,
-  CONSTRAINT `other_service_service_unit_link_chk_1` CHECK ((`price` > 0))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `other_service_service_unit_link`
---
-
-LOCK TABLES `other_service_service_unit_link` WRITE;
-/*!40000 ALTER TABLE `other_service_service_unit_link` DISABLE KEYS */;
-/*!40000 ALTER TABLE `other_service_service_unit_link` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `other_services`
 --
 
@@ -301,8 +245,13 @@ DROP TABLE IF EXISTS `other_services`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `other_services` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `service_name` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
+  `service_name` varchar(100) NOT NULL,
+  `unit` varchar(50) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `status` tinyint DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `other_services_chk_price` CHECK ((`price` > 0))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -348,13 +297,13 @@ DROP TABLE IF EXISTS `residence_renttype_link`;
 CREATE TABLE `residence_renttype_link` (
   `id` int NOT NULL AUTO_INCREMENT,
   `residence_id` int NOT NULL,
-  `rent_type` int NOT NULL,
+  `rent_type_id` int NOT NULL,
   `rent_price` decimal(10,0) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `residence_id` (`residence_id`),
-  KEY `rent_type` (`rent_type`),
+  KEY `rent_type` (`rent_type_id`),
   CONSTRAINT `residence_renttype_link_ibfk_1` FOREIGN KEY (`residence_id`) REFERENCES `residences` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `residence_renttype_link_ibfk_2` FOREIGN KEY (`rent_type`) REFERENCES `rent_types` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `residence_renttype_link_ibfk_2` FOREIGN KEY (`rent_type_id`) REFERENCES `rent_types` (`id`) ON DELETE CASCADE,
   CONSTRAINT `residence_renttype_link_chk_1` CHECK ((`rent_price` > 0))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -377,9 +326,15 @@ DROP TABLE IF EXISTS `residences`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `residences` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `resident_name` varchar(50) NOT NULL,
+  `residence_name` varchar(50) NOT NULL,
   `usable_area` double(10,2) unsigned NOT NULL DEFAULT '0.00',
   `maximum_occupancy` tinyint NOT NULL DEFAULT '0',
+  `room_standard` varchar(100) DEFAULT NULL,
+  `other_amenities_description` varchar(255) DEFAULT NULL,
+  `pool_area` double(10,2) unsigned DEFAULT NULL,
+  `number_of_floors` smallint unsigned DEFAULT NULL,
+  `complimentary_services` varchar(255) DEFAULT NULL,
+  `residence_type` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `residences_chk_1` CHECK ((`usable_area` >= 0)),
   CONSTRAINT `residences_chk_2` CHECK ((`maximum_occupancy` >= 0))
@@ -418,80 +373,6 @@ LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `rooms`
---
-
-DROP TABLE IF EXISTS `rooms`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `rooms` (
-  `id` int NOT NULL,
-  `complimentary_services` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `rooms_ibfk_1` FOREIGN KEY (`id`) REFERENCES `residences` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `rooms`
---
-
-LOCK TABLES `rooms` WRITE;
-/*!40000 ALTER TABLE `rooms` DISABLE KEYS */;
-/*!40000 ALTER TABLE `rooms` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `service_units`
---
-
-DROP TABLE IF EXISTS `service_units`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `service_units` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `service_unit_name` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `service_units`
---
-
-LOCK TABLES `service_units` WRITE;
-/*!40000 ALTER TABLE `service_units` DISABLE KEYS */;
-/*!40000 ALTER TABLE `service_units` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `villas`
---
-
-DROP TABLE IF EXISTS `villas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `villas` (
-  `id` int NOT NULL,
-  `room_standard` varchar(100) DEFAULT NULL,
-  `other_amenities_description` varchar(255) DEFAULT NULL,
-  `pool_area` double(10,2) unsigned DEFAULT NULL,
-  `number_of_floors` smallint unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `villas_ibfk_1` FOREIGN KEY (`id`) REFERENCES `residences` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `villas`
---
-
-LOCK TABLES `villas` WRITE;
-/*!40000 ALTER TABLE `villas` DISABLE KEYS */;
-/*!40000 ALTER TABLE `villas` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -502,4 +383,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-05-28 17:41:40
+-- Dump completed on 2026-05-30  7:43:25
