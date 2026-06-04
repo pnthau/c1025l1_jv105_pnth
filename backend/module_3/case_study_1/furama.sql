@@ -33,7 +33,7 @@ CREATE TABLE `contract_detail_other_service` (
   KEY `contract_id` (`contract_id`),
   KEY `other_service_idx` (`other_service_id`),
   CONSTRAINT `contract_detail_other_service_ibfk_1` FOREIGN KEY (`contract_id`) REFERENCES `contracts` (`id`) ON DELETE RESTRICT,
-  CONSTRAINT `other_service_id` FOREIGN KEY (`other_service_id`) REFERENCES `other_services` (`id`)
+  CONSTRAINT `other_service_id` FOREIGN KEY (`other_service_id`) REFERENCES `other_services` (`id`) on delete cascade
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -68,7 +68,7 @@ CREATE TABLE `contracts` (
   KEY `customer_id` (`customer_id`),
   KEY `residence_renttype_link_id` (`residence_renttype_link_id`),
   KEY `employee_id` (`employee_id`),
-  CONSTRAINT `contracts_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE RESTRICT,
+  CONSTRAINT `contracts_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE cascade,
   CONSTRAINT `contracts_ibfk_2` FOREIGN KEY (`residence_renttype_link_id`) REFERENCES `residence_renttype_link` (`id`) ON DELETE RESTRICT,
   CONSTRAINT `contracts_ibfk_3` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON DELETE RESTRICT,
   CONSTRAINT `contracts_chk_1` CHECK ((`total_money` >= 0)),
