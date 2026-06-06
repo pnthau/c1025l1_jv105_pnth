@@ -76,19 +76,23 @@ VALUES
 INSERT INTO products (product_name, product_description, quantity, price, exp_product_id)
 VALUES
 ('Bánh quy', 'Bánh quy bơ giòn', 100, 25.50, 1),
-('Sữa tươi', 'Sữa tươi nguyên chất', 50, 15.00, 2);
+('Sữa tươi', 'Sữa tươi nguyên chất', 50, 15.00, 2),
+('Sữa Bò', 'Sữa bò nguyên chất', 50, 15.00, 2);
 
 -- Thêm đơn hàng
 INSERT INTO orders (id_number, customer_id, employee_id, total_money)
 VALUES
 ('ORD001', 1, 1, 51.00),
-('ORD002', 2, 2, 30.00);
+('ORD002', 2, 2, 30.00),
+('ORD003', 2, 1, 30.00),
+('ORD003', 2, 1, 80.00);
 
 -- Thêm chi tiết đơn hàng
 INSERT INTO order_details (product_id, quantity, price, order_id)
 VALUES
 (1, 2, 25.50, 1),
-(2, 2, 15.00, 2);
+(2, 2, 15.00, 2),
+(3, 2, 15.00, 2);
 
 
 -- -------------------------------------------------------------
@@ -99,7 +103,9 @@ inner join order_details od on od.order_id = o.id;
 select CONCAT(cus.first_name, ' ', cus.last_name ) AS full_name, p.product_name from customers cus
 inner join orders o on o.customer_id = cus.id  
 inner join order_details od on od.order_id = o.id
-inner join products p on od.product_id = p.id;
+inner join products p on od.product_id = p.id
+group by cus.id,p.product_name;
+
 -- Hiển thị tên những khách hàng không mua bất kỳ một sản phẩm nào
 select CONCAT(cus.first_name, ' ', cus.last_name ) AS full_name from customers cus
 where not exists(select 1 from customers cus2
