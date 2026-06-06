@@ -127,15 +127,15 @@ DELIMITER ;
 
 -- Câu 27: Stored Procedure xóa Room (Cascading Delete)
 DELIMITER //
-CREATE PROCEDURE sp_delete_contract_customer_room()
+CREATE PROCEDURE sp_delete_contract_residence_room()
 BEGIN
-    CREATE TEMPORARY TABLE temp_ids AS
-    SELECT r.id FROM residences r
-    WHERE r.residence_type = 'Room'
-    AND r.id IN (
-        SELECT rrl.residence_id FROM contracts ct
-        JOIN residence_renttype_link rrl ON ct.residence_renttype_link_id = rrl.id
-        WHERE YEAR(ct.contract_start_date) BETWEEN 2015 AND 2019
+    CREATE TEMPORARY TABLE temp_ids(residence_id int) AS
+    SELECT res.id FROM residences res
+    WHERE res.residence_type = 'Room'
+    AND res.id IN (
+        SELECT rl.residence_id FROM contracts con
+        JOIN residence_renttype_link rl ON con.residence_renttype_link_id = rl.id
+        WHERE YEAR(con.contract_start_date) BETWEEN 2015 AND 2019
     );
 
     DELETE FROM contract_detail_other_service WHERE contract_id IN (
