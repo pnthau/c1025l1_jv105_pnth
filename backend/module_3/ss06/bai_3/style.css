@@ -1,0 +1,9 @@
+.toc{
+    display: flex;
+    flex-direction: column;
+}
+
+p>a{
+     text-decoration: none;
+     color: black;
+}

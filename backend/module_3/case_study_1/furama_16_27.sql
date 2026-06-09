@@ -125,7 +125,10 @@ END //
 DELIMITER ;
 
 
--- Câu 27: Stored Procedure xóa Room (Cascading Delete)
+/*27. Tạo Stored Procedure **sp_xoa_dich_vu_va_hd_room** để tìm các dịch vụ được thuê bởi 
+khách hàng với loại dịch vụ là “Room” từ đầu năm 2015 đến hết năm 2019 để xóa thông tin của
+ các dịch vụ đó (tức là xóa các bảng ghi trong bảng **dich_vu**) và xóa những **hop_dong** 
+ sử dụng dịch vụ liên quan (tức là phải xóa những bản gi trong bảng **hop_dong**) và những bản liên quan khác.*/
 DELIMITER //
 CREATE PROCEDURE sp_delete_contract_residence_room()
 BEGIN
