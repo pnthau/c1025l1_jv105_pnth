@@ -1,0 +1,443 @@
+[33mcommit 875d9f9e7747555decb6154a81d62f1850426270[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Jun 30 19:04:59 2026 +0700
+
+    ss11_mvc
+
+[33mcommit 9619ff4845c20a0374f4bcc69df91e17006121c9[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Wed Jun 17 13:09:05 2026 +0700
+
+    update file fengshui.sql
+
+[33mcommit 4002b9752cdef3de78aad1c98852519eee88b76a[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Jun 9 19:33:08 2026 +0700
+
+    css link
+
+[33mcommit 96fe5e01bf5be6ad0571af0454a8966f090dc3b6[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Sat Jun 6 16:39:44 2026 +0700
+
+    edit challenge 27. furama db
+
+[33mcommit b4e9ccdc0b75cab740333606e4e58aa05e09266b[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Sat Jun 6 16:31:41 2026 +0700
+
+    edit product_manager, student_manager db
+
+[33mcommit 210fdba9694558f99840a803565b8d5cf8dd9558[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Thu Jun 4 20:35:51 2026 +0700
+
+    update all furama db
+
+[33mcommit eaa62f92269fd49fabc6a5732f600a6a0f74b102[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Sun May 31 15:04:40 2026 +0700
+
+    update ss03 ss04 exercises
+
+[33mcommit e601c75de233277d09e5675dd14df4d2296f803a[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Sat May 30 20:09:29 2026 +0700
+
+    update ss03 student_manager
+
+[33mcommit e2a7b823ef17f0cb43f544000e040a7bf86a9fef[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Thu May 28 19:50:48 2026 +0700
+
+    update manager_warehouse
+
+[33mcommit b5d41b003a604a589a1ad9c402a44b04705df95f[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Thu May 28 19:00:05 2026 +0700
+
+    update ss02_design_and_create_db excersices
+
+[33mcommit 334c4cb17e46b5ed4a1f2eb401a7fb337ecb5c56[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Thu May 28 18:58:31 2026 +0700
+
+    update ss02_design_and_create_db excersices
+
+[33mcommit ffae5f7efa35b8c0e41328fd1624059e1ed5d575[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Thu May 28 18:29:40 2026 +0700
+
+    update case_study_1 db
+
+[33mcommit 77d2664aa4491849e12e9cd19dc3d0b289f56917[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue May 26 19:08:47 2026 +0700
+
+    update manager student db
+
+[33mcommit 978502e8b23c5118082e4c12440c6806466c369e[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Apr 14 18:09:24 2026 +0700
+
+    update_cv
+
+[33mcommit 300e020c715afc75c303fdab3378e985b71ad44e[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Apr 7 00:56:33 2026 +0700
+
+    update bai tap lam them version 2.1
+
+[33mcommit 0a8de8e0d95176cf9c59fd8a9a77a7af99a7b5f6[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Thu Apr 2 23:38:50 2026 +0700
+
+    update bai tap lam them version 2.0
+
+[33mcommit 0ecbfb78251945c81e1f51b75495b0fa82916495[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Sat Mar 21 19:13:40 2026 +0700
+
+    update project
+
+[33mcommit b987b28f5cc398d95ba6d1e8d19e09e9c8720538[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Mar 17 20:54:24 2026 +0700
+
+    nop_bai_thi
+
+[33mcommit d897cdcdfdcc1afcf1706ea1f1ab159fbeb19a32[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Mar 17 20:40:54 2026 +0700
+
+    nop_bai_thi
+
+[33mcommit 220f6bc59a2424366beb65032a9782ad592834ee[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Mar 17 16:45:38 2026 +0700
+
+    them moi 1 doi tuong eletricVehicle version 6.2
+
+[33mcommit 2823a6905ffb93197d81aa59bfce1c8db3c1502b[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Mar 17 16:07:10 2026 +0700
+
+    cap nhat bai tap lam them 1 version 6.1
+
+[33mcommit c2662cb61e83e1008f82b947c0f127e598ad1394[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Mar 17 15:48:24 2026 +0700
+
+    cap nhat bai tap lam them 1 version 6.0
+
+[33mcommit f9bd4d6fddd52fad72341e9fa8816e734fbac9c8[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Mar 17 13:10:35 2026 +0700
+
+    cap nhat bai tap lam them 1 version 5.0
+
+[33mcommit 0ceb4d8b3412773a20f3f47f920a198d336b8e05[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Mar 17 03:20:53 2026 +0700
+
+    update version 4.0 bai tap lam them 1
+
+[33mcommit cbbde01714f86656354885c76d02b19d4ed6c609[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Mar 17 01:55:40 2026 +0700
+
+    update version 3.0 bai tap lam them 1
+
+[33mcommit fd50e1d4299963717ae94ccd1ffbc372305d4024[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Mar 17 00:59:18 2026 +0700
+
+    update version 2.0 bai tap lam them 1
+
+[33mcommit 80ee11c0c0d9555e43eeaa34aafde93f28f0ea05[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Mon Mar 16 23:45:07 2026 +0700
+
+    update file bai tap lam them 1
+
+[33mcommit 983170bff1485ee98f111e985e6ea1e4f1077183[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Mar 10 19:55:33 2026 +0700
+
+    update_bai_tap
+
+[33mcommit de56662c5436644e8dc12e0792d88ca9ae315f4c[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Thu Feb 5 18:27:09 2026 +0700
+
+    ss8_clean_code_manager_mvc
+
+[33mcommit 831a5c6f719e05fd33cf3424fec6c8f67d1ff83a[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Feb 3 20:58:06 2026 +0700
+
+    ss8_clean_code
+
+[33mcommit 3e0c0ffddffcb2377be239da037fa034fd1df311[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Sat Jan 31 21:58:57 2026 +0700
+
+    ss7_abstract_class_interface
+
+[33mcommit 6bcdbc6ac4308fc193ec3c6829772beea5679df5[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Thu Jan 29 21:19:39 2026 +0700
+
+    ss6_inheritance
+
+[33mcommit 4f0f6aa98f01d22e753dbedc881f5867a42b16de[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Jan 20 23:56:33 2026 +0700
+
+    ss5_access_modifier
+
+[33mcommit c1289e77484664a7bce5a1bb542b5f1bab82e278[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Jan 20 18:31:44 2026 +0700
+
+    nop_ss4_object
+
+[33mcommit 3ce4c9884fc937aa6a4e4dc26ade7053977bfafe[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Thu Jan 15 21:34:16 2026 +0700
+
+    nop_ss3_array
+
+[33mcommit 9ab78c2023a5390f12fd52798b39a96eb1c35103[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Thu Jan 15 20:07:11 2026 +0700
+
+    nop_ss1_ss2
+
+[33mcommit 7dc332ab9ded6c23d9d6bdd137ae1be7189f3cd9[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Dec 30 20:16:33 2025 +0700
+
+    nop_bai_thi_module_1
+
+[33mcommit 17803d0380854472c156a1f78eeccc1470eca92b[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Dec 30 20:05:55 2025 +0700
+
+    nop_bai_thi_module_1
+
+[33mcommit 01e9fc539b7abb1c3386e8b3e63c5053a15685e5[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Thu Dec 25 19:37:05 2025 +0700
+
+    nop_case_study_module_1_2
+
+[33mcommit 34e7a24d530a5cc6b38a54398bc81d41730f8a3d[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Sat Dec 20 20:26:11 2025 +0700
+
+    sua_bai_tap_3_case_study
+
+[33mcommit 761fe4b422108da433bb244fb09993801ca70eeb[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Sat Dec 20 20:25:22 2025 +0700
+
+    sua_bai_tap_3_case_study
+
+[33mcommit 739fe8c5d509ad2ff81e83b891add433d5165ea6[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Sat Dec 20 20:23:51 2025 +0700
+
+    sua_bai_tap_3_case_study
+
+[33mcommit 20f4987ed7734f7c873c7fae65f2628327ed8aff[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Sat Dec 20 20:21:09 2025 +0700
+
+    sua_bai_3_case_study
+
+[33mcommit ef32a6ec1a0000f54482f971c9e3ad0c757da272[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Sat Dec 20 20:20:03 2025 +0700
+
+    Remove submodule objects
+
+[33mcommit f31b7788137a81f0e0ba3ad24b0290c2c3553bee[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Sat Dec 20 19:55:52 2025 +0700
+
+    sua_case_study_bai_1_3
+
+[33mcommit a769fea84399ab9c00426a390adcc1aa6e8e8501[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Fri Dec 19 19:04:39 2025 +0700
+
+    nop_case_study_module_1
+
+[33mcommit 3e90d76978f3da501c45d9cc5a4d07b79c248b96[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Dec 16 17:00:34 2025 +0700
+
+    nop_ss17_oop
+
+[33mcommit e194c3926306cc33f626b7ff09e6301840c286f3[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Thu Dec 11 12:12:16 2025 +0700
+
+    nop_ss16_object_1
+
+[33mcommit 7358aefdbf52c93946a01e760f9cad0860b3b86f[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Sun Dec 7 21:47:23 2025 +0700
+
+    nop_ss15_function
+
+[33mcommit 056180526b733a571ba67816b0fb50e12558c2d4[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Wed Dec 3 06:44:46 2025 +0700
+
+    cap_nhat_file_array_properties
+
+[33mcommit d4b893247650ad1a1928db5c09f47509e6ac8a76[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Wed Dec 3 06:38:07 2025 +0700
+
+    nop_ss13_array
+
+[33mcommit 80d51d085e98f89510a5e3efe60b927eec53826c[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Sat Nov 29 19:18:25 2025 +0700
+
+    sua_bai_tap_ss9_conditional_bai_4
+
+[33mcommit 698a95e43d0431ec3ed8f76817540179bc615fa9[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Sat Nov 29 19:10:41 2025 +0700
+
+    nop_ss11_loop
+
+[33mcommit 480d75586303fd6bffd14d2c081de8f3452df37d[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Thu Nov 27 22:11:49 2025 +0700
+
+    ss11_bai_tap_loop
+
+[33mcommit 333dca3a442f0b7e6264f84437332db9fef93cfd[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Nov 25 17:28:29 2025 +0700
+
+    ss10_bai_tap
+
+[33mcommit 5838c3ff0a7cbaaa105fbe71fa9880dc71cee677[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Sun Nov 23 11:59:14 2025 +0700
+
+    ss9_bai_tap_nop_bai
+
+[33mcommit 2ed42dce90722884980f61e662385699f594c218[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Nov 18 19:59:52 2025 +0700
+
+    chinh_sua_ss7_calculator
+
+[33mcommit 6758ea86172546719e8bdf81bb9773d357572d79[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Sat Nov 15 16:28:17 2025 +0700
+
+    nop_ss7_thuc_hanh_bai_tap
+
+[33mcommit 3ad2a6a4474461bebbaa49292060bb6a83ef6a40[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Thu Nov 13 20:49:17 2025 +0700
+
+    sua_bai_tap_ss6
+
+[33mcommit 823a13dc5bfb9b86e9ba479ddb378d1e3f7fd09a[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Thu Nov 13 20:42:19 2025 +0700
+
+    nop_ss6_js_bai_tap
+
+[33mcommit 4aef6a9e4421ef943e65ebb0e16fe7b5e0854368[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Thu Nov 13 17:44:03 2025 +0700
+
+    nop_thuc_hanh_ss6_js
+
+[33mcommit 4cf599270fa8460e88482ff1188a61f94f644118[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Wed Nov 12 13:42:23 2025 +0700
+
+    nop_bai_tap_form_table
+
+[33mcommit 187a92dec9edc57d461dd56d02d24ce8e0f0ddf7[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Nov 11 16:19:24 2025 +0700
+
+    nop_bai_thuc_hanh_form_table
+
+[33mcommit f880a742aea9a11df3a4ef9f9abfe1eb7e906cc8[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Nov 11 10:48:20 2025 +0700
+
+    update_html_css
+
+[33mcommit c9e8bc9cd2f325fcbbac9ed834492c6b6021ee69[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Sat Nov 8 21:25:50 2025 +0700
+
+    sua_bai_tap_pseudo_code_flowchart_4
+
+[33mcommit 6fa0538e8845139d760d56a76d17732785ecb366[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Sat Nov 8 21:07:24 2025 +0700
+
+    sua_bai_tap_pseudo_code_flowchart_3
+
+[33mcommit be303d25fc5c4a6c3fc739d32756a1d031e3ede7[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Sat Nov 8 20:57:04 2025 +0700
+
+    sua_bai_tap_pseudo_code_flowchart
+
+[33mcommit 4a7276acf4d299261adcccf5329d99d7e18cd9d0[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Sat Nov 8 20:53:35 2025 +0700
+
+    sua_bai_tap_pseudo_code_flowchart
+
+[33mcommit 1c8701cfdda3958dfd88da5a627ab5fee160db03[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Sat Nov 8 12:19:08 2025 +0700
+
+    nop_bai_tap_tao_cv
+
+[33mcommit 4a6b3b5d2f9007ecc31f58123ef48b1b510297e5[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Thu Nov 6 21:35:45 2025 +0700
+
+    nop_bai_tap_ss3_pseudo_code_and_flowchart
+
+[33mcommit 5755ed98a021fdea510d36bdd57fbf7ed12ae3f4[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Thu Nov 6 10:18:21 2025 +0700
+
+    nop_code_course_f
+
+[33mcommit 3897a99971164f73545cf9263173f0b763056358[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Nov 4 21:22:11 2025 +0700
+
+    noi_bai_tap_code_1_2_3_4
+
+[33mcommit aeb22c4cb9f85376fa000064c61385c2cf6e662b[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Nov 4 21:11:42 2025 +0700
+
+    nop_bai_tap_ss1_ss2
+
+[33mcommit e40653c134e0d64888179ba24784a01a264f0c4e[m
+Author: pnthau <pnguyentrunghau.24@gmail.com>
+Date:   Tue Nov 4 21:09:37 2025 +0700
+
+    first commit

@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="student_manager.main:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/student_manager_main_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="student_manager.main" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Gradle: jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0" />
+          <element id="library" level="project" name="Gradle: org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1" />
+          <element id="library" level="project" name="Gradle: com.mysql:mysql-connector-j:8.0.33" />
+          <element id="library" level="project" name="Gradle: jakarta.el:jakarta.el-api:5.0.0" />
+          <element id="library" level="project" name="Gradle: com.google.protobuf:protobuf-java:3.21.9" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="student_manager.main/web/Web Gradle : student_manager-1.0-SNAPSHOT.war" />
+    </root>
+  </artifact>
+</component>
