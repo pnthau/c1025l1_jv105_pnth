@@ -1,0 +1,57 @@
+plugins {
+  id 'java'
+  id 'war'
+  id 'org.gretty' version '4.1.1'
+}
+
+group 'com.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+  mavenCentral()
+}
+
+ext {
+  junitVersion = '5.13.2'
+}
+
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+tasks.withType(JavaCompile) {
+  options.encoding = 'UTF-8'
+}
+
+gretty {
+  servletContainer = 'tomcat10'
+  contextPath = '/'
+  httpPort = 8080
+}
+
+dependencies {
+  compileOnly('jakarta.servlet:jakarta.servlet-api:6.1.0')
+
+  // JSTL cho Jakarta EE 10 / Servlet 6.0
+  implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0'
+  implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
+
+  // MySQL Connector JDBC & Lombok
+  implementation 'com.mysql:mysql-connector-j:8.3.0'
+  compileOnly 'org.projectlombok:lombok:1.18.32'
+  annotationProcessor 'org.projectlombok:lombok:1.18.32'
+
+  testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
+  // Jackson for JSON parsing
+  implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.1'
+}
+
+test {
+  useJUnitPlatform()
+}
+
+tasks.register('copyToLib', Copy) {
+  into "src/main/webapp/WEB-INF/lib"
+  from configurations.runtimeClasspath
+}
