@@ -1,0 +1,28 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="distionary.main:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/distionary_main_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="distionary.main" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Gradle: jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-webmvc:6.2.17" />
+          <element id="library" level="project" name="Gradle: org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1" />
+          <element id="library" level="project" name="Gradle: jakarta.el:jakarta.el-api:5.0.0" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-context:6.2.17" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-aop:6.2.17" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-web:6.2.17" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-beans:6.2.17" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-expression:6.2.17" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-core:6.2.17" />
+          <element id="library" level="project" name="Gradle: io.micrometer:micrometer-observation:1.15.10" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-jcl:6.2.17" />
+          <element id="library" level="project" name="Gradle: io.micrometer:micrometer-commons:1.15.10" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="distionary.main/web/Web Gradle : distionary-1.0-SNAPSHOT.war" />
+    </root>
+  </artifact>
+</component>

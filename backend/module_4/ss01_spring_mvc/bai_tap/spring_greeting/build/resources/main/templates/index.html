@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Boot + Thymeleaf</title>
+</head>
+<body style="font-family: Arial, sans-serif; text-align: center; margin-top: 50px;">
+    
+    <!-- Đoạn th:text này sẽ được Spring Boot thay thế bằng dữ liệu từ Controller truyền sang -->
+    <h1 th:text="${loiChao}" style="color: blue;">Đây là nội dung ảo, sẽ bị đè mất</h1>
+    
+    <p>Giao diện này được vẽ bởi <b>Thymeleaf</b> (thế hệ mới thay thế hoàn hảo cho JSP)!</p>
+    
+</body>
+</html>

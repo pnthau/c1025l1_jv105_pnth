@@ -1,10 +1,11 @@
 # Thêm thông tin cho một mặt bằng cho thuê
 -Mã mặt bằng phải  đúng định dạng XXX-XX-XX với X là số hoặc các ký tự alphabet viết hoa. (1 điểm)
--Diện tích phải > 20m2 (1 điểm)
--Trạng thái có 3 giá trị: Trống, Hạ tầng, Đầy đủ (1 điểm)
--Tầng: 15 tầng tất cả (1 điểm)
--Loại mặt bằng bao gồm 2 giá trị: Văn phòng chia sẻ, Văn phòng trọn gói.(1 điểm)
-Giá tiền phải lớn hơn 1.000.000 VNĐ (1 điểm)
+-area > 20m2 
+-status 3 giá trị: Trống, Hạ tầng, Đầy đủ 
+-Tầng: 15 tầng tất cả 
+-Loại mặt bằng bao gồm 2 giá trị: Văn phòng chia sẻ, Văn phòng trọn gói.
+- price > 1.000.000 VNĐ
+
 
 Sau khi thêm mới thành công thì dữ liệu sẽ được lưu vào cơ sở dữ liệu và hiển thị trang danh sách
 # Hiển thị danh sách Mặt bằng đang cho thuê tại tòa nhà

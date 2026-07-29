@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyển đổi tiền tệ</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0">Ứng Dụng Chuyển Đổi Tiền Tệ</h4>
+                </div>
+                <div class="card-body">
+                    <form action="/transfer" method="post">
+                        <!-- Input USD -->
+                        <div class="mb-3">
+                            <label for="usdAmount" class="form-label fw-bold">Số tiền (USD):</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" step="0.01" class="form-control" id="usdAmount" name="usdAmount" placeholder="Nhập số tiền USD..." required>
+                            </div>
+                        </div>
+
+                        <!-- Tỉ giá (Có thể cho phép thay đổi hoặc fix cứng) -->
+                        <div class="mb-3">
+                            <label for="exchangeRate" class="form-label fw-bold">Tỉ giá (VND/USD):</label>
+                            <input type="number" class="form-control" id="exchangeRate" name="exchangeRate" value="25000" readonly>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg">Chuyển đổi sang VND</button>
+                        </div>
+                    </form>
+
+                    <!-- Vùng hiển thị kết quả nếu có -->
+                    <div th:if="${result != null}" class="mt-4 alert alert-info text-center">
+                        <h5 class="mb-0">Kết quả: <span class="text-danger fw-bold" th:text="${result} + ' VND'"></span></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script Bootstrap 5 Local -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
