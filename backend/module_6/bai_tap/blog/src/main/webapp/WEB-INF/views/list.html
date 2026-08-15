@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh sách Blog</title>
+</head>
+<body>
+<h1>Danh sách Blog</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Tiêu đề</th>
+        <th>Nội dung</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Lặp qua danh sách "blogs" được gửi từ model -->
+    <a href="/blogs/form">Add</a>
+    <tr th:each="blog : ${blogs}">
+        <td th:text="${blog.id}">1</td>
+        <td th:text="${blog.title}">Tiêu đề blog</td>
+        <td th:text="${blog.content}">Nội dung blog</td>
+        <td><a th:href="@{/blogs/form(id=${blog.id})}">Update</a></td>
+        <td><a th:href="@{/blogs/delete(id=${blog.id})}">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
