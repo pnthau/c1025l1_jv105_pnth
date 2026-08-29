@@ -5,13 +5,19 @@ import com.example.cart_demo.model.Order;
 import com.example.cart_demo.model.Product;
 import com.example.cart_demo.service.OrderService;
 import com.example.cart_demo.service.ProductService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.FlashMap;
+import org.springframework.web.servlet.support.RequestContextUtils;
+import org.springframework.web.servlet.view.RedirectView;
 
+import java.lang.management.RuntimeMXBean;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,7 +78,18 @@ public class OrderController {
 
         return "redirect:/payment-success";
     }
-    
+
+    @ExceptionHandler(RuntimeException.class)
+    public RedirectView handleOutOfStockException(RuntimeException ex, HttpServletRequest request)
+    {
+        ex.printStackTrace();
+
+        FlashMap flashMap = RequestContextUtils.getOutputFlashMap(request);
+
+        flashMap.put("msgError", ex.getMessage());
+        return new RedirectView("/cart", true);
+    }
+
     @GetMapping("/payment-success")
     public String paymentSuccess() {
         return "success";

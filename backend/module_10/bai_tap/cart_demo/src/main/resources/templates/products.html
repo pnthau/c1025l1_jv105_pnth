@@ -59,8 +59,10 @@
             <img th:unless="${product.image != null}" src="https://via.placeholder.com/250x200?text=No+Image" alt="No Image"/>
             <h3 th:text="${product.name}">Tên sản phẩm</h3>
             <p class="price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'">100.000 VNĐ</p>
+            <p class="quantity" th:text="${product.quantity}"></p>
             <a class="btn" th:href="@{/products/{id}(id=${product.id})}">Xem chi tiết</a>
-            <a class="btn" style="background-color: #28a745;" th:href="@{/add-to-cart/{id}(id=${product.id})}">Thêm vào giỏ</a>
+            <a th:if="${product.quantity > 0}" class="btn" style="background-color: #28a745;" th:href="@{/add-to-cart/{id}(id=${product.id})}">Thêm vào giỏ</a>
+            <span th:unless="${product.quantity > 0}" class="btn" style="background-color: #cccccc; cursor: not-allowed; color: #666;">Hết hàng</span>
         </div>
     </div>
     
