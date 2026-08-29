@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+    <!-- Mảnh ghép thanh điều hướng -->
+    <div th:fragment="step-navigation(currentStep)" class="steps">
+        <div class="step" th:classappend="${currentStep == 1} ? 'active' : ''">01. Giỏ hàng</div>
+        <div class="step" th:classappend="${currentStep == 2} ? 'active' : ''">02. Đơn hàng</div>
+        <div class="step" th:classappend="${currentStep == 3} ? 'active' : ''">03. Thanh toán</div>
+    </div>
+
+</body>
+</html>

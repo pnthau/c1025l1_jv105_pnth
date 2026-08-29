@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết sản phẩm</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .product-detail {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .product-detail img {
+            max-width: 400px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .info {
+            max-width: 600px;
+        }
+        .price {
+            color: #d9534f;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #218838;
+        }
+        .btn-back {
+            background-color: #6c757d;
+        }
+        .btn-back:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chi tiết sản phẩm</h1>
+    
+    <div class="product-detail" th:if="${product != null}">
+        <div>
+            <img th:if="${product.image != null}" th:src="${product.image}" alt="Product Image"/>
+            <img th:unless="${product.image != null}" src="https://via.placeholder.com/400x300?text=No+Image" alt="No Image"/>
+        </div>
+        <div class="info">
+            <h2 th:text="${product.name}">Tên sản phẩm</h2>
+            <p class="price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'">100.000 VNĐ</p>
+            <p><strong>Mô tả:</strong></p>
+            <p th:text="${product.description}">Mô tả chi tiết sản phẩm...</p>
+            
+            <br>
+            <a href="/products" class="btn btn-back">Quay lại danh sách</a>
+            
+            <a class="btn" style="margin-left: 10px;" th:href="@{/add-to-cart/{id}(id=${product.id})}">Thêm vào giỏ hàng</a>
+        </div>
+    </div>
+    
+    <div th:unless="${product != null}">
+        <p>Sản phẩm không tồn tại!</p>
+        <a href="/products" class="btn btn-back">Quay lại</a>
+    </div>
+</body>
+</html>
