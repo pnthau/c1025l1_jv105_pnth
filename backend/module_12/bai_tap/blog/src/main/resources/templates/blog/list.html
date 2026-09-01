@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh sách Blog</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h1>Danh sách Blog</h1>
+
+<a href="/blogs/form">Add</a>
+
+<div>
+    <input type="text" id="searchTitle" name="title" th:value="${titleSearch}" placeholder="Nhập tiêu đề tìm kiếm..." />
+    <select id="searchCategory" name="categoryId">
+        <option value="">Tất cả</option>
+        <option th:each="category : ${categoryList}"
+                th:value="${category.id}"
+                th:text="${category.name}"
+                th:selected="${categoryId == category.id}"></option>
+    </select>
+    <button type="button" id="btnSearch">Tìm kiếm</button>
+</div>
+
+<table border="1" style="margin-top: 15px;">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Tiêu đề</th>
+        <th>Nội dung</th>
+        <th colspan="2">Hành động</th>
+    </tr>
+    </thead>
+    <tbody id="blogTableBody">
+    <!-- Lặp qua danh sách "blogs" được gửi từ model ban đầu -->
+    <tr th:each="blog : ${blogList.getContent()}">
+        <td th:text="${blog.id}"></td>
+        <td><a th:href="@{/blogs/detail/{id}(id=${blog.id})}" th:text="${blog.title}">Tiêu đề blog</a></td>
+        <td th:text="${blog.content}">Nội dung blog</td>
+        <td><a th:href="@{/blogs/form(id=${blog.id})}">Update</a></td>
+        <td><a th:href="@{/blogs/delete(id=${blog.id})}">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<div style="margin-top: 15px;">
+    <!-- Nút Tải thêm -->
+    <button type="button" id="btnLoadMore" th:if="${!blogList.last}">Tải thêm</button>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+        let currentPage = 0;
+        async function fetchBlogs(isAppend)
+        {
+            let titleSearch = document.getElementById("searchTitle").value;
+            let catId = document.getElementById("searchCategory").value;
+
+            let url = `/api/blogs?title=${titleSearch}&categoryId=${catId}&page=${currentPage}&size=20`;
+            try{
+                let response = await  fetch(url);
+                let data = await response.json();
+                let blogList = data.content;
+                debugger;
+                let htmlStr = "";
+
+                for (let blog of blogList) {
+                    htmlStr += `
+                        <tr>
+                            <td>${blog.id}</td>
+                            <td><a href="/blogs/detail/${blog.id}">${blog.title}</a></td>
+                            <td>${blog.content}</td>
+                            <td><a href="/blogs/form?id=${blog.id}">Update</a></td>
+                            <td><a href="/blogs/delete?id=${blog.id}">Delete</a></td>
+                        </tr>
+                    `;
+                    let tbody = document.getElementById('blogTableBody');
+                    if(isAppend)
+                    {
+                        tbody.insertAdjacentHTML('beforeend', htmlStr);
+                    }else
+                    {
+                        tbody.innerHTML = htmlStr;
+                    }
+                    hideLoadMoreBTNAtLast(data);
+                }
+            }catch (error)
+            {
+                console.error("Lỗi khi fetch dữ liệu:", error);
+            }
+        }
+
+        let inputSearch = document.getElementById('searchTitle');
+        if(inputSearch)
+        {
+            inputSearch.addEventListener('input', function(){
+                currentPage = 0;
+                fetchBlogs(false);
+            })
+        }
+        let selectCategory = document.getElementById('searchCategory');
+        if (selectCategory) {
+            selectCategory.addEventListener('change', function() {
+                currentPage = 0;
+                fetchBlogs(false);
+            });
+        }
+
+        let btnLoadMore =  document.getElementById('btnLoadMore');
+        if(btnLoadMore)
+        {
+            btnLoadMore.addEventListener('click', function(){
+                currentPage++;
+                fetchBlogs(true);
+            });
+        }
+
+        let btnSearch =  document.getElementById('btnSearch');
+        if(btnSearch)
+        {
+            btnSearch.addEventListener('click', function(){
+                currentPage++;
+                fetchBlogs(false);
+            });
+        }
+    });
+
+    function hideLoadMoreBTNAtLast(data)
+    {
+        let btnLoadMore = document.getElementById('btnLoadMore');
+        if (btnLoadMore) {
+            if (data.last) {
+                btnLoadMore.style.display = 'none'; // Hết dữ liệu thì ẩn
+            } else {
+                btnLoadMore.style.display = 'inline-block'; // Còn dữ liệu thì hiện
+            }
+        }
+    }
+</script>
+</body>
+</html>

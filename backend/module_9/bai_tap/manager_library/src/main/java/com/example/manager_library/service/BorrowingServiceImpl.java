@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.concurrent.ThreadLocalRandom;
@@ -21,7 +22,6 @@ public class BorrowingServiceImpl implements IBorrowingService{
         return borrowingRepository.findAll(pageable);
     }
 
-    @Override
     public String createBorrowing(Book book) {
         // Chỉ sinh mã ngẫu nhiên và kiểm tra không trùng lặp, KHÔNG LƯU DB Ở ĐÂY
         boolean flag = true;
@@ -30,26 +30,20 @@ public class BorrowingServiceImpl implements IBorrowingService{
             borrowCode = generateDigits();
             flag = !borrowingRepository.existsBorrowingByBorrowId(borrowCode);
         } while (!flag);
-        
+
         return borrowCode;
     }
 
     @Transactional
-    @Override
     public boolean confirmBorrowing(int bookId, int userId, String borrowCode) {
         try {
-            // 1. Lưu phiếu mượn
             Borrowing borrowing = Borrowing.builder()
                     .book(Book.builder().id(bookId).build())
-                    .user(User.builder().id(userId).build())
-                    .borrow_id(borrowCode)
+                    .user(User.builder().id(1).build())
+                    .borrowCode(borrowCode)
                     .status("BORROWED")
                     .build();
             borrowingRepository.save(borrowing);
-
-            // 2. Trừ số lượng sách đi 1
-            // (Phải dùng câu lệnh query update hoặc lấy book ra sửa. 
-            // Nếu có hàm ở BookService thì gọi sang, ở đây giả lập đơn giản)
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -60,6 +54,19 @@ public class BorrowingServiceImpl implements IBorrowingService{
     @Override
     public Borrowing getBorrowing(int id) {
         return borrowingRepository.findBorrowingById(id);
+    }
+
+    @Override
+    @Transactional
+    public boolean returnBook(int borrowingId, String borrowCode) {
+        Borrowing borrowing = getBorrowing(borrowingId);
+        if (borrowing != null && borrowCode.equals(borrowing.getBorrowCode())) {
+            // Optional: borrowing.setStatus("RETURNED"); borrowingRepository.save(borrowing);
+            // Implement any additional logic for returning a book here
+            borrowingRepository.delete(borrowing); // Or change status based on your business logic
+            return true;
+        }
+        return false;
     }
 
     private String generateDigits(){

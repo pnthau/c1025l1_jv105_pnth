@@ -20,7 +20,8 @@ public class Borrowing {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private String borrow_id;
+    @Column(name = "borrow_code")
+    private String borrowCode;
 
     @Column(nullable = true)
     private String status;

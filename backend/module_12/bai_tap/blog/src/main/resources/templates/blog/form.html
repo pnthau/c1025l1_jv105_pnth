@@ -1,0 +1,12 @@
+<p th:if="${errMsg}" th:text="${errMsg}" style="color: red;"></p>
+<form action="/blogs/save" th:object="${blog}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <label>Tiêu đề:</label>
+    <input type="text" th:field="*{title}" />
+
+    <label>Nội dung:</label>
+    <textarea th:field="*{content}"></textarea>
+
+    <button type="submit">Cập nhật</button>
+</form>
