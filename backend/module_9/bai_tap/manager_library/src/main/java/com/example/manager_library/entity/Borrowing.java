@@ -4,12 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(
-        name = "borrowing",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "uk_book_user", columnNames = {"book_id", "user_id"})
-        }
-)
+@Table(name = "borrowings")
 @Setter
 @Getter
 @AllArgsConstructor
@@ -17,7 +12,7 @@ import lombok.*;
 @Builder
 public class Borrowing {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "borrow_code")
@@ -33,4 +28,6 @@ public class Borrowing {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+
 }

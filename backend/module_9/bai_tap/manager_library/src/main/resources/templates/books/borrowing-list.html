@@ -57,7 +57,7 @@
           <tbody>
           <!-- Dòng dữ liệu mẫu 1 -->
           <tr th:each="borrowing : ${borrowingPage.getContent()}">
-            <td><span class="badge bg-secondary" th:text="${borrowing.borrow_id}"></span></td>
+            <td><span class="badge bg-secondary" th:text="${borrowing.borrowCode}"></span></td>
             <td class="fw-semibold" th:text="${borrowing.status}"></td>
             <td class="text-center">
               <a th:href="@{/books/book-return(id=${borrowing.id})}" class="btn btn-sm btn-warning text-white me-1" title="Trả sách">
@@ -87,7 +87,7 @@
             <li class="page-item"
                 th:if="${borrowingPage.totalPages > 0}"
                 th:each="i : ${#numbers.sequence(0,borrowingPage.totalPages - 1)}"
-                th:classappend="${i == bookPage.number} ? 'active'">
+                th:classappend="${i == borrowingPage.number} ? 'active'">
               <a class="page-link" th:href="@{/books/borrowing-list(page=${i})}" th:text="${i+1}">
               </a>
             </li>

@@ -39,7 +39,7 @@
                     <!-- Form xác nhận trả sách -->
                     <form th:action="@{/books/confirm-return}" method="post">
                         <!-- Input ẩn chứa ID phiếu mượn -->
-                        <input type="hidden" name="id" th:value="${id}">
+                        <input type="hidden" name="borrowId" th:value="${id}">
 
                         <!-- Ô nhập mã mượn sách -->
                         <div class="mb-4">
