@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('Danh sách câu hỏi - CodeGymDN')}">
+    <meta charset="UTF-8">
+    <title>Danh sách câu hỏi</title>
+</head>
+<body style="background-color: #fff;">
+    <div th:replace="~{layout :: navbar}"></div>
+
+    <main class="main-content container-fluid px-4 px-md-5 my-3">
+        <!-- Thông báo Flash Messages -->
+        <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            <span th:text="${successMessage}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            <span th:text="${errorMessage}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <!-- Tiêu đề trang -->
+        <h2 class="text-center fw-bold my-4" style="color: #2b2b2b; font-size: 2.1rem;">
+            Danh sách câu hỏi
+        </h2>
+
+        <!-- Thanh công cụ: Tạo câu hỏi bên trái, Tìm kiếm bên phải -->
+        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+            <div>
+                <a th:href="@{/questions/create}"
+                   class="btn text-white fw-medium d-inline-flex align-items-center gap-1"
+                   style="background-color: #28a745; border: none; border-radius: 4px; padding: 6px 14px; font-size: 0.95rem;">
+                    <i class="bi bi-plus-circle"></i>
+                    <span>Tạo câu hỏi</span>
+                </a>
+            </div>
+
+            <form th:action="@{/questions}" method="get" class="d-inline-flex align-items-center gap-2 flex-wrap">
+                <input type="text" class="form-control" name="title" th:value="${title}"
+                       placeholder="Tiêu đề"
+                       style="width: 190px; border-radius: 4px; font-size: 0.95rem; border: 1px solid #ced4da;">
+
+                <select class="form-select" name="typeId"
+                        style="width: 210px; border-radius: 4px; font-size: 0.95rem; border: 1px solid #ced4da;">
+                    <option value="">-- Chọn loại câu hỏi --</option>
+                    <option th:each="t : ${questionTypes}"
+                            th:value="${t.id}"
+                            th:text="${t.name}"
+                            th:selected="${selectedTypeId == t.id}">
+                    </option>
+                </select>
+
+                <button type="submit" class="btn fw-medium"
+                        style="color: #17a2b8; border: 1px solid #17a2b8; background-color: #fff; border-radius: 4px; padding: 6px 16px; font-size: 0.95rem;">
+                    Tìm kiếm
+                </button>
+            </form>
+        </div>
+
+        <!-- Bảng danh sách câu hỏi theo mẫu table.png -->
+        <div class="table-responsive mb-3">
+            <table class="table table-striped align-middle mb-0" style="border: 1px solid #dee2e6;">
+                <thead>
+                    <tr style="background-color: #17a2b8; color: #fff;">
+                        <th scope="col" class="text-center py-2 fw-semibold" style="background-color: #17a2b8; color: #fff; width: 6%;">STT</th>
+                        <th scope="col" class="text-center py-2 fw-semibold" style="background-color: #17a2b8; color: #fff; width: 34%;">Tiêu đề</th>
+                        <th scope="col" class="text-center py-2 fw-semibold" style="background-color: #17a2b8; color: #fff; width: 16%;">Loại câu hỏi</th>
+                        <th scope="col" class="text-center py-2 fw-semibold" style="background-color: #17a2b8; color: #fff; width: 14%;">Ngày đăng</th>
+                        <th scope="col" class="text-center py-2 fw-semibold" style="background-color: #17a2b8; color: #fff; width: 14%;">Tình Trạng</th>
+                        <th scope="col" class="text-center py-2 fw-semibold" style="background-color: #17a2b8; color: #fff; width: 16%;">Tính Năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${questionsPage.empty}">
+                        <td colspan="6" class="text-center py-4 text-muted">
+                            Không tìm thấy câu hỏi nào phù hợp.
+                        </td>
+                    </tr>
+                    <tr th:each="question, iterStat : ${questionsPage.content}">
+                        <td class="text-center text-dark"
+                            th:text="${questionsPage.number * questionsPage.size + iterStat.count}">
+                            1
+                        </td>
+                        <td class="text-center">
+                            <a href="javascript:void(0)"
+                               class="text-decoration-none text-dark hover-primary btn-view-detail fw-normal"
+                               role="button"
+                               th:data-title="${question.title}"
+                               th:data-type="${question.questionType?.name}"
+                               th:data-date="${#temporals.format(question.date, 'd/M/yyyy')}"
+                               th:data-status="${question.status.name()}"
+                               th:data-status-display="${question.status.displayName}"
+                               th:data-content="${question.content}"
+                               th:data-answer="${(question.answer != null and !#strings.isEmpty(question.answer)) ? question.answer : 'N/A'}"
+                               th:text="${question.title}">
+                                Module 4: Xin demo bài AOP
+                            </a>
+                        </td>
+                        <td class="text-center text-dark" th:text="${question.questionType?.name}">
+                            Học tập
+                        </td>
+                        <td class="text-center text-dark"
+                            th:text="${#temporals.format(question.date, 'd/M/yyyy')}">
+                            8/1/2021
+                        </td>
+                        <td class="text-center text-dark" th:text="${question.status.displayName}">
+                            Chờ phản hồi
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex gap-2">
+                                <a th:href="@{/questions/{id}/edit(id=${question.id})}"
+                                   class="btn text-dark fw-normal"
+                                   style="background-color: #ffc107; border: none; border-radius: 4px; padding: 4px 10px; font-size: 0.88rem;">
+                                    Cập nhật
+                                </a>
+                                <button type="button"
+                                        class="btn text-dark fw-normal btn-delete"
+                                        th:data-id="${question.id}"
+                                        th:data-title="${question.title}"
+                                        style="background-color: #ffc107; border: none; border-radius: 4px; padding: 4px 10px; font-size: 0.88rem;">
+                                    Xóa
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Phân trang bên phải theo thiết kế table.png: [Đầu] [1] [2] [3] [Cuối] -->
+        <div class="d-flex justify-content-end mt-3 mb-4" th:if="${totalPages > 0}">
+            <nav aria-label="Page navigation">
+                <ul class="pagination pagination-sm mb-0">
+                    <!-- Đầu -->
+                    <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/questions(page=0, size=${questionsPage.size}, title=${title}, typeId=${selectedTypeId})}">
+                            Đầu
+                        </a>
+                    </li>
+
+                    <!-- Các trang số -->
+                    <li class="page-item"
+                        th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                        th:if="${i >= currentPage - 2 and i <= currentPage + 2}"
+                        th:classappend="${i == currentPage} ? 'active'">
+                        <a class="page-link"
+                           th:text="${i + 1}"
+                           th:href="@{/questions(page=${i}, size=${questionsPage.size}, title=${title}, typeId=${selectedTypeId})}">
+                            1
+                        </a>
+                    </li>
+
+                    <!-- Cuối -->
+                    <li class="page-item" th:classappend="${currentPage + 1 >= totalPages} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/questions(page=${totalPages - 1}, size=${questionsPage.size}, title=${title}, typeId=${selectedTypeId})}">
+                            Cuối
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </main>
+
+    <!-- Modal Chi Tiết Câu Hỏi (theo đúng thiết kế specs/img/img.png) -->
+    <div class="modal fade" id="detailQuestionModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 620px;">
+            <div class="modal-content border-0 shadow-lg" style="border-radius: 6px; padding: 25px 30px;">
+                <div class="modal-body p-2">
+                    <h3 class="text-center fw-bold mb-4" style="color: #2b2b2b; font-size: 1.85rem; letter-spacing: -0.5px;">
+                        Xem chi tiết câu hỏi
+                    </h3>
+
+                    <div class="container-fluid px-2" style="font-size: 1.05rem; line-height: 1.9;">
+                        <div class="row mb-2 align-items-baseline">
+                            <div class="col-4 fw-bold text-dark text-nowrap">Tiêu đề :</div>
+                            <div class="col-8 text-secondary" id="detailQuestionTitle"></div>
+                        </div>
+                        <div class="row mb-2 align-items-baseline">
+                            <div class="col-4 fw-bold text-dark text-nowrap">Nội Dung :</div>
+                            <div class="col-8 text-secondary" id="detailQuestionContent" style="white-space: pre-wrap;"></div>
+                        </div>
+                        <div class="row mb-2 align-items-baseline">
+                            <div class="col-4 fw-bold text-dark text-nowrap">Phản hồi :</div>
+                            <div class="col-8 text-secondary" id="detailQuestionAnswer" style="white-space: pre-wrap;"></div>
+                        </div>
+                        <div class="row mb-2 align-items-baseline">
+                            <div class="col-4 fw-bold text-dark text-nowrap">Loại câu hỏi :</div>
+                            <div class="col-8 text-secondary" id="detailQuestionType"></div>
+                        </div>
+                        <div class="row mb-2 align-items-baseline">
+                            <div class="col-4 fw-bold text-dark text-nowrap">Ngày đăng :</div>
+                            <div class="col-8 text-secondary" id="detailQuestionDate"></div>
+                        </div>
+                        <div class="row mb-3 align-items-baseline">
+                            <div class="col-4 fw-bold text-dark text-nowrap">Tình trạng :</div>
+                            <div class="col-8 text-secondary" id="detailQuestionStatus"></div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4 pt-1">
+                        <button type="button" class="btn text-white px-4 py-2 fw-medium" data-bs-dismiss="modal"
+                                style="background-color: #17a2b8; border: none; border-radius: 4px; min-width: 95px; font-size: 1rem;">
+                            Đóng
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Cảnh báo xác nhận xóa -->
+    <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="deleteModalLabel">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>Xác Nhận Xóa Câu Hỏi
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body py-4">
+                    <p class="mb-2">Bạn có chắc chắn muốn xóa câu hỏi này không?</p>
+                    <div class="alert alert-secondary mb-0">
+                        <i class="bi bi-chat-left-dots me-1 text-primary"></i>
+                        <strong id="modalQuestionTitle" class="text-danger"></strong>
+                    </div>
+                    <small class="text-muted d-block mt-2">Lưu ý: Thao tác này không thể hoàn tác sau khi thực hiện.</small>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-lg me-1"></i>Hủy Bỏ
+                    </button>
+                    <form id="deleteForm" method="post" action="">
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-trash-fill me-1"></i>Đồng Ý Xóa
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{layout :: footer}"></div>
+
+    <!-- Script xử lý mở modal xóa và modal chi tiết -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Xử lý Modal Xóa
+            const deleteButtons = document.querySelectorAll('.btn-delete');
+            const modalTitleSpan = document.getElementById('modalQuestionTitle');
+            const deleteForm = document.getElementById('deleteForm');
+            const deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+
+            deleteButtons.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const id = this.getAttribute('data-id');
+                    const title = this.getAttribute('data-title');
+
+                    modalTitleSpan.textContent = title;
+                    deleteForm.setAttribute('action', '/questions/' + id + '/delete');
+                    deleteModal.show();
+                });
+            });
+
+            // Xử lý Modal Chi tiết khi click vào Title
+            const detailButtons = document.querySelectorAll('.btn-view-detail');
+            const detailModal = new bootstrap.Modal(document.getElementById('detailQuestionModal'));
+            const detailTitle = document.getElementById('detailQuestionTitle');
+            const detailType = document.getElementById('detailQuestionType');
+            const detailDate = document.getElementById('detailQuestionDate');
+            const detailStatus = document.getElementById('detailQuestionStatus');
+            const detailContent = document.getElementById('detailQuestionContent');
+            const detailAnswer = document.getElementById('detailQuestionAnswer');
+
+            detailButtons.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const title = this.getAttribute('data-title');
+                    const type = this.getAttribute('data-type');
+                    const date = this.getAttribute('data-date');
+                    const statusDisplay = this.getAttribute('data-status-display');
+                    const content = this.getAttribute('data-content');
+                    const answer = this.getAttribute('data-answer');
+
+                    detailTitle.textContent = title || '';
+                    detailType.textContent = type || '';
+                    detailDate.textContent = date || '';
+                    detailStatus.textContent = statusDisplay || '';
+                    detailContent.textContent = content || '';
+                    detailAnswer.textContent = (answer && answer.trim() !== '') ? answer : 'N/A';
+
+                    detailModal.show();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('Xem chi tiết câu hỏi - Q&A')}">
+    <meta charset="UTF-8">
+    <title>Xem chi tiết câu hỏi</title>
+</head>
+<body>
+    <div th:replace="~{layout :: navbar}"></div>
+
+    <main class="main-content container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-7">
+                <div class="card border-0 shadow-lg" style="border-radius: 6px; padding: 25px 35px; background: #fff;">
+                    <div class="card-body p-2">
+                        <h3 class="text-center fw-bold mb-4" style="color: #2b2b2b; font-size: 1.85rem; letter-spacing: -0.5px;">
+                            Xem chi tiết câu hỏi
+                        </h3>
+
+                        <div class="container-fluid px-2" style="font-size: 1.05rem; line-height: 1.9;">
+                            <div class="row mb-2 align-items-baseline">
+                                <div class="col-4 fw-bold text-dark text-nowrap">Tiêu đề :</div>
+                                <div class="col-8 text-secondary" th:text="${question.title}">Module 4: Xin demo bài AOP</div>
+                            </div>
+                            <div class="row mb-2 align-items-baseline">
+                                <div class="col-4 fw-bold text-dark text-nowrap">Nội Dung :</div>
+                                <div class="col-8 text-secondary" style="white-space: pre-wrap;" th:text="${question.content}">Nhờ giảng viên gởi bài demo</div>
+                            </div>
+                            <div class="row mb-2 align-items-baseline">
+                                <div class="col-4 fw-bold text-dark text-nowrap">Phản hồi :</div>
+                                <div class="col-8 text-secondary" style="white-space: pre-wrap;"
+                                     th:text="${(question.answer != null and !#strings.isEmpty(question.answer)) ? question.answer : 'N/A'}">
+                                    Bạn xem demo tại link sau đây: example.com
+                                </div>
+                            </div>
+                            <div class="row mb-2 align-items-baseline">
+                                <div class="col-4 fw-bold text-dark text-nowrap">Loại câu hỏi :</div>
+                                <div class="col-8 text-secondary" th:text="${question.questionType?.name}">Học tập</div>
+                            </div>
+                            <div class="row mb-2 align-items-baseline">
+                                <div class="col-4 fw-bold text-dark text-nowrap">Ngày đăng :</div>
+                                <div class="col-8 text-secondary" th:text="${#temporals.format(question.date, 'd/M/yyyy')}">8/1/2020</div>
+                            </div>
+                            <div class="row mb-3 align-items-baseline">
+                                <div class="col-4 fw-bold text-dark text-nowrap">Tình trạng :</div>
+                                <div class="col-8 text-secondary" th:text="${question.status.displayName}">Đã phản hồi</div>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-4 pt-1">
+                            <a th:href="@{/questions}" class="btn text-white px-4 py-2 fw-medium text-decoration-none"
+                               style="background-color: #17a2b8; border: none; border-radius: 4px; min-width: 95px; font-size: 1rem;">
+                                Đóng
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="~{layout :: footer}"></div>
+</body>
+</html>
